@@ -1,0 +1,202 @@
+.btnAffix {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  cursor: pointer;
+}
+.btnAffix:hover svg {
+  fill: var(--ant-primary-color);
+}
+.btnAffix:active {
+  transform: scale(0.9);
+}
+.btnBox {
+  width: 44px;
+  height: 44px;
+  border-radius: 22px;
+  background-color: white;
+  box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014,
+    0 9px 28px 8px #0000000d;
+  transition: color 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.panelTitle {
+  margin-bottom: 10px;
+  align-items: center;
+}
+.panelBox {
+  margin-bottom: 20px;
+}
+.layoutBoxGroup {
+  display: flex;
+  align-items: center;
+}
+.layoutBoxItem {
+  position: relative;
+  width: 50px;
+  height: 38px;
+  background-color: var(--warden-body-background);
+  margin-right: 18px;
+  border-radius: 5px;
+  box-shadow: 0 1px 2.5px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+.layoutBoxItem:active {
+  box-shadow: none;
+}
+.layoutBoxItem:active svg {
+  transform: scale(0.9);
+  fill: var(--ant-primary-color);
+}
+.layoutBoxItem svg {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  fill: transparent;
+}
+.layoutBoxItem:hover svg {
+  fill: #a1a3a6;
+}
+.itemChecked svg {
+  fill: var(--ant-primary-color);
+}
+.layoutNormal::before {
+  position: absolute;
+  width: 30px;
+  height: 18px;
+  left: 10px;
+  top: 10px;
+  background-color: white;
+  border-radius: 2px;
+  content: '';
+}
+.layoutScreen {
+  background-color: white;
+}
+.layoutScreen::after {
+  position: absolute;
+  width: 25px;
+  height: 38px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  background-color: var(--warden-panel-background);
+  content: '';
+}
+.layoutCard::after {
+  background-color: var(--warden-panel-background);
+  position: absolute;
+  width: 17px;
+  height: 22px;
+  left: 8px;
+  top: 8px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  content: '';
+}
+.layoutCard::before {
+  background-color: white;
+  position: absolute;
+  width: 17px;
+  height: 22px;
+  left: 25px;
+  top: 8px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  content: '';
+}
+
+.layoutDarkTitle::after {
+  position: absolute;
+  top: 10px;
+  width: 16px;
+  height: 28px;
+  background-color: white;
+  border-bottom-left-radius: 4px;
+  line-height: 0px;
+  content: '';
+}
+.layoutDarkTitle::before {
+  position: absolute;
+  background-color: var(--warden-panel-background);
+  height: 10px;
+  width: 100%;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  line-height: 0px;
+  content: '';
+}
+
+.layoutDarkMenu::after {
+  position: absolute;
+  width: 16px;
+  height: 38px;
+  background-color: var(--warden-panel-background);
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+  line-height: 0px;
+  content: '';
+}
+.layoutDarkMenu::before {
+  position: absolute;
+  background-color: white;
+  left: 16px;
+  height: 10px;
+  width: 34px;
+  border-top-right-radius: 4px;
+  line-height: 0px;
+  content: '';
+}
+
+.layoutLightTitleAndMenu::after {
+  position: absolute;
+  top: 11px;
+  width: 16px;
+  height: 27px;
+  background-color: white;
+  border-bottom-left-radius: 4px;
+  line-height: 0px;
+  content: '';
+}
+.layoutLightTitleAndMenu::before {
+  position: absolute;
+  background-color: white;
+  height: 10px;
+  width: 100%;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  line-height: 0px;
+  content: '';
+}
+
+.colorBoxGroup {
+  display: flex;
+  align-items: center;
+}
+
+.colorBoxItem {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  margin-right: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 2.5px 0 rgba(0, 0, 0, 0.2);
+}
+.colorBoxItem:hover {
+  opacity: 0.9;
+}
+.colorBoxItem svg {
+  fill: transparent;
+}
+.colorBoxItem:active {
+  box-shadow: none;
+}
+.colorBoxSelected svg {
+  fill: white;
+}

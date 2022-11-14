@@ -1,1 +1,72 @@
 @import './styles/app.less';
+@import 'antd/dist/antd.variable.less';
+
+:root{
+  --warden-body-background: #f3f4f9;
+  --warden-from-background: white;
+  --warden-card-background: #dcdce0;
+  --warden-panel-background: #505152;
+  --warden-text-color-1: #a1a3a6;
+  --warden-text-color-2: #999;
+  --warden-text-color-3: #666;
+  --warden-text-color-4: #333;
+  --warden-line-color-1:#f0f2f5;  
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+}
+
+canvas {
+  display: block;
+}
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--warden-body-background);
+}
+body ::-webkit-scrollbar{
+  width:4px;
+  height:4px;
+}
+
+body ::-webkit-scrollbar-thumb{
+  background: rgba(0,0,0,.12);
+  border-radius: 2px;
+  box-shadow: inset 0 0 5px rgb(0 21 41 / 5%)
+}
+body ::-webkit-scrollbar-track{
+  background: rgba(0,0,0,.06);
+  border-radius: 2px;
+  box-shadow: inset 0 0 5px rgb(0 21 41 / 5%);
+}
+ul,
+ol {
+  list-style: none;
+}
+::-moz-selection {
+  background: @primary-color;
+  color: white;
+}
+::selection {
+  background: @primary-color;
+  color: white;
+}
+.ant-carousel .dotStyle li {
+  width:6px;
+  height:6px;
+  border-radius: 6px;
+}
+.ant-carousel .dotStyle li button{
+  height:6px;
+  border-radius: 6px;
+}
+.ant-carousel .dotStyle li.slick-active{
+  width:6px;
+}

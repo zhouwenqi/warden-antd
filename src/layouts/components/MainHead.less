@@ -1,0 +1,158 @@
+.warden-layout-header{
+    padding:0px;    
+    height:48px;
+    line-height: 48px;
+    max-height: 48px;
+    min-height: 48px;
+    display: flex;
+    // border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+.warden-layout-header-white-shadow {
+    box-shadow: 8px 0px 8px 0px rgba(0, 0, 0, 0.06);
+}
+.warden-layout-header-dark-shadow {
+    box-shadow: 8px 0px 8px 0px rgba(0, 0, 0, 0.2);
+}
+
+.warden-layout-header .warden-layout-header-menu {
+    flex:1;
+}
+
+.warden-layout-header .warden-layout-header-menu-space {
+    border-left: solid 1px var(--warden-line-color-1)
+}
+
+.warden-layout-header-toolbar {
+    position: fixed;
+    right:0;
+    width:auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items:center;
+    top:0;
+    max-height: 48px;
+    min-height: 48px;
+    padding-left:10px;
+    padding-right:10px;
+}
+.warden-layout-header-toolbar a.icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:30px;
+    height:30px;
+}
+
+.warden-layout-header-toolbar .ant-space-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.w-layout-header-white .ant-menu-horizontal{
+    border-bottom: none;
+}
+.warden-layout-header-white {
+    background-color: white;
+    .warden-layout-header-toolbar a.icon svg {
+        fill:#333333;
+    }
+    .warden-layout-header-toolbar a.icon:hover svg {
+        fill:currentColor;
+    }    
+    
+}
+.warden-layout-header-primary {
+    background-color: var(--ant-primary-color);
+    .warden-avatar-box{
+        background-color: #ffffff33;
+    }
+    .warden-avatar-name{
+        color: white;
+    }
+    .warden-layout-header-toolbar a.icon svg {
+        fill:#ffffff99
+    }
+    .warden-layout-header-toolbar a.icon:hover svg {
+        fill:white;
+    }
+}
+.warden-layout-header-block {
+    background-color: white;
+    .warden-layout-header-toolbar a.icon svg {
+        fill:#333333;
+    }
+    .warden-layout-header-toolbar a.icon:hover svg {
+        fill:currentColor;
+    }    
+}
+
+// .warden-layout-header-white .ant-menu.ant-menu-dark{
+//     background-color: white;
+// }
+.warden-layout-header-primary .ant-menu.ant-menu-dark {
+    background-color: var(--ant-primary-color);
+}
+.warden-layout-header-block .ant-menu.ant-menu-dark {
+    background-color: white;
+}
+
+.warden-layout-header-block .ant-menu-dark .ant-menu-item,
+.warden-layout-header-block .ant-menu-dark .ant-menu-item-group-title,
+.warden-layout-header-block .ant-menu-dark .ant-menu-item > a, 
+.warden-layout-header-block .ant-menu-dark .ant-menu-item > span > a {
+    color:rgba(0, 0, 0, 0.85);
+}
+
+.warden-layout-header-block .ant-menu-dark .ant-menu-item-selected{
+    color:white;
+}
+
+.warden-layout-header-block .ant-menu-dark .ant-menu-item-active,.warden-layout-header-block .ant-menu-dark .ant-menu-submenu-active{
+    color:rgba(255, 255, 255, 0.65); 
+    background-color: var(--ant-primary-color);
+}
+
+.warden-layout-header-block .ant-menu-dark .ant-menu-submenu-selected {
+    background-color: var(--ant-primary-color);    
+}
+
+.warden-layout-header-primary .ant-menu.ant-menu-dark .ant-menu-submenu-popup.ant-menu-dark,
+.warden-layout-header-primary .ant-menu.ant-menu-dark  .ant-menu-item-selected{
+    background-color: var(--ant-primary-color-active);
+}
+
+// .warden-layout-header-primary .ant-menu.ant-menu-dark .ant-menu-item-selected,.warden-layout-header-primary .ant-menu.ant-menu-dark .ant-menu-submenu-popup.ant-menu-dark,.warden-layout-header-primary .ant-menu.ant-menu-dark  .ant-menu-item-selected{
+//     background-color: var(--ant-primary-color-active);
+// }
+
+
+
+// .warden-layout-header-white .ant-menu.ant-menu-dark, .warden-layout-header-white .ant-menu-dark .ant-menu-sub, .warden-layout-header-white .ant-menu.ant-menu-dark .ant-menu-sub {
+//     color:rgba(0, 0, 0, 0.85)
+// }
+
+
+
+.warden-layout-header-fixed {
+    position:fixed;
+    top:0;
+    width:100%;
+    z-index: 100;    
+}
+
+.warden-layout-header-toolbar a.icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:30px;
+    height:30px;
+}
+
+.warden-layout-header-toolbar .ant-space-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.warden-layout-header-white .ant-menu-horizontal{
+    border-bottom: none;
+}

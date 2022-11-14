@@ -1,0 +1,95 @@
+.warden-layout-body {
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    min-height: 100%;
+}
+.warden-layout-content {
+    position: relative;
+}
+.warden-layout-box {
+    min-height: 100%;
+}
+
+.warden-logo-panel {
+    background-color: transparent;
+    height: 48px;
+    display: flex;
+    padding-left: 16px;
+    flex-direction: row;
+    justify-items: baseline;
+    align-items: center;
+}
+
+.warden-logo-panel h3.title {
+    margin: 0px 0px 0px 8px;
+    font-weight: bold;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 180px;
+    min-width: 0px;
+    overflow: hidden;
+}
+
+.warden-logo-max-panel {    
+    background-color: transparent;
+    height:240px;    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+}
+
+.warden-logo-max-panel h3.title{
+    margin: 0px 0px 0px 6px;
+    font-weight: bold;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width:80%;
+    min-width: 0px;
+    overflow: hidden;
+    text-align: center;
+    margin-top:10px;
+}
+
+.warden-logo-panel a{
+    line-height: 0px;
+}
+
+.warden-logo-max-panel a{
+    text-align: center;
+}
+.warden-logo-white {
+    background-color: white;
+}
+.warden-logo-white a.icon svg {
+    fill: var(--ant-primary-color);
+}
+
+.warden-logo-primary {
+    background-color: var(--ant-primary-color);
+    border-bottom: none;
+}
+.warden-logo-active {
+    background-color: var(--ant-primary-color-active);
+}
+.warden-logo-dark {
+    background-color: var(--ant-primary-8);
+}
+
+.warden-logo-primary a.icon svg,
+.warden-logo-active a.icon svg,
+.warden-logo-dark a.icon svg {
+    fill: white;
+}
+.warden-logo-primary h3.title,
+.warden-logo-active h3.title,
+.warden-logo-dark h3.title {
+    color:white;
+}
+
+.warden-layout-body .ant-menu-submenu-title .ant-menu-item-icon,.w-layout-body .ant-menu-item .ant-menu-item-icon {   
+    width:16px;
+    height:16px;
+}

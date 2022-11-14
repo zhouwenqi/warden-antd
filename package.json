@@ -11,7 +11,7 @@
   "dependencies": {
     "umi": "^4.0.25",
     "@umijs/plugins": "^4.0.22",
-    "antd": "^4.23.2"
+    "antd": "^4.20.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",
