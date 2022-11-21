@@ -19,13 +19,13 @@ import AppIcon from '@/components/AppIcon';
     
 
     // logo style
-    const logoWidth = props.collapsed ? 18 : (props.logoSize == 'Max' ? 90 : 24);
+    const logoWidth = props.collapsed ? 18 : (props.isBigLogo ? 90 : 24);
     const placement = logoWidth > 24 ? 'leftBottom' : 'topRight'
-    let logoStyle = props.logoSize == 'Max' && !props.collapsed ? 'warden-logo-max-panel' : 'warden-logo-panel'
+    let logoStyle = props.isBigLogo && !props.collapsed ? 'warden-logo-max-panel' : 'warden-logo-panel'
     let maskColor = config?.mainLayout == 'DarkLeft' ? 'var(--ant-primary-color)' : 'White'
-    const maskPanel = props.logoSize == 'Max' && config?.logo.isMaskadorn && !props.collapsed ? <AppIcon name="logoWhiteMask" color={maskColor} size={240} style={{position:'absolute', left:'0px'}} /> : undefined  
+    const maskPanel = props.isBigLogo && config?.logo.isMaskadorn && !props.collapsed ? <AppIcon name="logoWhiteMask" color={maskColor} size={240} style={{position:'absolute', left:'0px'}} /> : undefined  
     let logoTheme:LayoutProps.LogoTheme = props.logoTheme    
-    if(config?.mainLayout == 'DarkTop' && props.logoSize == 'Max' && !props.collapsed){
+    if(config?.mainLayout == 'DarkTop' && props.isBigLogo && !props.collapsed){
       logoTheme = 'White'
     }
     switch(logoTheme){
@@ -67,7 +67,7 @@ import AppIcon from '@/components/AppIcon';
     );
 }
 LogoPanel.defaultProps = {
-    logoSize:'Normal',
+    isBigLogo:false,
     logoTheme:'White',
     collapsed:false
 }

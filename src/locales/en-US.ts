@@ -29,11 +29,8 @@ export default {
   'config.setting.splitmenu.title': 'Split menu',
   'config.setting.breadcrumb.title':'Enable breadcrumb',
   'config.setting.layoutshadow.title':'Layout shadow',
-  'config.setting.logo.outstand.title':'Logo Outstand',
-  'config.setting.logosize.title':'Logo Size',
-  'config.setting.logosize.normal.label':'Normal',
-  'config.setting.logosize.max.label':'Max',
-  'config.setting.logosize.mini.label':'Mini',
+  'config.setting.logo.outstand.title':'Logo outstand',
+  'config.setting.logo.big.title':'Big logo',
   'config.setting.alert.message':
     'The configuration bar is only used for preview in the development environment. The production environment will not be enabled by default. Please modify the configuration parameters manually.',
   'config.setting.button.copy': 'Copy configuration...',

@@ -76,20 +76,19 @@ export default function MainLayout() {
         openerKeys={operLeftKeys}
         menuTheme={leftTheme}
         logoTheme={logoTheme}
-        logoSize={config?.logo.sizeMode}  
+        isBigLogo={config?.logo.isBigLogo!}  
         shadow={config?.isLayoutShadow}
     />
   ):undefined 
 
   
-  let BreadcrumbPanel = undefined  
+  let BreadcrumbPanel:JSX.Element = <></>  
   if(config?.isBreadcrumb){    
-    console.log(breadcrumbData)
     let items:JSX.Element[]=[]
     breadcrumbData.forEach((menu,index)=>{
       items.push(<Breadcrumb.Item key={'breadcrumb'+index}><Link to={menu.path}>{menu.name}</Link></Breadcrumb.Item>)
     })
-    BreadcrumbPanel = (<Breadcrumb>{items}</Breadcrumb>)   
+    BreadcrumbPanel = (<div className="warden-breadcrumb-box"><Breadcrumb>{items}</Breadcrumb></div>)   
   }
 
   return (
@@ -105,12 +104,13 @@ export default function MainLayout() {
             menuData={headMenus} 
             selectedKeys={selectTopKeys}
             shadow={config?.isLayoutShadow} />
-          <Layout className='warden-layout-content'>
-          {BreadcrumbPanel}    
+          <Layout className='warden-layout-content'> 
             <Content>                        
-              <Outlet />
+              <Outlet context={{breadcrumb:BreadcrumbPanel}} />
             </Content>
-            <Footer />
+            <Footer>
+              <div>Microsoft.com</div>
+            </Footer>
           </Layout>                   
         </div>
         <div className='warden-layout-header-maskbar' />

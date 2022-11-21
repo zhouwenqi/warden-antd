@@ -79,8 +79,7 @@ const MainLeft=(props:LayoutProps.LeftProps) => {
     if((props.logoTheme == 'Primary' && props.menuTheme=='DarkBox') || (props.logoTheme == 'White' && props.menuTheme!='DarkBox')){
       boxStyle += ' warden-layout-left-splice'
     }
-
-    console.log('left-logo-size:'+props.logoSize)
+    
     return(
         <>
             <div
@@ -109,7 +108,7 @@ const MainLeft=(props:LayoutProps.LeftProps) => {
             height: '100%',
             }}
             >
-                <LogoPanel logoTheme={props.logoTheme} collapsed={collapsed} logoSize={props.logoSize} />
+                <LogoPanel logoTheme={props.logoTheme} collapsed={collapsed} isBigLogo={props.isBigLogo} />
                 <div className={'warden-layout-left-box ' + boxStyle}>
                 <Menu
                     onOpenChange={(e) => {

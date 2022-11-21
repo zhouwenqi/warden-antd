@@ -8,14 +8,14 @@ declare namespace LayoutProps {
       openerKeys: string[];
       menuTheme: MenuTheme;    
       logoTheme: LogoTheme;
-      logoSize?: LogoSize;
+      isBigLogo: boolean;
       shadow:boolean;
     };
     type LogoPanelProps = {
       collapsed: boolean;
       title?: string;
       logoTheme: LogoTheme;
-      logoSize: LogoSize;
+      isBigLogo: boolean;
     };
     type HeadProps = {
       menuData: any[];
@@ -28,5 +28,11 @@ declare namespace LayoutProps {
     type MenuTheme = 'WhiteLine' | 'WhiteBlock' | 'DarkBox';
     type LogoSize = 'Mini' | 'Normal' | 'Max'
     type LogoTheme = 'White' | 'Primary' | 'Active' | 'Dark'
-  }
-  
+}
+declare interface WardenBaseProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>{
+
+}
+declare interface ContainerProps extends WardenBaseProps {
+    children:React.ReactNode,
+    isBreadcrumb:boolean,
+}

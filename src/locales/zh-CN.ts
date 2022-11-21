@@ -30,10 +30,7 @@ export default {
   'config.setting.breadcrumb.title':'启用面包屑',
   'config.setting.layoutshadow.title':'布局阴影',
   'config.setting.logo.outstand.title':'突出标志',
-  'config.setting.logosize.title':'标志大小',
-  'config.setting.logosize.normal.label':'正常',
-  'config.setting.logosize.max.label':'很大',
-  'config.setting.logosize.mini.label':'很小',
+  'config.setting.logo.big.title':'展示大标志',
   'config.setting.alert.message':
     '配置栏只有开发环境中用于预览，生产环境默认不会开启，请手动修改配置参数。',
   'config.setting.button.copy': '拷贝配置',

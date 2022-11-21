@@ -43,6 +43,8 @@ declare namespace Warden{
         sizeMode?:'Normal' | 'Max';
         /** 是否修修大Logo背景 */
         isMaskadorn?:boolean;
+        /** 是否展示大logo */
+        isBigLogo?:boolean;
     }
 
     /** 主题 */

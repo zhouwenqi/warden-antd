@@ -11,6 +11,7 @@ import {
   Switch,
   Segmented,
   message,
+  Divider,
 } from 'antd';
 import styles from './SettingDrawer.less';
 import AppIcon from '../AppIcon';
@@ -37,7 +38,7 @@ const SettingDrawer = () => {
   const [isSplitMenu,setIsSplitMenu] = useState<boolean>(config?.isSplitMenu!)
   const [isLayoutShadow,setIsLayoutShadow] = useState<boolean>(config?.isLayoutShadow!)
   const [isOutstand,setIsOutstand] = useState<boolean>(config?.logo.isOutstand!)
-  const [logoSizeMode,setLogoSizeMode] = useState<string>(config?.logo.sizeMode!)
+  const [isBigLogo,setIsBigLogo] = useState<boolean>(config?.logo.isBigLogo!)
   /**
    * 选择登录布局事件
    * @param e 登录布局类型
@@ -89,6 +90,20 @@ const SettingDrawer = () => {
   const onChangeOutstandMenuHandler = (e: boolean) => {
     setIsOutstand(e)
     const logo = {...config?.logo,isOutstand:e}   
+    setInitialState(() => {
+      return {
+        config: { ...config!, logo:logo },
+      }
+    })
+  };
+
+  /**
+   * 是否展示大Logo
+   * @param e 
+   */
+  const onChangeBigLogoHandler = (e: boolean) => {
+    setIsBigLogo(e)
+    const logo = {...config?.logo,isBigLogo:e}   
     setInitialState(() => {
       return {
         config: { ...config!, logo:logo },
@@ -154,20 +169,6 @@ const SettingDrawer = () => {
     })
   }
 
-
-  /**
-   * Logo大小选择
-   * @param e 
-   */
-   const onChangeLogoSizeHandler = (e:string) =>{   
-    setLogoSizeMode(e)
-    const logo = {...config?.logo, sizeMode:e} 
-    setInitialState(() => {
-      return {
-        config: { ...config!, logo:logo }
-      }
-    })
-  }
 
   /** 拷贝配置 */
   const onCopyHandler = () => {
@@ -256,52 +257,44 @@ const SettingDrawer = () => {
           <div className={styles.panelTitle}>
             <label>
               {intl.formatMessage({ id: 'config.setting.language.title' })}
-            </label>
+            </label>            
           </div>
           <div className={styles.panelBox}>
             <LanguageGroup value={language} onChange={onChangeLangageHandler} />
           </div>
-          <div className={styles.panelTitle}>
+          <Divider />
+          <div className={styles.panelItem}>
             <label>
               {intl.formatMessage({ id: 'config.setting.breadcrumb.title' })}
             </label>
-          </div>
-          <div className={styles.panelBox}>
             <Switch defaultChecked={isBreadcrumb} onChange={onChangeBreadcrumbHandler} />
-          </div>
-          <div className={styles.panelTitle}>
+          </div>          
+          <div className={styles.panelItem}>            
             <label>
               {intl.formatMessage({ id: 'config.setting.splitmenu.title' })}
             </label>
-          </div>
-          <div className={styles.panelBox}>
             <Switch defaultChecked={isSplitMenu} onChange={onChangeSplitMenuHandler} />
           </div>
-          <div className={styles.panelTitle}>
+          
+          <div className={styles.panelItem}>
             <label>
               {intl.formatMessage({ id: 'config.setting.layoutshadow.title' })}
             </label>
-          </div>
-          <div className={styles.panelBox}>
             <Switch defaultChecked={isLayoutShadow} onChange={onChangeLayoutShadowbHandler} />
-          </div>    
-          <div className={styles.panelTitle}>
+          </div>   
+          <div className={styles.panelItem}>
             <label>
               {intl.formatMessage({ id: 'config.setting.logo.outstand.title' })}
             </label>
-          </div>
-          <div className={styles.panelBox}>
             <Switch defaultChecked={isOutstand} onChange={onChangeOutstandMenuHandler} />
-          </div>     
-          <div className={styles.panelTitle}>
+          </div>              
+          <div className={styles.panelItem}>
             <label>
-              {intl.formatMessage({ id: 'config.setting.logosize.title' })}
+              {intl.formatMessage({ id: 'config.setting.logo.big.title' })}
             </label>
-          </div>
-          <div className={styles.panelBox}>
-              <LogoSizeGroup data={logoSizeData} value={logoSizeMode} onChange={onChangeLogoSizeHandler} />                      
-          </div>
-          <div className={styles.panelBox}>
+            <Switch defaultChecked={isBigLogo} onChange={onChangeBigLogoHandler} />
+          </div>         
+          <div style={{margin:'20px 0px'}}>
             <Alert
               message={intl.formatMessage({
                 id: 'config.setting.alert.message',
@@ -531,25 +524,6 @@ const ColorBox = (props: ColorBoxProps) => {
         <AppIcon name="checked" size={12} />
       </label>
     </Tooltip>
-  )
-}
-
-/**
- * Logo背景样式选择器
- * @param props 
- * @returns 
- */
-const LogoStyleGroup=(props:LogoStyleGroupProps)=>{  
-  return (
-    <>
-      <Segmented
-        options={props.data}
-        defaultValue={props.value}
-        onChange={(e) => {
-          props.onChange(e);
-        }}
-      />
-    </>
   )
 }
 
