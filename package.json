@@ -1,6 +1,6 @@
 {
   "private": true,
-  "author":"zhouwenqi1982@live.com",
+  "author": "zhouwenqi1982@live.com",
   "scripts": {
     "dev": "umi dev",
     "build": "umi build",
@@ -9,9 +9,10 @@
     "start": "npm run dev"
   },
   "dependencies": {
-    "umi": "^4.0.25",
     "@umijs/plugins": "^4.0.22",
-    "antd": "^4.20.0"
+    "antd": "^4.20.0",
+    "echarts": "^5.4.1",
+    "umi": "^4.0.25"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",

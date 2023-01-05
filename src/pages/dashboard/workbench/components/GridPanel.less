@@ -1,0 +1,78 @@
+.listBox{
+    padding:10px;
+    display: flex;
+    flex-direction: row;   
+    justify-items: center;
+    flex-wrap: wrap;
+    flex:1;
+}
+.boxItem{    
+    width:50%;
+}
+.gridBox{    
+    background-color: white;
+    margin:10px;  
+    padding:20px;  
+    position: relative;
+    label.number{
+        font-size: 40px;
+        line-height: 40px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+}
+
+.gridTitle{
+    color:var(--warden-text-color-2); 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;      
+    label{
+        margin-right:8px;        
+    }  
+    
+}
+.titleLeft{
+    display: flex;
+    align-items: center;
+    svg{
+        margin-right:4px;
+    }
+}
+.gridFooter{
+    label{
+        display: inline-block;
+        padding: 6px;
+        font-size: 14px;
+        line-height: 14px;
+    }
+    label.red{
+        background-color: #ff000011;
+        color:#ff0000;
+    }
+    label.green{
+        background-color: #40be0811;
+        color:#40be08;
+    }
+    span{
+        display: inline-block;
+        padding:6px;
+        color:var(--warden-text-color-2); 
+    }
+    svg{
+        vertical-align: middle;
+        margin-right: 4px;
+    }   
+}
+img.gridWork{
+    position: absolute;
+    bottom:18px;
+    right:18px;
+    height:70%;
+}
+.gridChartBox{
+    position: absolute;
+    bottom:4px;
+    right:4px;
+    height:60%;
+    width:30%;
+}

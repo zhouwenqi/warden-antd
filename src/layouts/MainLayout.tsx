@@ -1,6 +1,6 @@
 import { Link, Outlet,useLocation} from 'umi';
 import './MainLayout.less';
-import {Breadcrumb, Layout,BreadcrumbItemProps} from 'antd';
+import {Breadcrumb, Layout} from 'antd';
 import MainHead from './components/MainHead';
 import MainLeft from './components/MainLeft';
 import { useModel } from 'umi';
@@ -8,6 +8,7 @@ import SettingDrawer from '@/components/setting/SettingDrawer';
 import { getAntdMenus, getBreadcrumbData, getMapMenus, getSplitAntdMenus } from '@/utils/menuUtils';
 import { matchPathToKeys } from '@/utils/routeUtils';
 import { Content, Footer } from 'antd/lib/layout/layout';
+import AppIcon from '@/components/AppIcon';
 
 /**
  * 主控制台布局
@@ -82,15 +83,17 @@ export default function MainLayout() {
   ):undefined 
 
   
-  let BreadcrumbPanel:JSX.Element = <></>  
+  let BreadcrumbPanel = undefined 
   if(config?.isBreadcrumb){    
     let items:JSX.Element[]=[]
     breadcrumbData.forEach((menu,index)=>{
       items.push(<Breadcrumb.Item key={'breadcrumb'+index}><Link to={menu.path}>{menu.name}</Link></Breadcrumb.Item>)
     })
-    BreadcrumbPanel = (<div className="warden-breadcrumb-box"><Breadcrumb>{items}</Breadcrumb></div>)   
+    BreadcrumbPanel = (<Breadcrumb>{items}</Breadcrumb>)   
   }
 
+  const currentTitle = breadcrumbData.length>0 ? breadcrumbData[breadcrumbData.length-1].name : ''
+  document.title = currentTitle
   return (
     <>
     <div className="warden-layout-body">
@@ -106,10 +109,10 @@ export default function MainLayout() {
             shadow={config?.isLayoutShadow} />
           <Layout className='warden-layout-content'> 
             <Content>                        
-              <Outlet context={{breadcrumb:BreadcrumbPanel}} />
+              <Outlet context={{breadcrumb:BreadcrumbPanel,title:currentTitle}} />
             </Content>
             <Footer>
-              <div>Microsoft.com</div>
+              <div className="warden-layout-footer-box"><label>Copyright © 2022 <AppIcon name="logo" color="#666666" size={18} /> warden.vip All Rights Reserved</label></div>
             </Footer>
           </Layout>                   
         </div>

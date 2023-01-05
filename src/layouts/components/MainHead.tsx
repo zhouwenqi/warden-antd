@@ -37,15 +37,16 @@ const MainHead =(props:LayoutProps.HeadProps)=> {
         baseStyle += ' warden-layout-header-white'
         break
     }
-    let headStyle = baseStyle
-    const headBoxStyle = baseStyle + ' warden-layout-header-fixed'
+    const headStyle = baseStyle
+    let headBoxStyle = baseStyle + ' warden-layout-header-fixed'
     const antTheme = props.menuTheme == 'WhiteLine' ? 'light' : 'dark'    
     // logo
     const logoPanel = props.showLogo ? (<LogoPanel logoTheme={props.logoTheme} />) : undefined
     // 阴影
     if(props.shadow){
-      headStyle += props.menuTheme == 'DarkBox' ? ' warden-layout-header-dark-shadow' : ' warden-layout-header-white-shadow'
+      headBoxStyle += props.menuTheme == 'DarkBox' ? ' warden-layout-header-dark-shadow' : ' warden-layout-header-white-shadow'
     }
+    console.log("shadow:"+props.shadow)
     
     return(
         <>
@@ -57,7 +58,7 @@ const MainHead =(props:LayoutProps.HeadProps)=> {
                 <Space direction="horizontal">
                     <Dropdown overlay={menus} placement="bottomRight">
                     <Space>
-                        <Avatar className="warden-avatar-box">U</Avatar>
+                        <Avatar className="warden-avatar-box" src="/images/face.png">User</Avatar>
                         <label className="warden-avatar-name">zhouwenqi</label>
                     </Space>
                     </Dropdown>

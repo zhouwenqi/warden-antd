@@ -8,6 +8,7 @@ declare interface IMenuData {
     iconName?:string;
     icon?: React.ReactNode;
     items?: IMenuData[];
+    title?:string;
 }
 declare interface IAntMenuData {
     key:string;

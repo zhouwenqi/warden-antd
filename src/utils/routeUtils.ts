@@ -23,6 +23,7 @@ function getMenuData(routes:any[],intl:IntlShape):IMenuData[]{
                 locale:false,
                 path:item.path,                
                 key:mkey,
+                title:item.title ? intl.formatMessage({id:item.title}) : intl.formatMessage({id:mkey}),
                 iconName:item.icon
             } 
             global.menuMap[mkey]=menuItemData

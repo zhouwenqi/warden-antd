@@ -34,5 +34,9 @@ declare interface WardenBaseProps extends React.DetailedHTMLProps<React.HTMLAttr
 }
 declare interface ContainerProps extends WardenBaseProps {
     children:React.ReactNode,
-    isBreadcrumb:boolean,
+    background?:string,
+    showBreadcrumb?:boolean,
+    fillHeight?:boolean,
+    showTitle?:boolean,
+    boxStyle:'none' | 'box' | 'panel',
 }

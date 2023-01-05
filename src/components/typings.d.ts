@@ -15,7 +15,12 @@ declare type IswiperItemData = {
     src?:string;
     source:string | JSX.Element;
 }
-declare interface Ioption {
+declare interface IOption {
     value:string|number
     label:string
+}
+declare interface AppChartProps extends React.HTMLAttributes<HTMLDivElement> {    
+    ready?:Function
+    finished?:Function
+    option?:any
 }

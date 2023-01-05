@@ -189,11 +189,6 @@ const SettingDrawer = () => {
   const onClose = () => {
     setOpen(false);
   }
-
-  const logoSizeData = [
-    {value:'Normal',label:intl.formatMessage({ id: 'config.setting.logosize.normal.label' })},
-    {value:'Max',label:intl.formatMessage({ id: 'config.setting.logosize.max.label' })},
-  ]
   return (
     <>
        <div className={styles.btnAffix} onClick={showDrawer}>
