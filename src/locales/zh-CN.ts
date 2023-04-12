@@ -40,6 +40,7 @@ export default {
   'error.page.403.message': '很抱歉，您没有权限访问此页面。',
   'error.page.back.button': '返回首页',
   'tooltip.more':'更多',
+  'global.button.view':'查看',
   ...components,
   ...menus,
   ...titles,

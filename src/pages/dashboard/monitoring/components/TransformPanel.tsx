@@ -2,6 +2,11 @@ import AppChart from '@/components/AppChart';
 import styles from './TransformPanel.less';
 import {MutableRefObject,useRef,useEffect} from 'react'
 
+
+/**
+ * 转换率面版
+ * @returns 
+ */
 const TransformPanel = ()=>{
 
     const intervalRef:MutableRefObject<any> = useRef()

@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import AppIcon from '@/components/AppIcon';
-import { Button, Tag } from 'antd';
+import { Tag } from 'antd';
 import styles from './GridPanel.less';
 import AppButton from '@/components/button';
 import AppChart from '@/components/AppChart';
+import { useIntl } from 'umi';
 
 /**
  * 基本统计面版 - 工作台
  * @returns 
  */
 function GridPanel(){
+    const intl = useIntl()
     const data:GridInfo[] = [
-        {id:1,title:'本周新增用户',tag:'相比上周',total:'629',iconName:'member1',iconColor:"#61aa4b",rate:'50%',rateType:'rise'},
-        {id:2,title:'今日订单量',tag:'相比昨天',total:'1198',iconName:'order1',iconColor:"#c96079",rate:'10%', rateType:'drop'},
-        {id:3,title:'本月成交金额',tag:'相比上月',total:'$10933.34',iconName:'payment1',iconColor:"#289cf5",rate:'32%',rateType:'rise'},
-        {id:4,title:'待办事项',tag:'紧急事件',total:'32',iconName:'ring2',iconColor:"#fa583e",rate:'12',rateType:'drop'},
+        {id:1,title:intl.formatMessage({id:'workbench.card.registrations.title'}),tag:intl.formatMessage({id:'workbench.card.registrations.tag'}),total:'629',iconName:'member1',iconColor:"#61aa4b",rate:'50%',rateType:'rise'},
+        {id:2,title:intl.formatMessage({id:'workbench.card.orders.title'}),tag:intl.formatMessage({id:'workbench.card.orders.tag'}),total:'1198',iconName:'order1',iconColor:"#c96079",rate:'10%', rateType:'drop'},
+        {id:3,title:intl.formatMessage({id:'workbench.card.sales.title'}),tag:intl.formatMessage({id:'workbench.card.sales.tag'}),total:'$10933.34',iconName:'payment1',iconColor:"#289cf5",rate:'32%',rateType:'rise'},
+        {id:4,title:intl.formatMessage({id:'workbench.card.todos.title'}),tag:intl.formatMessage({id:'workbench.card.todos.tag'}),total:'32',iconName:'ring2',iconColor:"#fa583e",rate:'12',rateType:'drop'},
     ]
     
-
     const option1 = {
         dataset:{
             source:[{'week':'Monday','value':200},{'week':'Tuesday','value':1200},{'week':'Wednesday','value':800},{'week':'Thursday','value':1460},{'week':'Friday','value':560},{'week':'Saturday','value':790},{'week':'Sunday','value':410}],

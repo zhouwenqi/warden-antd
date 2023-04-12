@@ -31,8 +31,7 @@ const AgentChartPanel=()=>{
             console.log('fetch data failed', error);
           });
     };
-    useEffect(() => {    
-        
+    useEffect(() => {        
         return ()=>{
             clearInterval(intervalRef.current)
             appChart.current = null
@@ -55,9 +54,7 @@ const AgentChartPanel=()=>{
             "uv":getRandomNumber(lastUV),
             "ip":getRandomNumber(lastIP)
         }
-    }
-
-  
+    }  
 
     const getRandomNumber=(lastNum:number)=>{
         let lnum = lastNum
@@ -84,9 +81,9 @@ const AgentChartPanel=()=>{
                 x2:0,
                 y2:1,
                 colorStops:[
-                    {offset:0,color:'#2f60d1'},
-                    {offset:0.5,color:'#4480f7'},
-                    {offset:1,color:'#ace1ff'}
+                    {offset:0,color:'#7486af'},
+                    {offset:0.5,color:'#8598c2'},
+                    {offset:1,color:'#bcccef'}
                 ]
             },
             {
@@ -96,9 +93,9 @@ const AgentChartPanel=()=>{
                 x2:0,
                 y2:1,
                 colorStops:[
-                    {offset:0,color:'#07910a'},
-                    {offset:0.5,color:'#20b523'},
-                    {offset:1,color:'#bcf346'}
+                    {offset:0,color:'#d87d7d'},
+                    {offset:0.5,color:'#f09494'},
+                    {offset:1,color:'#fdbdbd'}
                 ]
             },
             {
@@ -108,9 +105,9 @@ const AgentChartPanel=()=>{
                 x2:0,
                 y2:1,
                 colorStops:[
-                    {offset:0,color:'#9623df'},
-                    {offset:0.5,color:'#bc63f5'},
-                    {offset:1,color:'#f991f8'}
+                    {offset:0,color:'#84b19d'},
+                    {offset:0.5,color:'#9fceb9'},
+                    {offset:1,color:'#c3edda'}
                 ]
             } 
         ],       

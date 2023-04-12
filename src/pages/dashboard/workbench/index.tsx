@@ -3,9 +3,10 @@ import AppButton from '@/components/button';
 import {WardenPanel} from '@/components/panel';
 import Container from '@/layouts/components/Container';
 import { Avatar, List, Tag, Typography } from 'antd';
-import { Link } from 'umi';
+import { Link,useIntl } from 'umi';
 import GridPanel from './components/GridPanel';
 import { TeamOutlined } from '@ant-design/icons';
+import dayjs from 'dayjs';
 const {Text} = Typography;
 
 import styles from './index.less';
@@ -35,6 +36,20 @@ const WorkbenchPage = () => {
 
 /** 欢迎面版 */
 const WelcomePanel=()=>{
+  const intl = useIntl()
+  const hour = dayjs().hour()
+  console.log(hour)
+  var weltag = ''
+  if(hour > 6 && hour < 11){
+    weltag = intl.formatMessage({id:'workbench.welcome.time.morning'})
+  }
+  else if(hour > 11 && hour < 14){
+    weltag = intl.formatMessage({id:'workbench.welcome.time.goodnoon'})  
+  }else if(hour > 14 && hour < 18){
+    weltag = intl.formatMessage({id:'workbench.welcome.time.afternoon'})
+  }else{
+    weltag = intl.formatMessage({id:'workbench.welcome.time.evening'})
+  }
   return(
     <div className={styles.welcomeBox}>          
       <div className={styles.welcomeMemberBox}>
@@ -42,21 +57,21 @@ const WelcomePanel=()=>{
           <Avatar size={64} src="/images/face.png">User</Avatar>
         </Link>        
         <div className={styles.welcomeInfo}>
-          <label>早安，<Link to="/system/profile">马邦德</Link>，祝你开心每一天！</label><br />
+          <label>{weltag}，<Link to="/system/profile">马邦德</Link>，{intl.formatMessage({id:'workbench.welcome.title'})}</label><br />
           <span className={styles.deptInfo}>研发部 - 高级工程师</span><Tag color="orange">管理员</Tag>
         </div>
       </div>
       <div className={styles.descInfo}>        
         <div className={styles.descItem}>
-          <span>帐号ID</span><br />
+          <span>{intl.formatMessage({id:'workbench.welcome.account.id'})}</span><br />
           <label>827397238</label>
         </div>
         <div className={styles.descItem}>
-          <span>手机号</span><br />
+          <span>{intl.formatMessage({id:'workbench.welcome.account.mobile'})}</span><br />
           <label>139***322</label>
         </div>
         <div className={styles.descItem}>
-          <span>登录次数</span><br />
+          <span>{intl.formatMessage({id:'workbench.welcome.account.signin.total'})}</span><br />
           <label>3089</label>
         </div>        
       </div>      
@@ -72,6 +87,7 @@ const TeamIcon=(props:{text:string})=>{
 
 /** 参与项目面版 */
 const ProjectsPanel=()=>{  
+  const intl = useIntl()
   const datas:Warkbench.Project[] = [
     {id:'1',name:'牛犊子学堂',icon:'/images/project/p1.png',createDate:'2022/12/8 23:22',description:'为企业客户创造价值是牛犊子学堂一直以来的追求，通过丰富的产品矩阵为...',memberCount:4,speedCount:86,testCount:19},
     {id:'2',name:'代码猴部落',icon:'/images/project/p2.png',createDate:'2022/12/8 23:22',description:'代码猴部落APP是一款注册方便，秒速登录的真人交友软件，最大程度...',memberCount:12,speedCount:59,testCount:51},
@@ -156,11 +172,10 @@ const ProjectsPanel=()=>{
       ]
     }    
     ]
-  }
-  
+  }  
 
   return(
-      <WardenPanel title="参与项目" moreElement={<AppButton><AppIcon name="next" style={{marginTop:'5px'}} size={14} color="#666" /></AppButton>}>
+      <WardenPanel title={intl.formatMessage({id:'workbench.card.projects.title'})} moreElement={<AppButton tooltip={intl.formatMessage({id:'tooltip.more'})}><AppIcon name="next" style={{marginTop:'5px'}} size={14} color="#666" /></AppButton>}>
         <>
         <List itemLayout="horizontal" dataSource={datas} renderItem={(item)=>(
           <List.Item actions={[<TeamIcon text={''+item.memberCount} />]}>
@@ -183,7 +198,8 @@ const ProjectsPanel=()=>{
 
 /** 日志面版 */
 const LogsPanel=()=>{
-  const data = [
+  const intl = useIntl()
+  const cnData = [
     {uid:'Apple',ico:'/images/face/f1.png',time:'2022/12/8 23:24',content:(<><Text strong>Apple </Text><Text type="success">审核</Text><Text> 了一张订单： </Text><Text type="secondary">PSN204823422</Text></>)},
     {uid:'Microsoft',ico:'/images/face/f2.png',time:'2022/12/8 23:24',content:<><Text strong>Microsoft </Text><Text type="danger">删除</Text><Text> 了订单： </Text><Text type="secondary" delete>PSN49837246</Text></>},
     {uid:'Google',ico:'/images/face/f3.png',time:'2022/12/8 23:24',content:<><Text strong>Google </Text><Text type="warning">修改</Text><Text> 了用户(173****234)的 </Text><Text type="secondary">登录密码</Text></>},    
@@ -192,10 +208,20 @@ const LogsPanel=()=>{
     {uid:'Oracle',ico:'/images/face/f6.png',time:'2022/12/8 23:24',content:<><Text strong>Oracle </Text><Text type="success">加入</Text><Text> 项目 </Text><Text type="secondary"> 产品飞车</Text></>}, 
     
   ]
+  const enData = [
+    {uid:'Apple',ico:'/images/face/f1.png',time:'2022/12/8 23:24',content:(<><Text strong>Apple </Text><Text type="success">Verify</Text><Text> an order： </Text><Text type="secondary">PSN204823422</Text></>)},
+    {uid:'Microsoft',ico:'/images/face/f2.png',time:'2022/12/8 23:24',content:<><Text strong>Microsoft </Text><Text type="danger">Delete</Text><Text> an order： </Text><Text type="secondary" delete>PSN49837246</Text></>},
+    {uid:'Google',ico:'/images/face/f3.png',time:'2022/12/8 23:24',content:<><Text strong>Google </Text><Text type="warning">Modify</Text><Text> user(173****234) is </Text><Text type="secondary">login password</Text></>},    
+    {uid:'Facebook',ico:'/images/face/f4.png',time:'2022/12/8 23:24',content:<><Text strong>Facebook </Text><Text> use mobile-app </Text><Text type="success">Login</Text><Text type="secondary"> warden system</Text></>},  
+    {uid:'Sumsang',ico:'/images/face/f5.png',time:'2022/12/8 23:24',content:<><Text strong>Sumsang </Text><Text type="success">Publish</Text><Text> product info </Text><Text type="secondary"> warden intelligent UAVs</Text></>},  
+    {uid:'Oracle',ico:'/images/face/f6.png',time:'2022/12/8 23:24',content:<><Text strong>Oracle </Text><Text type="success">Join</Text><Text> project </Text><Text type="secondary"> PM fly up</Text></>}, 
+    
+  ]
+  const data = intl.locale=='en-US' ? enData : cnData
   return(
-    <WardenPanel title="团队日志" style={{paddingBottom:'0px'}} moreElement={<AppButton><AppIcon name="next" style={{marginTop:'5px'}} size={14} color="#666" /></AppButton>}>
+    <WardenPanel title={intl.formatMessage({id:'workbench.card.logs.title'})} style={{paddingBottom:'0px'}} moreElement={<AppButton tooltip={intl.formatMessage({id:'tooltip.more'})}><AppIcon name="next" style={{marginTop:'5px'}} size={14} color="#666" /></AppButton>}>
         <List size="small" itemLayout="horizontal" dataSource={data} renderItem={(item)=>(
-          <List.Item actions={[<a>查看</a>]}>
+          <List.Item actions={[<a>{intl.formatMessage({id:'global.button.view'})}</a>]}>
             <List.Item.Meta
             avatar={<Avatar size={30} src={item.ico} alt={item.uid} />}
             title={<a href="https://ant.design">{item.uid}</a>}

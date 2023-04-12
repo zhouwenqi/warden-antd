@@ -1,12 +1,16 @@
 import AppChart from '@/components/AppChart';
-import { Col, Row, Statistic, StatisticProps } from 'antd';
-import { useEffect,useRef,MutableRefObject,useState,forwardRef,useImperativeHandle } from 'react';
+import { Statistic } from 'antd';
+import { useEffect,useRef,MutableRefObject,useState } from 'react';
 import { RiseOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import styles from './SalesChartPanel.less';
 
 const { Countdown } = Statistic;
 
+/**
+ * 区域销售数据监控
+ * @returns 
+ */
 const SalesChartPanel=()=>{
     const appChart:MutableRefObject<any> = useRef()
     const colors:{[key:string]:string} = {
@@ -121,7 +125,7 @@ const SalesCount=(props:Monitoring.TotalProps)=>{
           var total = 0
           var overly = false
           if(Date.now() >= props.endTime){
-            clearInterval()
+            onClearInterval()
             overly = true
             return
           }

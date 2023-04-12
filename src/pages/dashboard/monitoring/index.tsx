@@ -2,6 +2,7 @@ import Panel, { WardenPanel } from "@/components/panel";
 import Container from "@/layouts/components/Container"
 import { Button } from "antd";
 import AgentChartPanel from "./components/AgentChartPanel";
+import OrderChartPanel from "./components/OrderChartPanel";
 import SalesChartPanel from "./components/SalesChartPanel";
 import TransformPanel from "./components/TransformPanel";
 import styles from './index.less';
@@ -28,8 +29,8 @@ const MonitoringPage = () => {
               </WardenPanel>
           </div>
           <div className={styles.boxRight}>
-            <WardenPanel title="实时流量监控">
-              <label>4444</label>
+            <WardenPanel title="项目实时指标">
+              <OrderChartPanel />
             </WardenPanel>
           </div>
         </div>     

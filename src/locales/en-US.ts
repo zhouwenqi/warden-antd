@@ -41,6 +41,7 @@ export default {
     'Sorry, you are not authorized to access this page.',
   'error.page.back.button': 'Back Home',
   'tooltip.more':'More',
+  'global.button.view':'View',
   ...components,
   ...menus,
   ...titles,

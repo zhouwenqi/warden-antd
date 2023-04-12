@@ -6,7 +6,10 @@ const AppChart=(props:AppChartProps,ref:Ref<any>)=>{
     let myChart:any
     useEffect(()=>{
         const dom = echartsRef.current as unknown as HTMLElement
-        myChart = echarts.init(dom)
+        myChart = echarts.init(dom,undefined, {
+            renderer: 'canvas',
+            useDirtyRect: false
+        })
         myChart.on('finished',()=>{
             if(props.finished){
                 props.finished()
@@ -19,18 +22,18 @@ const AppChart=(props:AppChartProps,ref:Ref<any>)=>{
         if(props.option){
             myChart.setOption(props.option)
         }        
-        window.addEventListener('resize',handleResize)  
-           
+        window.addEventListener('resize',handleResize)
         return ()=>{
             window.removeEventListener('resize',handleResize)
         }        
     },[])
-    useImperativeHandle(ref,()=>({       
+    useImperativeHandle(ref,()=>({            
         setOption:(option:any)=>{
             myChart.setOption(option)
         }})
     )
     const handleResize=()=>{
+        console.log("resize...")
         try{
             myChart.resize()
         }
