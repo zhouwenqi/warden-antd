@@ -31,5 +31,11 @@ export default {
     'workbench.welcome.account.id':'帐号ID',
     'workbench.welcome.account.mobile':'手机号',
     'workbench.welcome.account.signin.total':'登录次数',
-    'monitoring.visits.title':'实时访问数据',
+    'monitoring.sales.title':'区域销售数据',
+    'monitoring.sales.active.begin':'活动开始时间',
+    'monitoring.sales.active.total':'合计销售额',
+    'monitoring.sales.active.remaining':'活动剩余时间',
+    'monitoring.visits.title':'实时流量监控',
+    'monitoring.transformed.title':'转化率',
+    'monitoring.projects.title':'实目实时指标',
 }

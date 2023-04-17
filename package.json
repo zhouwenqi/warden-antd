@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@umijs/plugins": "^4.0.22",
-    "antd": "^4.20.0",
+    "antd": "^4.23.6",
     "echarts": "^5.4.1",
     "umi": "^4.0.25"
   },

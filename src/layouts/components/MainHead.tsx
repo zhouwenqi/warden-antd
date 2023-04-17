@@ -6,6 +6,7 @@ import './MainHead.less';
 import LogoPanel from "./LogoPanel";
 const {Header} = Layout;
 const MainHead =(props:LayoutProps.HeadProps)=> {
+
     let baseStyle = 'warden-layout-header'   
     const menus = (
         <Menu>
@@ -46,7 +47,6 @@ const MainHead =(props:LayoutProps.HeadProps)=> {
     if(props.shadow){
       headBoxStyle += props.menuTheme == 'DarkBox' ? ' warden-layout-header-dark-shadow' : ' warden-layout-header-white-shadow'
     }
-    console.log("shadow:"+props.shadow)
     
     return(
         <>
@@ -58,8 +58,8 @@ const MainHead =(props:LayoutProps.HeadProps)=> {
                 <Space direction="horizontal">
                     <Dropdown overlay={menus} placement="bottomRight">
                     <Space>
-                        <Avatar className="warden-avatar-box" src="/images/face.png">User</Avatar>
-                        <label className="warden-avatar-name">zhouwenqi</label>
+                        <Avatar className="warden-avatar-box" src={global.currentUser.face}>{global.currentUser.uid}</Avatar>
+                        <label className="warden-avatar-name">{global.currentUser.uid}</label>
                     </Space>
                     </Dropdown>
                     <a className="icon">

@@ -12,7 +12,7 @@ declare interface GridInfo{
     total:string,
     iconName?:string;
     iconColor?:string;
-    rateType:'rise'|'drop';
+    rateType:'rise'|'drop'|'flag';
     rate:string;
 }
 

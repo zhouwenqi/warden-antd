@@ -16,7 +16,7 @@ export default [
         ]},
         {path:'/main/control/report', name:'report', icon: 'BarChartOutlined',routes:[
             {path:'/main/control/report/',redirect:'/main/control/report/visit'},
-            {path:'/main/control/report/visit',name:'visit',component:'@/pages/dashboard/workbench/index'},
+            {path:'/main/control/report/visit',name:'visit',component:'@/pages/report/visit/index'},
             {path:'/main/control/report/order',name:'order',component:'@/pages/dashboard/monitoring/index'},
             {path:'/main/control/report/payment',name:'payment',component:'@/pages/dashboard/monitoring/index'}
         ]},

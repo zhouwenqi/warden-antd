@@ -16,7 +16,7 @@ function GridPanel(){
         {id:1,title:intl.formatMessage({id:'workbench.card.registrations.title'}),tag:intl.formatMessage({id:'workbench.card.registrations.tag'}),total:'629',iconName:'member1',iconColor:"#61aa4b",rate:'50%',rateType:'rise'},
         {id:2,title:intl.formatMessage({id:'workbench.card.orders.title'}),tag:intl.formatMessage({id:'workbench.card.orders.tag'}),total:'1198',iconName:'order1',iconColor:"#c96079",rate:'10%', rateType:'drop'},
         {id:3,title:intl.formatMessage({id:'workbench.card.sales.title'}),tag:intl.formatMessage({id:'workbench.card.sales.tag'}),total:'$10933.34',iconName:'payment1',iconColor:"#289cf5",rate:'32%',rateType:'rise'},
-        {id:4,title:intl.formatMessage({id:'workbench.card.todos.title'}),tag:intl.formatMessage({id:'workbench.card.todos.tag'}),total:'32',iconName:'ring2',iconColor:"#fa583e",rate:'12',rateType:'drop'},
+        {id:4,title:intl.formatMessage({id:'workbench.card.todos.title'}),tag:intl.formatMessage({id:'workbench.card.todos.tag'}),total:'32',iconName:'ring2',iconColor:"#fa583e",rate:'12',rateType:'flag'},
     ]
     
     const option1 = {
@@ -26,7 +26,7 @@ function GridPanel(){
         },
         tooltip: {
             trigger: 'axis',
-            borderWidth: 0,
+            borderWidth: 0
         },
         xAxis: {
           type: 'category',
@@ -155,7 +155,7 @@ function GridCard(props:GridCardProps){
                     <label className={styles.number}>{data.total}</label>
                 </div>                
                 <div className={styles.gridFooter}>
-                    <label className={data.rateType == 'rise' ? styles.green : styles.red}>{data.rateType == 'rise' ? <AppIcon name="rise" size={12} color="#40be08" /> : <AppIcon name="drop" size={12} color="#ff0000" />}{data.rate}</label>
+                    <label className={data.rateType == 'rise' ? styles.green : styles.red}>{data.rateType == 'rise' ? <AppIcon name="rise" size={12} color="#40be08" /> : (data.rateType == 'drop' ? <AppIcon name="drop" size={12} color="#ff0000" /> : <AppIcon name="flag" size={12} color="#ff0000" />)}{data.rate}</label>
                     <span>{data.tag}</span>  
                 </div>
                 {props.memoElement}                               

@@ -31,5 +31,11 @@ export default {
     'workbench.welcome.account.id':'Account-ID',
     'workbench.welcome.account.mobile':'Mobile',
     'workbench.welcome.account.signin.total':'Signin total',
-    'monitoring.visits.title':'actual time visits data',
+    'monitoring.sales.title':'Regional sales data',
+    'monitoring.sales.active.begin':'Begin time',
+    'monitoring.sales.active.total':'Total sales',
+    'monitoring.sales.active.remaining':'Time remaining',
+    'monitoring.visits.title':'Real-time traffic monitoring',
+    'monitoring.transformed.title':'Conversion rate',
+    'monitoring.projects.title':'Real-time metrics',
 }

@@ -4,6 +4,7 @@ import { useEffect,useRef,MutableRefObject,useState } from 'react';
 import { RiseOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import styles from './SalesChartPanel.less';
+import { useIntl } from 'umi';
 
 const { Countdown } = Statistic;
 
@@ -13,7 +14,8 @@ const { Countdown } = Statistic;
  */
 const SalesChartPanel=()=>{
     const appChart:MutableRefObject<any> = useRef()
-    const colors:{[key:string]:string} = {
+    const intl = useIntl()
+    let colors:{[key:string]:string} = {
       BeiJing:'#77abe5',
       ShangHai:'#66bf6e',
       HongKong:'#b489c6',
@@ -24,6 +26,19 @@ const SalesChartPanel=()=>{
       TianJing:'#eda3b9',
       TaiWan:'#b19c85',
       HaiNan:'#9fd5e9',
+    }
+
+    colors = {
+      BeiJing:'#3ba272',
+      ShangHai:'#b19c85',
+      HongKong:'#fac858',
+      GuangDong:'#5470c6',
+      FuJian:'#73c0de',
+      JiangShu:'#fc8452',
+      ZheJiang:'#d88ec4',
+      TianJing:'#ee6666',
+      TaiWan:'#91cc75',
+      HaiNan:'#9a60b4',
     }
       
     const initOption = {
@@ -94,9 +109,9 @@ const SalesChartPanel=()=>{
     return(
       <>
       <div className={styles.statisticBox}>
-        <Statistic title="活动开始时间" valueStyle={{color:"#666666"}} value={dayjs().format("YYYY-MM-DD HH:mm:ss")} />
+        <Statistic title={intl.formatMessage({id:'monitoring.sales.active.begin'})} valueStyle={{color:"#666666"}} value={dayjs().format("YYYY-MM-DD HH:mm:ss")} />
         <SalesCount onChange={onChangeHandler} endTime={endTime} />
-        <Countdown title="活动剩余时间" value={endTime} format="HH:mm:ss:SSS" />
+        <Countdown title={intl.formatMessage({id:'monitoring.sales.active.remaining'})} value={endTime} format="HH:mm:ss:SSS" />
       </div>
       <AppChart style={{width:"100%", height:"300px"}} ref={appChart} option={initOption} ready={onReadyHandler} />
       </>
@@ -104,6 +119,7 @@ const SalesChartPanel=()=>{
 }
 
 const SalesCount=(props:Monitoring.TotalProps)=>{
+  const intl = useIntl()
   const [total,setTotal] = useState(0)
   const intervalRef:MutableRefObject<any> = useRef()  
   let chartData:Monitoring.Sales[]=[]
@@ -153,7 +169,7 @@ const SalesCount=(props:Monitoring.TotalProps)=>{
       })
   }
   return(
-    <Statistic title="合计销量总额" value={total+' K'} suffix={<RiseOutlined />} />
+    <Statistic title={intl.formatMessage({id:'monitoring.sales.active.total'})} value={total+' K'} suffix={<RiseOutlined />} />
   )
 }
 

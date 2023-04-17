@@ -57,6 +57,7 @@ declare namespace Warden{
 
     type SysUser = {
         id:number,
+        uid:string,
         nickName: string;
         deptName: string;
         deptId: number;
@@ -65,8 +66,11 @@ declare namespace Warden{
         createDate: Date;
         loginDate: Date;
         face?:string;
+        roleName:string;
         authoritys: Array<string>;
         roles: Array<string>;
         isRoot?: boolean;
     }
+    type TerminalType = 'MAC' | 'PC' | 'MOBILE' | 'LINUX'
+    type AppType = 'ANDROID' | 'IOS' | 'WEIXIN' | 'WEB'
 }

@@ -30,12 +30,12 @@ declare interface ColorBoxProps extends Warden.ITheme {
 declare type LogoStyleGroupProps = {
     onChange: Function;
     value: string;
-    data:Ioption[];
+    data:IOption[];
 }
 
 /** Logo大小选择参数 */
 declare type LogoSizeGroupProps = {
     onChange: Function;
     value: string;
-    data:Ioption[];
+    data:IOption[];
 }

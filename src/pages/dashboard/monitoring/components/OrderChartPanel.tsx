@@ -92,7 +92,7 @@ const OrderChartPanel=()=>{
             yAxis: {
                 type:'value',
                 name:'订单量',
-                max:240,
+                max:250,
                 splitLine: {
                     show: false
                 },

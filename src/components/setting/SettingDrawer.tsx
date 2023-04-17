@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {getLocalUser} from '@/utils/stringUtils';
 import {
   Drawer,
   Button,
@@ -160,9 +161,11 @@ const SettingDrawer = () => {
   const onChangeLangageHandler = (e: string) => {
     setLanguage(e)
     setLocale(e, false)
+    // (伪代码)用户信息国际化                           
+    global.currentUser = getLocalUser(e)
     setInitialState(() => {
       // 清除菜单数据（菜单做了缓存，需要重新国际化）
-      global.menus = [];
+      global.menus = [] 
       return {
         config: { ...config!, language: e }
       }
@@ -448,8 +451,9 @@ const LanguageGroup = (props: LanguageGroupProps) => {
     options.push({
       label: region.name,
       value: region.language,
-    });
-  });
+    })
+  })
+
   return (
     <>
       <Segmented

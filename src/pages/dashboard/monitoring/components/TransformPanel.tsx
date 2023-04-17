@@ -23,7 +23,7 @@ const TransformPanel = ()=>{
         }
     },[]) 
     
-    const loadData=()=>{
+    const loadData=()=>{        
         const interval = setInterval(()=>{
             
             for(var i=0;i<4;i++){
