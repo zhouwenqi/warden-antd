@@ -8,14 +8,15 @@ const {Header} = Layout;
 const MainHead =(props:LayoutProps.HeadProps)=> {
 
     let baseStyle = 'warden-layout-header'   
-    const menus = (
-        <Menu>
-          <Menu.Item>rrrrwewr</Menu.Item>
-          <Menu.Item>3333rrre</Menu.Item>
-          <Menu.Item>3333rwerwr</Menu.Item>
-        </Menu>
-    )    
- 
+  
+    const menuProps:MenuProps={
+      items:[
+        {key:"Edit", label:"Edit"},
+        {key:"Path", label:"Path"},
+        {key:"Profile", label:"Profile"}
+      ]
+    }
+    
     // 菜单点击事件
     const onMenuClick: MenuProps['onClick'] = (e) => {     
       history.push(e.key) 
@@ -56,11 +57,11 @@ const MainHead =(props:LayoutProps.HeadProps)=> {
               <Menu className={headMenuStyle} selectedKeys={props.selectedKeys} defaultSelectedKeys={props.selectedKeys} mode="horizontal" theme={antTheme} items={props.menuData} onClick={onMenuClick}></Menu>
               <div className="warden-layout-header-toolbar">
                 <Space direction="horizontal">
-                    <Dropdown overlay={menus} placement="bottomRight">
-                    <Space>
-                        <Avatar className="warden-avatar-box" src={global.currentUser.face}>{global.currentUser.uid}</Avatar>
-                        <label className="warden-avatar-name">{global.currentUser.uid}</label>
-                    </Space>
+                    <Dropdown menu={menuProps} placement="bottomRight">
+                      <Space>
+                          <Avatar className="warden-avatar-box" src={global.currentUser.face}>{global.currentUser.uid}</Avatar>
+                          <label className="warden-avatar-name">{global.currentUser.uid}</label>
+                      </Space>
                     </Dropdown>
                     <a className="icon">
                         <AppIcon name="ring" size={18} />

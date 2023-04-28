@@ -1,5 +1,10 @@
 import styles from './index.less';
 
+/**
+ * 通用面版
+ * @param props 
+ * @returns 
+ */
 const Panel=(props:PanelBaseProps)=>{
     return(
         <div className={styles.panelBox} style={props.style}>
@@ -9,6 +14,11 @@ const Panel=(props:PanelBaseProps)=>{
     )
 }
 
+/**
+ * 带标题样式的面版
+ * @param props 
+ * @returns 
+ */
 const WardenPanel=(props:WardenPanelProps)=>{
     const titlePanel = (
         <div className={styles.panelTitle}>

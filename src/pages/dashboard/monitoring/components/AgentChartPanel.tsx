@@ -14,7 +14,7 @@ const AgentChartPanel=()=>{
         asyncFetch() 
     }
     const asyncFetch = () => {
-        fetch('/api/chart/agent')
+        fetch('/api/monitoring/agent')
           .then((response) => response.json())
           .then((json) => {
             items=json

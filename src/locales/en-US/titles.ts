@@ -3,6 +3,6 @@ export default {
     'title.page.registration':'Registration',
     'title.page.workbench':'Workbench',
     'title.page.monitoring':'Monitoring',
-    'title.page.operates':'Operates logs',
+    'title.page.operation':'Operation logs',
     'title.page.sms':'SMS logs',
 }

@@ -74,3 +74,43 @@ ol {
 .ant-layout-footer{
   padding:10px 20px;
 }
+button[data-warden-type="button"]{    
+  padding:0px;
+  margin: 0px;
+  background-color: transparent;
+  border:none;
+  text-indent: 0px;
+  text-shadow: none;
+  outline: none;
+  font-size: inherit;
+  line-height: inherit;
+  align-items: center;
+  display: flex;
+  align-items: center;
+  :hover{
+      cursor: pointer;
+      color:var(--ant-primary-color);
+  }
+  svg:hover{
+      fill:var(--ant-primary-color);
+  }
+  :active{
+      opacity: 0.7;
+  }
+}
+button[data-warden-type="button"]:disabled{
+  opacity: 0.2;  
+  :hover{
+    cursor:not-allowed;
+    color:currentColor;
+  }
+  svg:hover{
+    fill:currentColor;;
+  }
+  :active{
+      opacity: 1;
+  }
+}
+div[data-warden-box="space"] .ant-space-item{
+  display: flex;
+}  

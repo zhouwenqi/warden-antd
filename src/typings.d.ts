@@ -71,6 +71,6 @@ declare namespace Warden{
         roles: Array<string>;
         isRoot?: boolean;
     }
-    type TerminalType = 'MAC' | 'PC' | 'MOBILE' | 'LINUX'
-    type AppType = 'ANDROID' | 'IOS' | 'WEIXIN' | 'WEB'
+    type TerminalType = 'MAC' | 'PC' | 'MOBILE' | 'SERVER' | 'OTHER'
+    type AppType = 'ANDROID' | 'IOS' | 'WEIXIN' | 'WEB' | 'OTHER'
 }

@@ -7,3 +7,8 @@ declare interface VisitData{
     appType:Warden.AppType;    
     time:string;
 }
+declare interface VisitChartWindowProps {
+    open:boolean;
+    closeWindowHandler:React.Dispatch<React.SetStateAction<boolean>>,
+}
+declare type VistChartType = 'Terminal' | 'Application'

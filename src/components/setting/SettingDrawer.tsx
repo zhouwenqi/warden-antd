@@ -163,10 +163,11 @@ const SettingDrawer = () => {
     setLocale(e, false)
     // (伪代码)用户信息国际化                           
     global.currentUser = getLocalUser(e)
-    setInitialState(() => {
-      // 清除菜单数据（菜单做了缓存，需要重新国际化）
-      global.menus = [] 
+    // 清除菜单数据（菜单做了缓存，需要重新国际化）
+    global.menus = []
+    setInitialState((preInitialState) => {      
       return {
+        ...preInitialState,
         config: { ...config!, language: e }
       }
     })

@@ -1,5 +1,6 @@
 import AppChart from '@/components/AppChart';
 import { useEffect,useRef,MutableRefObject,useState } from 'react';
+import { useIntl } from 'umi';
 import styles from './OrderChartPanel.less';
 
 /**
@@ -8,6 +9,8 @@ import styles from './OrderChartPanel.less';
  */
 const OrderChartPanel=()=>{
     const appChart:MutableRefObject<any> = useRef()
+    const intl = useIntl()
+    const local = intl.locale
     const projectsData = ['xxx','yyy','mmm','zzz','bbb'] 
 
     const getRandomRow=(tag:string,time:string)=>{
@@ -24,11 +27,6 @@ const OrderChartPanel=()=>{
         months.push(time)
         datas.push([getRandomRow('xxx',time),getRandomRow('yyy',time),getRandomRow('mmm',time),getRandomRow('zzz',time),getRandomRow('bbb',time)])
     }
-    
-
-    useEffect(()=>{       
-                 
-    },[])
 
     const onReadyHandler=()=>{
         
@@ -39,6 +37,7 @@ const OrderChartPanel=()=>{
         return Math.floor(y*120)
     }
 
+    
     var initOption = {
         baseOption:{
             timeline:{             
@@ -65,8 +64,7 @@ const OrderChartPanel=()=>{
                 borderWidth: 0,
                 padding:10,
                 formatter: function (obj:any) {
-                    var value = obj[0].value;
-                    console.log(value)
+                    var value = obj[0].value;                    
                     return '销售额' + '：' + value[2] + '<br>'
                                   + '订单量' + '：' + value[0] + '<br>'
                                   + '访问量' + '：' + value[1] + '<br>'
@@ -84,14 +82,14 @@ const OrderChartPanel=()=>{
                 type:'log',
                 max:1000,
                 min:50,            
-                name:'访问量',
+                name:intl.formatMessage({id:'monitoring.projects.chart.visit.count'}),
                 splitLine: {
                     show: false
                 },
             },
             yAxis: {
                 type:'value',
-                name:'订单量',
+                name:intl.formatMessage({id:'monitoring.projects.chart.sales.count'}),
                 max:250,
                 splitLine: {
                     show: false
@@ -145,6 +143,10 @@ const OrderChartPanel=()=>{
             
         })
     }
+
+    useEffect(()=>{
+        appChart.current.setOption(initOption)
+    },[local])
 
     return(
         <div>

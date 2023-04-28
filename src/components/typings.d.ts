@@ -24,3 +24,7 @@ declare interface AppChartProps extends React.HTMLAttributes<HTMLDivElement> {
     finished?:Function
     option?:any
 }
+declare interface IProperty{
+    value:string|number
+    label:string
+}

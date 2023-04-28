@@ -69,7 +69,7 @@ const TransformPanel = ()=>{
 
     const initOption = {
         tooltip: {
-            formatter: '{a} {b} : {c}%',            
+            formatter: '{b} : {c}%',            
             borderWidth: 0,
         },
         grid:{

@@ -33,7 +33,7 @@ declare interface WardenBaseProps extends React.DetailedHTMLProps<React.HTMLAttr
 
 }
 declare interface ContainerProps extends WardenBaseProps {
-    children:React.ReactNode,
+    children?:React.ReactNode,
     background?:string,
     showBreadcrumb?:boolean,
     fillHeight?:boolean,

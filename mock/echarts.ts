@@ -1,5 +1,5 @@
 export default {
-    'GET /api/chart/agent':[
+    'GET /api/monitoring/agent':[
         {time:'30:23:01',pv:24,uv:13,ip:9},
         {time:'30:23:02',pv:27,uv:15,ip:10},
         {time:'30:23:03',pv:25,uv:14,ip:8},
@@ -42,16 +42,31 @@ export default {
         {time:'30:23:50',pv:34,uv:12,ip:10},
         {time:'30:23:51',pv:33,uv:10,ip:11},
     ],
-    'GET /api/chart/sales':[
-        {name:'北京',value:0,time:'2022/12/19 8:05',area:'BeiJing'},
-        {name:'上海',value:0,time:'2022/12/19 8:06',area:'ShangHai'},
-        {name:'香港',value:0,time:'2022/12/19 8:07',area:'HongKong'},
-        {name:'广东',value:0,time:'2022/12/19 8:09',area:'GuangDong'},
-        {name:'福建',value:0,time:'2022/12/19 8:10',area:'FuJian'},
-        {name:'江苏',value:0,time:'2022/12/19 8:11',area:'JiangShu'},
-        {name:'浙江',value:0,time:'2022/12/19 8:12',area:'ZheJiang'},
-        {name:'天津',value:0,time:'2022/12/19 8:13',area:'TianJing'},
-        {name:'台湾',value:0,time:'2022/12/19 8:14',area:'TaiWan'},
-        {name:'海南',value:0,time:'2022/12/19 8:15',area:'HaiNan'},
-    ],
+    'POST /api/monitoring/sales':(req:any,res:any)=>{
+        const local = req.headers.local      
+        const list = local=='en-US' ? [
+            {name:'BeiJing',value:0,time:'2022/12/19 8:05',area:'BeiJing'},
+            {name:'ShangHai',value:0,time:'2022/12/19 8:06',area:'ShangHai'},
+            {name:'HongKong',value:0,time:'2022/12/19 8:07',area:'HongKong'},
+            {name:'GuangDong',value:0,time:'2022/12/19 8:09',area:'GuangDong'},
+            {name:'FuJian',value:0,time:'2022/12/19 8:10',area:'FuJian'},
+            {name:'JiangShu',value:0,time:'2022/12/19 8:11',area:'JiangShu'},
+            {name:'ZheJiang',value:0,time:'2022/12/19 8:12',area:'ZheJiang'},
+            {name:'TianJing',value:0,time:'2022/12/19 8:13',area:'TianJing'},
+            {name:'TaiWan',value:0,time:'2022/12/19 8:14',area:'TaiWan'},
+            {name:'HaiNan',value:0,time:'2022/12/19 8:15',area:'HaiNan'},
+        ]:[
+            {name:'北京',value:0,time:'2022/12/19 8:05',area:'BeiJing'},
+            {name:'上海',value:0,time:'2022/12/19 8:06',area:'ShangHai'},
+            {name:'香港',value:0,time:'2022/12/19 8:07',area:'HongKong'},
+            {name:'广东',value:0,time:'2022/12/19 8:09',area:'GuangDong'},
+            {name:'福建',value:0,time:'2022/12/19 8:10',area:'FuJian'},
+            {name:'江苏',value:0,time:'2022/12/19 8:11',area:'JiangShu'},
+            {name:'浙江',value:0,time:'2022/12/19 8:12',area:'ZheJiang'},
+            {name:'天津',value:0,time:'2022/12/19 8:13',area:'TianJing'},
+            {name:'台湾',value:0,time:'2022/12/19 8:14',area:'TaiWan'},
+            {name:'海南',value:0,time:'2022/12/19 8:15',area:'HaiNan'},
+        ]
+        res.send(list)
+    },
 }

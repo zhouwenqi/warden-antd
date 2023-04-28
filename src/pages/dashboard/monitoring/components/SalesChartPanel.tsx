@@ -52,7 +52,7 @@ const SalesChartPanel=()=>{
       },
       grid:{
         top:'20px',
-        left:'40px',
+        left:intl.locale=='en-US'? '100px' : '40px',
         right:'20px',
         bottom:'20px'
       },
@@ -90,18 +90,16 @@ const SalesChartPanel=()=>{
         }
       ]
     }
-    useEffect(()=>{       
-      return ()=>{
-        appChart.current = null
-      }
-    },[]) 
+   
+
     const onReadyHandler=()=>{
       
     }
 
     const onChangeHandler=(option:any,total:number,overly:boolean)=>{      
-      if(!overly){
-        appChart.current.setOption(option)
+      if(!overly && appChart.current.setOption){
+        const ops = {grid:{left:intl.locale=='en-US'? '80px' : '40px'},...option}
+        appChart.current.setOption(ops)
       }      
     }
 
@@ -120,20 +118,30 @@ const SalesChartPanel=()=>{
 
 const SalesCount=(props:Monitoring.TotalProps)=>{
   const intl = useIntl()
+  const local = intl.locale
   const [total,setTotal] = useState(0)
   const intervalRef:MutableRefObject<any> = useRef()  
   let chartData:Monitoring.Sales[]=[]
-  useEffect(()=>{    
+  
+  useEffect(()=>{
     asyncFetch()  
     return ()=>{
       onClearInterval()
     }
-  },[]) 
+  },[local])
   const onClearInterval=()=>{
     clearInterval(intervalRef.current)
   } 
   const asyncFetch = () => {
-    fetch('/api/chart/sales')
+    fetch('/api/monitoring/sales',{
+        method:'POST',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            "local":local
+        }
+      })
       .then((response) => response.json())
       .then((json) => {
         chartData = json
@@ -168,6 +176,7 @@ const SalesCount=(props:Monitoring.TotalProps)=>{
         console.log('fetch data failed', error);
       })
   }
+
   return(
     <Statistic title={intl.formatMessage({id:'monitoring.sales.active.total'})} value={total+' K'} suffix={<RiseOutlined />} />
   )

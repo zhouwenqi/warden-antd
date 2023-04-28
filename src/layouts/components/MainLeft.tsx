@@ -38,8 +38,7 @@ const MainLeft=(props:LayoutProps.LeftProps) => {
 
   // 手动折叠
   const onHandCollapse=(value:boolean)=>{
-    setCollapsed(value)
-    
+    setCollapsed(value)    
       global.isHandFold = value
     
   }
@@ -78,7 +77,7 @@ const MainLeft=(props:LayoutProps.LeftProps) => {
     // 强迫症补正顶部和左侧菜单主题一致时，菜单顶部间距暇疵
     if((props.logoTheme == 'Primary' && props.menuTheme=='DarkBox') || (props.logoTheme == 'White' && props.menuTheme!='DarkBox')){
       boxStyle += ' warden-layout-left-splice'
-    }
+    }    
     
     return(
         <>
@@ -116,7 +115,7 @@ const MainLeft=(props:LayoutProps.LeftProps) => {
                     }}
                     onClick={onMenuClick}
                     items={props.menuData}
-                    openKeys={openKeys}
+                    openKeys={ collapsed ? undefined : openKeys}
                     defaultOpenKeys={defaultOpenKeysRef.current}
                     selectedKeys={props.selectedKeys}
                     mode="inline"

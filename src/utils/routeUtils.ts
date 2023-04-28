@@ -14,6 +14,7 @@ function getMenuData(routes:any[],intl:IntlShape):IMenuData[]{
     if(!routes || routes.length <=0){
         return menuItemDatas
     }
+
     routes.forEach((item,index)=>{
         let auth:boolean = matchAuthority(item.authoritys,user.authoritys)        
         const mkey = getPathToKey(item.path)

@@ -17,12 +17,11 @@ export default [
         {path:'/main/control/report', name:'report', icon: 'BarChartOutlined',routes:[
             {path:'/main/control/report/',redirect:'/main/control/report/visit'},
             {path:'/main/control/report/visit',name:'visit',component:'@/pages/report/visit/index'},
-            {path:'/main/control/report/order',name:'order',component:'@/pages/dashboard/monitoring/index'},
-            {path:'/main/control/report/payment',name:'payment',component:'@/pages/dashboard/monitoring/index'}
+            {path:'/main/control/report/payment',name:'payment',component:'@/pages/report/payment/index'}
         ]},
         {path:'/main/control/logs', name:'logs',icon:'warden_logs', routes:[
-            {path:'/main/control/logs/',redirect:'/main/control/logs/operates'},
-            {path:'/main/control/logs/operates',name:'operates',component:'@/pages/dashboard/workbench/index'},
+            {path:'/main/control/logs/',redirect:'/main/control/logs/operation'},
+            {path:'/main/control/logs/operation',name:'operation',component:'@/pages/logs/operation/index'},
             {path:'/main/control/logs/sms',name:'sms',component:'@/pages/dashboard/monitoring/index'}
         ]}
     ]},

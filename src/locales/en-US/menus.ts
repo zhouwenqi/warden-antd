@@ -8,7 +8,7 @@ export default {
   'menu.control.report.order':'Order',
   'menu.control.report.payment':'Payment',
   'menu.control.logs': 'Logs',
-  'menu.control.logs.operates': 'Operates logs',
+  'menu.control.logs.operation': 'Operation logs',
   'menu.control.logs.sms': 'SMS logs',
   'menu.worker': 'Workers',
   'menu.worker.order': 'Order',

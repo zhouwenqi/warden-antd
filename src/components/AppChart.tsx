@@ -1,8 +1,11 @@
 import * as echarts from 'echarts';
 import { useEffect,useImperativeHandle,useRef,forwardRef,Ref, MutableRefObject } from 'react';
+import { useIntl } from 'umi';
 
 const AppChart=(props:AppChartProps,ref:Ref<any>)=>{
     const echartsRef:MutableRefObject<any> = useRef()
+    const intl = useIntl()
+    
     let myChart:any
     useEffect(()=>{
         const dom = echartsRef.current as unknown as HTMLElement
@@ -24,6 +27,7 @@ const AppChart=(props:AppChartProps,ref:Ref<any>)=>{
             window.removeEventListener('resize',handleResize)
         }        
     },[])
+    
     useImperativeHandle(ref,()=>({
         setOption:(option:any)=>{
             if(myChart==null){
