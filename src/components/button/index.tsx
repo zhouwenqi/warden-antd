@@ -20,6 +20,5 @@ const AppButton=(props:AppButtonProps)=>{
     )
 }
 
-
 export default AppButton
 export {BaseButton}

@@ -7,7 +7,10 @@ import OrderChartPanel from "./components/OrderChartPanel";
 import SalesChartPanel from "./components/SalesChartPanel";
 import TransformPanel from "./components/TransformPanel";
 import styles from './index.less';
-
+/**
+ * Page - 监控页
+ * @returns 
+ */
 const MonitoringPage = () => {
   const intl = useIntl()
   return (

@@ -1,12 +1,15 @@
 import AppChart from "@/components/AppChart"
 import AppButton from "@/components/button"
 import { WardenPanel } from "@/components/panel"
-import { List } from "antd"
+import { List, message } from "antd"
 import { useEffect, useRef, useState,MutableRefObject } from "react"
-import { useIntl } from "umi"
+import { history, useIntl } from "umi"
 import { TeamOutlined } from '@ant-design/icons'
 import styles from './ProjectsPanel.less'
 import AppIcon from "@/components/AppIcon"
+import ProjectDetailsWindow,{ProjectDetailsWindowProps} from "@/pages/project/components/ProjectDetailsWindow"
+import ProjectFormWindow,{ProjectFormWindowProps} from "@/pages/project/components/ProjectFormWindow"
+
 
 /**
  * Panel - 参与项目面版
@@ -17,12 +20,18 @@ const ProjectsPanel=()=>{
     const intl = useIntl()
     const local = intl.locale 
     const [data,setData] = useState<{list:Warkbench.Project[],chartTitle:string[]}>()
+    const [detailsWindowOpen,setDetailsWindowOpen]=useState<boolean>(false)
+    const [detailsWindowData,setDetailsWindowData]=useState<ProjectData>()
+    const [formWindowOpen,setFormWindowOpen]=useState<boolean>(false)
+    const [formWindowData,setFormWindowData]=useState<ProjectData>()
     useEffect(()=>{
       getProjectData()
     },[local])
 
+
+
     const getProjectData=()=>{
-      fetch('/api/projects',{
+      fetch('/api/project/top5',{
           method:'POST',
           cache: 'no-cache',
           credentials: 'same-origin',
@@ -142,15 +151,63 @@ const ProjectsPanel=()=>{
     useEffect(()=>{
       updateOption()    
     },[local,data])
-  
+
+    const onEditHandler=(e:ProjectData)=>{
+      setFormWindowData(e)
+      setFormWindowOpen(true)
+    }
+
+    const onSubmitHandler=(e:ProjectData)=>{
+        const key = 'projectSubmit'
+        message.loading({ content: intl.formatMessage({id:'global.message.submitting'}), key })
+        setTimeout(() => {
+            message.success({ content: intl.formatMessage({id:'global.message.commit'}), key, duration: 2 })
+            setFormWindowOpen(false)
+        }, 1000)
+
+    }
+
+
+    const onViewDetailsHandler=(e:Warkbench.Project)=>{
+      const project:ProjectData = {
+        id:e.id,
+        name:e.name,
+        code:e.code,
+        icon:e.icon,
+        description:e.description,
+        color:e.color,
+        memberCount:e.memberCount,
+        createDate:e.createDate,
+        modifyDate:e.modifyDate
+
+      }
+      setDetailsWindowData(project)
+      setDetailsWindowOpen(true)
+    }
+
+    const detailsWindowProps:ProjectDetailsWindowProps = {
+        open:detailsWindowOpen,
+        data:detailsWindowData,
+        closeWindowHandler:setDetailsWindowOpen,
+        onEdit:onEditHandler
+    }
+
+    
+    const formWindowProps:ProjectFormWindowProps = {
+        open:formWindowOpen,
+        data:formWindowData,
+        onSubmit:onSubmitHandler,
+        closeWindowHandler:setFormWindowOpen
+    }
     return(
-        <WardenPanel title={intl.formatMessage({id:'workbench.card.projects.title'})} moreElement={<AppButton tooltip={intl.formatMessage({id:'tooltip.more'})}><AppIcon name="next" style={{marginTop:'5px'}} size={14} color="#666" /></AppButton>}>
+        <>
+        <WardenPanel title={intl.formatMessage({id:'workbench.card.projects.title'})} moreElement={<AppButton tooltip={intl.formatMessage({id:'tooltip.more'})}><AppIcon onClick={()=>{history.push('/main/worker/project')}} name="next" style={{marginTop:'5px'}} size={14} color="#666" /></AppButton>}>
           <>
           <List itemLayout="horizontal" dataSource={data?.list} renderItem={(item)=>(
             <List.Item actions={[<TeamIcon text={''+item.memberCount} />]}>
               <List.Item.Meta
               avatar={<img className={styles.projectIco} src={item.icon} alt={item.name} />}
-              title={<a href="https://ant.design">{item.name}</a>}
+              title={<a onClick={()=>{onViewDetailsHandler(item)}}>{item.name}</a>}
               description={item.description}
               key={item.id}      
             />          
@@ -163,6 +220,9 @@ const ProjectsPanel=()=>{
           </div>
           </>
         </WardenPanel>
+        <ProjectDetailsWindow {...detailsWindowProps} />
+        <ProjectFormWindow {...formWindowProps} /> 
+        </>
     )
   }
 

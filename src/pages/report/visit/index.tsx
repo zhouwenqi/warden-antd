@@ -5,12 +5,11 @@ import type { ColumnsType, } from 'antd/es/table';
 import type { FilterValue, SorterResult,FilterConfirmProps,TableCurrentDataSource } from 'antd/es/table/interface';
 import { useState,useEffect, useCallback } from 'react';
 import { BarChartOutlined,WechatFilled,AndroidFilled,AppleFilled,RobotFilled } from '@ant-design/icons';
-import styles from './index.less';
 import { Button, message,Space,DatePicker,TablePaginationConfig, TableProps, Tag, Tooltip } from 'antd';
 import { DataGridProps, DataGridToolbarProps } from '@/components/datagrid/typings';
 import { useIntl } from 'umi';
 import AppIcon from '@/components/AppIcon';
-import VistsChartWindow from './components/VistsChartWindow';
+import VisitChartWindow,{VisitChartWindowProps} from './components/VisitChartWindow';
 
 /**
  * Page - 访问统计
@@ -23,8 +22,7 @@ const VisitPage = () => {
     const [loading,setLoading] = useState(false)
     const [timers,setTimers] = useState<string[]>()
     const [tableParams,setTableParams] = useState<WardenData.ITableParams>({pagination:{current:1,pageSize:10}})
-    const [windowOpen,setWindowOpen] = useState(Boolean)
-    
+    const [windowOpen,setWindowOpen] = useState<boolean>(false)    
  
     const columns:ColumnsType<VisitData> = [
         {
@@ -38,7 +36,7 @@ const VisitPage = () => {
             sorter:true
         },
         {
-            title:intl.formatMessage({id:'visit.data.property.ip'}),
+            title:intl.formatMessage({id:'global.data.property.ip'}),
             dataIndex:'ip'
         },
         {
@@ -46,7 +44,7 @@ const VisitPage = () => {
             dataIndex:'page',
         },
         {
-            title:intl.formatMessage({id:'visit.data.property.terminal'}),
+            title:intl.formatMessage({id:'global.data.property.terminal'}),
             dataIndex:'terminal',
             sorter:true,
             render:(value)=>{
@@ -54,7 +52,8 @@ const VisitPage = () => {
                     <Tag key={value}>{value}</Tag>
                 )
             },
-            filters:[
+            filters:
+            [
                 {text:"PC",value:"PC"},
                 {text:"MAC",value:"MAC"},
                 {text:"SERVER",value:"SERVER"},
@@ -63,7 +62,7 @@ const VisitPage = () => {
             ]
         },
         {
-            title:intl.formatMessage({id:'visit.data.property.application'}),
+            title:intl.formatMessage({id:'global.data.property.application'}),
             dataIndex:'appType',
             sorter:true,
             render:(value:Warden.AppType)=>{
@@ -205,7 +204,7 @@ const VisitPage = () => {
         onChange:onChangeHandler
     }
 
-    const vistsChartWindowProps:VisitChartWindowProps = {
+    const windowProps:VisitChartWindowProps={
         open:windowOpen,
         closeWindowHandler:setWindowOpen
     }
@@ -213,7 +212,7 @@ const VisitPage = () => {
     return(
         <Container boxStyle="box" showTitle={true}>
             <DataGrid {...gridProps} />
-            <VistsChartWindow {...vistsChartWindowProps} />        
+            <VisitChartWindow {...windowProps} />        
         </Container>
     )
 }

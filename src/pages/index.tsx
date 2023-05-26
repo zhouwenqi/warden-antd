@@ -7,8 +7,7 @@ export default function HomePage() {
     <div>
       <h2>Yay! Welcome to umi!</h2>
       <div>
-        <img src={yayJpg} width="388" />
-        
+        <img src={yayJpg} width="388" />        
       </div>    
       <div>
         <Space>

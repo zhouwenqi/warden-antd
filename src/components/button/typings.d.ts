@@ -1,5 +1,5 @@
 declare interface ButtonBaseProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
-    children?:JSX.Element;
+    children?:JSX.Element | JSX.Element[];
     tooltip?:string;
 }
 

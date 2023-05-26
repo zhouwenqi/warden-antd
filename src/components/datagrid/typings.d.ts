@@ -9,6 +9,8 @@ declare interface DataGridProps<RecordType extends object = any> extends TablePr
     toolBarProps?:DataGridToolbarProps;
     /** 查询面版属性 */
     searchBarProps?:DataGridSearchPanelProps;
+    /** 禁用选中列 */
+    disenableSelectCloumn?:boolean;
     
     extElements?:JSX.Element
 }

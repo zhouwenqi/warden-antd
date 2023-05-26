@@ -3,7 +3,7 @@ declare interface OperationData{
     name:string;
     action:string;
     face?:string;
-    content?:string;
+    content?:string | JSX.Element;
     ip?:string;
     terminal:Warden.TerminalType;
     appType:Warden.AppType;   

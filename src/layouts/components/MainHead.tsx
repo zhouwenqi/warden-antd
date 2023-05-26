@@ -1,4 +1,4 @@
-import { Layout, Menu, Space, Dropdown, Avatar,Tooltip,MenuProps } from "antd";
+import { Layout, Menu, Space, Dropdown, Avatar,Tooltip,MenuProps, Badge } from "antd";
 import React from 'react';
 import AppIcon from "@/components/AppIcon";
 import { history, useIntl } from "umi";
@@ -64,7 +64,9 @@ const MainHead =(props:LayoutProps.HeadProps)=> {
                       </Space>
                     </Dropdown>
                     <a className="icon">
+                    <Badge count={19} size="small">
                         <AppIcon name="ring" size={18} />
+                    </Badge>
                     </a>
                     <FullscreenButton />         
                 </Space>

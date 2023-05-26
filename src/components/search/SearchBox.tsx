@@ -10,18 +10,18 @@ import styles from "./SearchBox.less";
  */
 const SearchBox=(props:SearchBoxProps)=>{
     const intl = useIntl()
-    let selectElement:JSX.Element = <></>    
-    let defaultValue = undefined
     
+    let selectElement:JSX.Element = <></>
     if(props.searchPropertyItems && props.searchPropertyItems.length > 0){
-        let index = props.selectIndex != undefined ? props.selectIndex : 0       
-        defaultValue = props.searchPropertyItems[index].value
+        let index = props.selectIndex != undefined ? props.selectIndex : 0  
+        let defaultItem:IProperty = props.searchPropertyItems[index]
         if(props.selectItem){
-            defaultValue = props.selectItem.value
+            defaultItem = props.selectItem
         }
-        selectElement=(<Form.Item noStyle name="searchProertyKey" initialValue={defaultValue}><Select options={props.searchPropertyItems}></Select></Form.Item>)
+        selectElement=(<Form.Item noStyle name="searchProertyKey" initialValue={defaultItem?.value}><Select options={props.searchPropertyItems}></Select></Form.Item>)    
     }
-    const inputSuffix = defaultValue ? defaultValue : intl.formatMessage({id:'global.placeholder.input.suffix'})    
+    
+    const inputSuffix = intl.formatMessage({id:'global.placeholder.input.suffix'})
     const inputPlaceholder = intl.formatMessage({id:'global.placeholder.input.prefix'}) + ' ' + inputSuffix
     const searchButton = props.searchButtonType=='icon' ? <Button htmlType="submit" type={props.searchButtonTheme} icon={<SearchOutlined />} /> : <Button htmlType="submit" type={props.searchButtonTheme}>{intl.formatMessage({id:'global.button.search'})}</Button>
     

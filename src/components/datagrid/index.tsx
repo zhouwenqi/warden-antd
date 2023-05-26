@@ -17,7 +17,7 @@ import { SizeType } from 'antd/es/config-provider/SizeContext';
  * @returns 
  */
 const DataGrid=(props:DataGridProps)=>{
-    const  {extElements,columns,...tableProps} = props    
+    const  {extElements,columns,disenableSelectCloumn,...tableProps} = props    
     const [gridColumns,setGridColumns] = useState<DataGridColumnType[]>([])    
     const [rowHeight,setRowHeight] = useState<SizeType>('large')
     const [selectedRowKeys,setSelectedRowKeys]=useState<React.Key[]>([])
@@ -37,7 +37,10 @@ const DataGrid=(props:DataGridProps)=>{
         }        
     })
     const onFinishHandler=(values:any)=>{
-        console.log(values)
+        console.log('SearchBarprops.onSearch:',values)
+        if(props.searchBarProps?.onSearch){
+            props.searchBarProps?.onSearch(values)
+        }
     }
 
     const onSetupColumnHandler=(cols:DataGridColumnType[])=>{
@@ -55,14 +58,18 @@ const DataGrid=(props:DataGridProps)=>{
         }
     }
 
+    const toolBarprops = {
+        deleteButtonShow:!disenableSelectCloumn,
+        ...props.toolBarProps
+    }
     return(
         <div className={styles.box}>
             <Form onFinish={onFinishHandler}>
                 <DataGridSearchPanel {...props.searchBarProps} />     
             </Form>   
             <div className={styles.table}>
-                <DataGridToolbar selectedRowKeys={selectedRowKeys} columns={props.columns} {...props.toolBarProps} onSetupColumns={(cols:DataGridColumnType[])=>{onSetupColumnHandler(cols)}} onSetRowheightType={(e)=>{onSetupRowheightHandler(e)}} />
-                <Table rowSelection={rowSelectionProps} columns={dyColumns} {...tableProps} size={rowHeight} />    
+                <DataGridToolbar selectedRowKeys={selectedRowKeys} columns={props.columns} {...toolBarprops} onSetupColumns={(cols:DataGridColumnType[])=>{onSetupColumnHandler(cols)}} onSetRowheightType={(e)=>{onSetupRowheightHandler(e)}} />
+                <Table rowSelection={!disenableSelectCloumn ? rowSelectionProps : undefined} columns={dyColumns} {...tableProps} size={rowHeight} />    
             </div>
         </div>
     )

@@ -97,7 +97,7 @@ const SalesChartPanel=()=>{
     }
 
     const onChangeHandler=(option:any,total:number,overly:boolean)=>{      
-      if(!overly && appChart.current.setOption){
+      if(!overly && appChart.current){
         const ops = {grid:{left:intl.locale=='en-US'? '80px' : '40px'},...option}
         appChart.current.setOption(ops)
       }      

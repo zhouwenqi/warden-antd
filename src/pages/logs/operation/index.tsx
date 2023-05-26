@@ -1,16 +1,20 @@
 import Container from "@/layouts/components/Container"
 import type { ColumnsType, } from 'antd/es/table';
 import { WardenData } from '@/pages/typings';
-import { useState,useEffect } from "react"
+import { useState,useEffect, useRef,MutableRefObject } from "react"
 import { useIntl } from "umi"
-import { Space, Tag, Tooltip, DatePicker,Button,TablePaginationConfig,message } from "antd";
+import { Space, Tag, Tooltip, DatePicker,Button,TablePaginationConfig,message,Form, Select, Table } from "antd";
 import type { FilterValue, SorterResult,FilterConfirmProps,TableCurrentDataSource } from 'antd/es/table/interface';
 import { BarChartOutlined,WechatFilled,AndroidFilled,AppleFilled,RobotFilled } from '@ant-design/icons';
-import { DataGridProps, DataGridToolbarProps } from '@/components/datagrid/typings';
+import { DataGridProps, DataGridToolbarProps,DataGridSearchPanelProps } from '@/components/datagrid/typings';
 import AppIcon from "@/components/AppIcon";
 import DataGrid from "@/components/datagrid";
+import { getTagColor } from "@/utils/stringUtils";
+import AppButton from "@/components/button";
+import OperationDetailsWindow,{OperationDetailsWindowProps} from "./components/OperationDetailsWindow";
 
 const { RangePicker } = DatePicker;
+
 
 /**
  * Page - 操作日志
@@ -24,26 +28,31 @@ const OperationPage=()=>{
     const [loading,setLoading] = useState(false)
     const [timers,setTimers] = useState<string[]>()
     const [tableParams,setTableParams] = useState<WardenData.ITableParams>({pagination:{current:1,pageSize:10}})
-    const [windowOpen,setWindowOpen] = useState(Boolean)
- 
+    const [windowOpen,setWindowOpen]=useState<boolean>(false)
+    const [windowData,setWindowData]=useState<OperationData>()
+    
     const columns:ColumnsType<OperationData> = [
         {
-            title:intl.formatMessage({id:'operation.data.property.id'}),
+            title:intl.formatMessage({id:'global.data.property.id'}),
             dataIndex:'id',
             sorter:true
         },
         {
             title:intl.formatMessage({id:'operation.data.property.account'}),
             dataIndex:'name',
-            sorter:true
         },
         {
-            title:intl.formatMessage({id:'operation.data.property.ip'}),
+            title:intl.formatMessage({id:'global.data.property.ip'}),
             dataIndex:'ip'
         },
         {
-            title:intl.formatMessage({id:'operation.data.property.action'}),
+            title:intl.formatMessage({id:'global.data.property.type'}),
             dataIndex:'action',
+            render:(value)=>{
+                return(
+                    <Tag key={value} color={getTagColor(value)}>{value}</Tag>
+                )
+            },
         },
         {
             title:intl.formatMessage({id:'operation.data.property.content'}),
@@ -51,7 +60,7 @@ const OperationPage=()=>{
         },
         
         {
-            title:intl.formatMessage({id:'operation.data.property.terminal'}),
+            title:intl.formatMessage({id:'global.data.property.terminal'}),
             dataIndex:'terminal',
             sorter:true,
             render:(value)=>{
@@ -68,7 +77,7 @@ const OperationPage=()=>{
             ]
         },
         {
-            title:intl.formatMessage({id:'operation.data.property.application'}),
+            title:intl.formatMessage({id:'global.data.property.application'}),
             dataIndex:'appType',
             sorter:true,
             render:(value:Warden.AppType)=>{
@@ -101,7 +110,7 @@ const OperationPage=()=>{
             ]
         },
         {
-            title:intl.formatMessage({id:'operation.data.property.createDate'}),
+            title:intl.formatMessage({id:'global.data.property.createDate'}),
             dataIndex:'createDate',
             sorter:true,
             width:'220px',
@@ -114,9 +123,22 @@ const OperationPage=()=>{
                 </div>
             )
         },
+        {
+            title:intl.formatMessage({id:'global.data.property.action'}),
+            render:(value:any,record:any)=>{
+                return(
+                    <Space>
+                        <AppButton tooltip={intl.formatMessage({id:'global.button.tooltip.details'})} onClick={()=>{onClickDetailsHandler(record)}} iconProps={{name:"details",color:"#333333"}} />
+                    </Space>
+                )
+            }
+        }
     ]
 
-    
+    const onClickDetailsHandler=(record:any)=>{        
+        setWindowData(record) 
+        setWindowOpen(true)       
+    }
 
     const onChangePickerHandler=(timeArr:string[])=>{
         let timerstring:(string[] | undefined) = timeArr
@@ -134,9 +156,6 @@ const OperationPage=()=>{
     useEffect(() => {
         fetchData();
     }, [JSON.stringify(tableParams),local]) 
-
-
-
    
     const fetchData = () => {
         setLoading(true);
@@ -173,14 +192,8 @@ const OperationPage=()=>{
         })
     }
 
-    // 表格工具栏button
-    const toolbarButtons = [    
-        <Button onClick={()=>{setWindowOpen(true)}} icon={<BarChartOutlined />} key="chartsBtn">{intl.formatMessage({id:'visit.data.button.chart.analysis'})}</Button>        
-    ]
-
     // 表格工具栏属性
     const toolBarProps:DataGridToolbarProps = {
-        leftButtons:toolbarButtons,
         onRefresh:()=>{
             fetchData()
         },
@@ -195,11 +208,16 @@ const OperationPage=()=>{
             console.log(keys)
         }
     }
-
-    // 查询面版属性
-    const searchBarProps:SearchBoxProps = {
+   
+    const searchBarProps:DataGridSearchPanelProps = {
         searchButtonType:'icon',
-        searchButtonTheme:'primary'        
+        searchButtonTheme:'primary',
+        searchPropertyItems:[
+            {label:intl.formatMessage({id:'operation.data.property.account'}), value:'account'},
+            {label:intl.formatMessage({id:'global.data.property.content'}), value:'content'},
+            {label:intl.formatMessage({id:'global.data.property.ip'}),value:'ip'}
+        ]
+               
     }
 
     // datagrid属性
@@ -211,11 +229,25 @@ const OperationPage=()=>{
         rowKey:(record)=>record.id,
         pagination:tableParams.pagination,
         loading,
-        onChange:onChangeHandler
+        disenableSelectCloumn:true,        
+        onChange:onChangeHandler,
+        footer:()=>{
+            return(
+                <div>{intl.formatMessage({id:'global.data.footer.tag'})} : {tableParams.pagination?.total}</div>
+            )
+        }
     }
+    const windowProps:OperationDetailsWindowProps = {
+        open:windowOpen,
+        data:windowData,
+        closeWindowHandler:setWindowOpen
+    }
+   
+
     return(
         <Container boxStyle="box" showTitle={true}>
-            <DataGrid {...gridProps} />            
+            <DataGrid {...gridProps} />  
+            <OperationDetailsWindow {...windowProps} />
         </Container>
     )
 }

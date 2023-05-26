@@ -114,7 +114,7 @@ const getMenuIcon=(item:IMenuData)=> {
         });
         break;
       case 'warden':
-        icon = (<span className='anticon anticon-setting ant-menu-item-icon'><AppIcon name={iconName} /></span>)
+        icon = (<span className='anticon anticon-setting ant-menu-item-icon'><AppIcon size={18} name={iconName} /></span>)
         break;
     }
   }

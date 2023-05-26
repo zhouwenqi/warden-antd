@@ -31,4 +31,46 @@ const getLocalUser=(local?:string)=>{
     }
     return userInfo
 }
-export {getLocalUser}
+const getTagColor=(tagName:string):string=>{
+    var color="default"    
+    switch(tagName.toUpperCase()){
+        case "DELETE":
+            color = "red"
+            break
+        case "CREATE":
+        case "INSERT":
+        case "ADD":
+        case "PUBLISH":
+            color = "blue"
+            break
+        case "JOIN":
+            color = "green"
+            break
+        case "MODIFY":
+        case "UPDATE":
+        case "EDIT":
+            color = "orange"
+            break
+        case "LOGIN":
+            color = "purple"
+            break
+        case "VERIFY":
+            color = "magenta"
+            break
+    }
+
+    return color
+}
+const getNs=(list:any[],value:string):any=>{
+        for(var i=0;i<list.length;i++){
+        if(list[i].value==value){
+            return list[i]
+        }
+    }
+    return undefined
+}
+const getNsText=(list:any[],value:string):string=>{
+    const item = getNs(list,value)
+    return item!= undefined ? item.text : undefined
+}
+export {getLocalUser,getTagColor,getNsText,getNs}

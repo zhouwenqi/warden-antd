@@ -22,30 +22,18 @@ export default [
         {path:'/main/control/logs', name:'logs',icon:'warden_logs', routes:[
             {path:'/main/control/logs/',redirect:'/main/control/logs/operation'},
             {path:'/main/control/logs/operation',name:'operation',component:'@/pages/logs/operation/index'},
-            {path:'/main/control/logs/sms',name:'sms',component:'@/pages/dashboard/monitoring/index'}
+            {path:'/main/control/logs/sms',name:'sms',component:'@/pages/logs/sms/index'}
         ]}
     ]},
-    {path:'/main/worker', name:'worker', icon: 'DeploymentUnitOutlined', routes:[
-        {path:'/main/worker/', redirect:'/main/worker/order'},
-        {path:'/main/worker/order',name: 'order', routes:[
-            {path:'/main/worker/order/',redirect:'/main/worker/order/list'},
-            {path:'/main/worker/order/list',name:'list',component:'@/pages/dashboard/workbench/index'},
-            {path:'/main/worker/order/category',name:'category',component:'@/pages/dashboard/monitoring/index'}
+    {path:'/main/worker', name:'worker', icon: 'DeploymentUnitOutlined', routes:[        
+        {path:'/main/worker/', redirect:'/main/worker/project'},
+        {path:'/main/worker/project', name:'project',component:'@/pages/project/index',icon:'warden_goods'},
+        {path:'/main/worker/order',name: 'order',icon: 'warden_order', component:'@/pages/order/index'},
+        {path:'/main/worker/action', name:'product',icon:'GiftOutlined',routes:[
+            {path:'/main/worker/action/',redirect:'/main/worker/action/coupon'},
+            {path:'/main/worker/action/coupon',name:'coupon',component:'@/pages/action/coupon/index'},
+            {path:'/main/worker/action/ad',name:'ad',component:'@/pages/dashboard/monitoring/index'}
         ]},
-        {path:'/main/worker/product', name:'product',routes:[
-            {path:'/main/worker/product/',redirect:'/main/worker/product/list'},
-            {path:'/main/worker/product/list',name:'list',component:'@/pages/dashboard/workbench/index'},
-            {path:'/main/worker/product/category',name:'category',component:'@/pages/dashboard/monitoring/index'}
-        ]}
-    ]},
-    {path:'/main/action', name:'action', icon: 'GiftOutlined', routes:[
-        {path:'/main/action/', redirect:'/main/action/coupon'},
-        {path:'/main/action/coupon',name: 'coupon',component:'@/pages/dashboard/workbench/index'},
-        {path:'/main/action/ad', name:'ad',routes:[
-            {path:'/main/action/ad/',redirect:'/main/action/ad/list'},
-            {path:'/main/action/ad/list',name:'list',component:'@/pages/dashboard/workbench/index'},
-            {path:'/main/action/ad/category',name:'category',component:'@/pages/dashboard/monitoring/index'}
-        ]}
     ]},
     {path:'/main/system', name:'system', icon: 'SettingOutlined', routes:[
         {path:'/main/system/message',name:'message', icon:'warden_ring', component:'@/pages/dashboard/workbench/index'},

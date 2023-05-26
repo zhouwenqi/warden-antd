@@ -3,7 +3,7 @@ import { useState,useRef,MutableRefObject, useEffect } from "react"
 import { useIntl } from "umi"
 import { WindowProps } from "@/components/window/typings"
 import AppChart from "@/components/AppChart"
-import styles from './VistsChartWindow.less'
+import styles from './VisitChartWindow.less'
 import { Segmented } from "antd"
 import { SegmentedValue } from "antd/lib/segmented"
 
@@ -12,19 +12,20 @@ import { SegmentedValue } from "antd/lib/segmented"
  * @param props 
  * @returns 
  */
-const VistsChartWindow=(props:VisitChartWindowProps)=>{
+export interface VisitChartWindowProps extends WindowProps {
+    data?:VisitData
+}
+const VisitChartWindow=(props:VisitChartWindowProps)=>{ 
     const intl = useIntl()
     const [charType,setChartType]=useState<VistChartType>('Terminal')    
     const appChart:MutableRefObject<any> = useRef('agentChart')
-
+  
     const windowProps:WindowProps = {
-        open:props.open,
         width:600,
         title:intl.formatMessage({id:'visit.data.button.chart.analysis'}),        
-        onClose:()=>{props.closeWindowHandler(false)}
+        onClose:()=>{props.closeWindowHandler!(false)},
+        ...props
     }
-
-
 
     let data = [
         {value:32812,name:'MAC'},
@@ -104,4 +105,4 @@ const VistsChartWindow=(props:VisitChartWindowProps)=>{
         </Window>
     )
 }
-export default VistsChartWindow
+export default VisitChartWindow

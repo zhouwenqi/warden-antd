@@ -1,10 +1,8 @@
 import * as echarts from 'echarts';
 import { useEffect,useImperativeHandle,useRef,forwardRef,Ref, MutableRefObject } from 'react';
-import { useIntl } from 'umi';
 
 const AppChart=(props:AppChartProps,ref:Ref<any>)=>{
     const echartsRef:MutableRefObject<any> = useRef()
-    const intl = useIntl()
     
     let myChart:any
     useEffect(()=>{

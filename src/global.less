@@ -85,32 +85,42 @@ button[data-warden-type="button"]{
   font-size: inherit;
   line-height: inherit;
   align-items: center;
-  display: flex;
-  align-items: center;
-  :hover{
-      cursor: pointer;
-      color:var(--ant-primary-color);
-  }
-  svg:hover{
-      fill:var(--ant-primary-color);
-  }
-  :active{
-      opacity: 0.7;
-  }
+  display: flex;  
+  cursor: pointer;
+}
+
+button[data-warden-type="button"]:hover{  
+  color:var(--ant-primary-color);
+}
+button[data-warden-type="button"]:active{
+  opacity: 0.7;
 }
 button[data-warden-type="button"]:disabled{
-  opacity: 0.2;  
-  :hover{
-    cursor:not-allowed;
-    color:currentColor;
-  }
-  svg:hover{
-    fill:currentColor;;
-  }
-  :active{
-      opacity: 1;
-  }
+  opacity: 0.2;
+  cursor:not-allowed;
+}
+button[data-warden-type="button"]:disabled :hover{  
+  color:currentColor;
+}
+button[data-warden-type="button"]:disabled :active{
+  opacity: 1;
+}
+button[data-warden-type="button"]:hover svg[data-warden-type="svg"]{
+  fill:var(--ant-primary-color);
 }
 div[data-warden-box="space"] .ant-space-item{
   display: flex;
-}  
+}
+div[data-warden-details="box"] .details-item{
+  display: flex;  
+  color:#333;  
+  padding:4px 0px;
+  justify-items: center;
+  align-items: center;
+}
+div[data-warden-details="box"] .details-item label{
+  text-align: right;
+  width:140px;
+  margin-right: 4px;
+  color:#999;
+}

@@ -12,6 +12,7 @@
     "@umijs/plugins": "^4.0.22",
     "antd": "^4.23.6",
     "echarts": "^5.4.1",
+    "react-fast-marquee": "^1.6.0",
     "umi": "^4.0.25"
   },
   "devDependencies": {

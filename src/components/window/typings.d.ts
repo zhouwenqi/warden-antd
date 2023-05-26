@@ -1,5 +1,7 @@
 import { DrawerProps } from "antd";
-
-declare interface WindowProps extends DrawerProps {
-    closeOpenHandler?:React.Dispatch<React.SetStateAction<boolean>>
+declare interface BaseWindowProps extends DrawerProps{
+    closeWindowHandler?:React.Dispatch<React.SetStateAction<boolean>>;
+}
+declare interface WindowProps extends BaseWindowProps {
+    
 }

@@ -18,13 +18,16 @@ declare interface GridInfo{
 
 declare namespace Warkbench{
     interface Project {
-        id:string;
+        id:number;
+        code?:string;
         name:string;
-        icon:string;
+        icon?:string;
+        color?:string;
         memberCount:number;
         speedCount:number;
         testCount:number;
         description?:string;
         createDate?:string;
+        modifyDate?:string;
     }
 }

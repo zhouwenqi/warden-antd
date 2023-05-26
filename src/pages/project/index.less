@@ -1,0 +1,79 @@
+.box{
+    display: flex;
+}
+
+.header{
+    margin:10px 20px 0px 20px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+.itemBox{
+    width:250px;
+    border-radius: 16px;    
+    background-color: white;
+    cursor: pointer;
+    height: 218px;
+}
+
+.itemFace{
+    background-color: white;
+    border-bottom: 1px solid white;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    min-height: 180px;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    user-select: none;
+    color:var(--ant-primary-color);   
+    img {
+        width:90px;
+        height:90px;
+        transition: All 0.2s ease-in-out;
+    }
+    svg[data-warden-type="svg"]  {
+        transition: All 0.2s ease-in-out;
+    }
+}
+.itemBox:hover{    
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px 0 rgba(0, 0, 0, 0.02);
+    .itemFace{
+        border-bottom-color:#f0f0f0;
+    }
+    img,svg[data-warden-type="svg"]{
+        transform:scale(1.2);
+    }
+}
+.itemBox:active{
+    box-shadow:none;
+    img,svg[data-warden-type="svg"]{
+        transform:scale(1.1);
+    }
+}
+.itemDes{
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    height: 38px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:0px 8px;
+    label{
+        margin:0px 8px;
+        display: flex;
+        align-items: center;
+        color:var(--warden-text-color-4);
+    }
+    svg{
+        margin-right:4px;
+    }
+}
+.listBox{
+    margin:20px;
+    padding:20px;
+    background-color: white;
+}
