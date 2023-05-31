@@ -21,17 +21,23 @@ const formItemLayout = {
 const { TextArea } = Input
 const { RangePicker } = DatePicker
 
-export interface CouponBitchFormWindowProps extends WindowProps {
-    data?:CouponBitchData;
-    onSubmit?:(e:CouponBitchData)=>void
+export interface CouponBatchFormWindowProps extends WindowProps {
+    data?:CouponBatchData;
+    onSubmit?:(e:CouponBatchData)=>void
 }
-const CouponBitchFormWindow=(props:CouponBitchFormWindowProps)=>{
+
+/**
+ * Window - 优惠券批次表单
+ * @param props 
+ * @returns 
+ */
+const CouponBatchFormWindow=(props:CouponBatchFormWindowProps)=>{
     const intl = useIntl()  
     const {closeWindowHandler,data,...WindowProps} = props
     const [form] = Form.useForm();
     const windowProps:WindowProps = {
         width:650,
-        title:intl.formatMessage({id:'couponBitch.data.details.title'}),        
+        title:intl.formatMessage({id:'couponBatch.data.details.title'}),        
         onClose:()=>{closeWindowHandler!(false)},
         ...WindowProps
     }
@@ -56,14 +62,14 @@ const CouponBitchFormWindow=(props:CouponBitchFormWindowProps)=>{
     },[data]) 
 
     const receiveMethods =[
-        {label:intl.formatMessage({id:'couponBitch.data.receiveMethod.auto'}),value:'Auto'}, 
-        {label:intl.formatMessage({id:'couponBitch.data.receiveMethod.active'}),value:'Active'}
+        {label:intl.formatMessage({id:'couponBatch.data.receiveMethod.auto'}),value:'Auto'}, 
+        {label:intl.formatMessage({id:'couponBatch.data.receiveMethod.active'}),value:'Active'}
     ]
 
     const couponTypes =[
-        {label:intl.formatMessage({id:'couponBitch.data.couponType.cash'}),value:'Cash'}, 
-        {label:intl.formatMessage({id:'couponBitch.data.couponType.discount'}),value:'Discount'},
-        {label:intl.formatMessage({id:'couponBitch.data.couponType.exchange'}),value:'Exchange'}
+        {label:intl.formatMessage({id:'couponBatch.data.couponType.cash'}),value:'Cash'}, 
+        {label:intl.formatMessage({id:'couponBatch.data.couponType.discount'}),value:'Discount'},
+        {label:intl.formatMessage({id:'couponBatch.data.couponType.exchange'}),value:'Exchange'}
     ]
 
     let footerPanel = (        
@@ -83,82 +89,82 @@ const CouponBitchFormWindow=(props:CouponBitchFormWindowProps)=>{
                         rules={[
                             {
                               required: true,
-                              message: intl.formatMessage({id:'couponBitch.form.name.rules'}),
+                              message: intl.formatMessage({id:'couponBatch.form.name.rules'}),
                             },
                         ]}
                         >
-                        <Input placeholder={intl.formatMessage({id:'couponBitch.form.name.placeholder'})} />
+                        <Input placeholder={intl.formatMessage({id:'couponBatch.form.name.placeholder'})} />
                     </Form.Item>
                     <Form.Item
                         name="denomination"
-                        label={intl.formatMessage({id:'couponBitch.data.property.denomination'})}
+                        label={intl.formatMessage({id:'couponBatch.data.property.denomination'})}
                         rules={[
                             {
                               required: true,
-                              message: intl.formatMessage({id:'couponBitch.form.denomination.rules'}),
+                              message: intl.formatMessage({id:'couponBatch.form.denomination.rules'}),
                             },
                         ]}
                         >
-                        <Input placeholder={intl.formatMessage({id:'couponBitch.form.denomination.placeholder'})} />
+                        <Input placeholder={intl.formatMessage({id:'couponBatch.form.denomination.placeholder'})} />
                     </Form.Item>   
                     <Form.Item
                         name="quantity"
-                        label={intl.formatMessage({id:'couponBitch.data.property.quantity'})}
+                        label={intl.formatMessage({id:'couponBatch.data.property.quantity'})}
                         rules={[
                             {
                               required: true,
-                              message: intl.formatMessage({id:'couponBitch.form.quantity.rules'}),
+                              message: intl.formatMessage({id:'couponBatch.form.quantity.rules'}),
                             },
                         ]}
                         >
-                        <InputNumber placeholder={intl.formatMessage({id:'couponBitch.form.quantity.placeholder'})} />
+                        <InputNumber placeholder={intl.formatMessage({id:'couponBatch.form.quantity.placeholder'})} />
                     </Form.Item>
                     <Form.Item
                         name="where"
-                        label={intl.formatMessage({id:'couponBitch.data.property.where'})}
+                        label={intl.formatMessage({id:'couponBatch.data.property.where'})}
                         rules={[
                             {
                               required: true,
-                              message: intl.formatMessage({id:'couponBitch.form.where.rules'}),
+                              message: intl.formatMessage({id:'couponBatch.form.where.rules'}),
                             },
                         ]}
                         >
-                        <InputNumber placeholder={intl.formatMessage({id:'couponBitch.form.where.placeholder'})} />
+                        <InputNumber placeholder={intl.formatMessage({id:'couponBatch.form.where.placeholder'})} />
                     </Form.Item>
                     <Form.Item
                         name="receiveMethod"
-                        label={intl.formatMessage({id:'couponBitch.data.property.receiveMethod'})}
+                        label={intl.formatMessage({id:'couponBatch.data.property.receiveMethod'})}
                         >
                         <Select options={receiveMethods} />
                     </Form.Item>
                     <Form.Item
                         name="couponType"
-                        label={intl.formatMessage({id:'couponBitch.data.property.couponType'})}
+                        label={intl.formatMessage({id:'couponBatch.data.property.couponType'})}
                         >
                         <Select options={couponTypes} />
                     </Form.Item>
                     <Form.Item
                         name="enabled"
-                        label={intl.formatMessage({id:'couponBitch.data.property.enabled'})}
+                        label={intl.formatMessage({id:'couponBatch.data.property.enabled'})}
                         valuePropName="checked"
                         >
                         <Checkbox />
                     </Form.Item>
                     <Form.Item
                         name="receiveDate"
-                        label={intl.formatMessage({id:'couponBitch.data.property.receiveDate'})}
+                        label={intl.formatMessage({id:'couponBatch.data.property.receiveDate'})}
                         >
                         <RangePicker format={'YYYY/MM/DD HH:mm:ss'} showTime />
                     </Form.Item>  
                     <Form.Item
                         name="expireDate"
-                        label={intl.formatMessage({id:'couponBitch.data.property.expireDate'})}
+                        label={intl.formatMessage({id:'couponBatch.data.property.expireDate'})}
                         >
                         <RangePicker format={'YYYY/MM/DD HH:mm:ss'} showTime />
                     </Form.Item>   
                     <Form.Item
                         name="description"
-                        label={intl.formatMessage({id:'couponBitch.data.property.description'})}                        
+                        label={intl.formatMessage({id:'couponBatch.data.property.description'})}                        
                         >
                         <TextArea maxLength={100} style={{ height: 120, resize: 'none' }} />
                     </Form.Item>                                                       
@@ -168,4 +174,4 @@ const CouponBitchFormWindow=(props:CouponBitchFormWindowProps)=>{
     )
 }
 
-export default CouponBitchFormWindow
+export default CouponBatchFormWindow

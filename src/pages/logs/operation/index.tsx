@@ -1,11 +1,11 @@
 import Container from "@/layouts/components/Container"
 import type { ColumnsType, } from 'antd/es/table';
 import { WardenData } from '@/pages/typings';
-import { useState,useEffect, useRef,MutableRefObject } from "react"
+import { useState,useEffect} from "react"
 import { useIntl } from "umi"
-import { Space, Tag, Tooltip, DatePicker,Button,TablePaginationConfig,message,Form, Select, Table } from "antd";
+import { Space, Tag, Tooltip, DatePicker,Button,TablePaginationConfig,message} from "antd";
 import type { FilterValue, SorterResult,FilterConfirmProps,TableCurrentDataSource } from 'antd/es/table/interface';
-import { BarChartOutlined,WechatFilled,AndroidFilled,AppleFilled,RobotFilled } from '@ant-design/icons';
+import { FileSearchOutlined,WechatFilled,AndroidFilled,AppleFilled,RobotFilled } from '@ant-design/icons';
 import { DataGridProps, DataGridToolbarProps,DataGridSearchPanelProps } from '@/components/datagrid/typings';
 import AppIcon from "@/components/AppIcon";
 import DataGrid from "@/components/datagrid";
@@ -30,7 +30,7 @@ const OperationPage=()=>{
     const [tableParams,setTableParams] = useState<WardenData.ITableParams>({pagination:{current:1,pageSize:10}})
     const [windowOpen,setWindowOpen]=useState<boolean>(false)
     const [windowData,setWindowData]=useState<OperationData>()
-    
+       
     const columns:ColumnsType<OperationData> = [
         {
             title:intl.formatMessage({id:'global.data.property.id'}),
@@ -128,7 +128,7 @@ const OperationPage=()=>{
             render:(value:any,record:any)=>{
                 return(
                     <Space>
-                        <AppButton tooltip={intl.formatMessage({id:'global.button.tooltip.details'})} onClick={()=>{onClickDetailsHandler(record)}} iconProps={{name:"details",color:"#333333"}} />
+                        <AppButton tooltip={intl.formatMessage({id:'global.button.tooltip.details'})} onClick={()=>{onClickDetailsHandler(record)}}><FileSearchOutlined /></AppButton>
                     </Space>
                 )
             }

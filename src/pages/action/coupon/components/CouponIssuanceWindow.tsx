@@ -7,6 +7,7 @@ import { UnorderedListOutlined,BlockOutlined,DeleteOutlined } from '@ant-design/
 import { useEffect, useState } from "react";
 import { SegmentedValue } from "antd/lib/segmented";
 
+
 const formItemLayout = {
     labelCol: {
       xs: { span: 24 },
@@ -19,10 +20,15 @@ const formItemLayout = {
 }
 
 export interface CouponIssuanceWindowProps extends WindowProps {
-    data?:CouponBitchData;
+    data?:CouponBatchData;
     onSubmit?:(e:IssuanceData)=>void
 }
 
+/**
+ * Window - 发行优惠券
+ * @param props 
+ * @returns 
+ */
 const CouponIssuanceWindow=(props:CouponIssuanceWindowProps)=>{
     const intl = useIntl()  
     const [accStatus,setAccStatus]=useState<boolean>(true)
@@ -30,7 +36,7 @@ const CouponIssuanceWindow=(props:CouponIssuanceWindowProps)=>{
     const [form] = Form.useForm();
     const windowProps:WindowProps = {
         width:650,
-        title:data ? data!.name : intl.formatMessage({id:'couponBitch.button.issuance'}),
+        title:data ? data!.name : intl.formatMessage({id:'couponBatch.button.issuance'}),
         onClose:()=>{closeWindowHandler!(false)},
         ...WindowProps
     }
@@ -43,8 +49,12 @@ const CouponIssuanceWindow=(props:CouponIssuanceWindowProps)=>{
         form.submit()
     }
 
-    const onFinishHandler=(values:any)=>{        
-        props.onSubmit!(values!)
+    const onFinishHandler=(values:any)=>{    
+        const issuanceData:IssuanceData = {...values}
+        if(data){
+            issuanceData.batchId = data?.id
+        }
+        props.onSubmit!(issuanceData)
         form.resetFields()
     }
 
@@ -67,7 +77,6 @@ const CouponIssuanceWindow=(props:CouponIssuanceWindowProps)=>{
     }
 
     if(data){
-
         const options = [
             {label:"ZhangMaoqi",value:"ZhangMaoqi"},
             {label:"Xunsum2",value:"Xunsum2"},
@@ -94,10 +103,9 @@ const CouponIssuanceWindow=(props:CouponIssuanceWindowProps)=>{
                     rules={[
                         {
                           required: true,
-                          message: intl.formatMessage({id:'couponBitch.form.quantity.rules'}),
+                          message: intl.formatMessage({id:'couponBatch.form.quantity.rules'}),
                         },
-                    ]}
-                    >
+                    ]}>
                     <InputNumber min={1} max={99999} placeholder={accStatus ? intl.formatMessage({id:'couponIssuance.data.property.quantity'}) : intl.formatMessage({id:'couponIssuance.form.account.quantity.placeholder'})} />
                 </Form.Item>                
                 <Form.Item

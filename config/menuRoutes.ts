@@ -32,7 +32,8 @@ export default [
         {path:'/main/worker/action', name:'product',icon:'GiftOutlined',routes:[
             {path:'/main/worker/action/',redirect:'/main/worker/action/coupon'},
             {path:'/main/worker/action/coupon',name:'coupon',component:'@/pages/action/coupon/index'},
-            {path:'/main/worker/action/ad',name:'ad',component:'@/pages/dashboard/monitoring/index'}
+            {path:'/main/worker/action/adslots',name:'adslots',component:'@/pages/action/adslots/index'},
+            {path:'/main/worker/action/ads',name:'ads',component:'@/pages/action/ads/index'}
         ]},
     ]},
     {path:'/main/system', name:'system', icon: 'SettingOutlined', routes:[

@@ -4,32 +4,39 @@ import { WardenData } from '@/pages/typings';
 import type { ColumnsType, } from 'antd/es/table';
 import type { FilterValue, SorterResult,FilterConfirmProps,TableCurrentDataSource } from 'antd/es/table/interface';
 import { useState,useEffect, useCallback } from 'react';
-import { PlusOutlined,UnorderedListOutlined,BlockOutlined } from '@ant-design/icons';
+import { PlusOutlined,UnorderedListOutlined,BlockOutlined,FileSearchOutlined } from '@ant-design/icons';
 import { Button, message,Space,DatePicker,TablePaginationConfig, Badge, Form, Select, InputNumber, Input, Divider, Tag, notification } from 'antd';
 import { DataGridProps, DataGridToolbarProps,DataGridSearchPanelProps } from '@/components/datagrid/typings';
 import { useIntl } from 'umi';
 import AppIcon from '@/components/AppIcon';
 import { getNs, getNsText } from '@/utils/stringUtils';
 import AppButton from '@/components/button';
-import CouponBitchDetailsWindow,{CouponDetailsWindowProps} from './components/CouponBitchDetailsWindow';
-import CouponBitchFormWindow, { CouponBitchFormWindowProps } from './components/CouponBitchFormWindow';
+import CouponBatchDetailsWindow,{CouponDetailsWindowProps} from './components/CouponBatchDetailsWindow';
+import CouponBatchFormWindow, { CouponBatchFormWindowProps } from './components/CouponBatchFormWindow';
 import CouponIssuanceWindow, { CouponIssuanceWindowProps } from './components/CouponIssuanceWindow';
+import CouponListWindow, { CouponListWindowProps } from './components/CouponListWindow';
 
-const {Option} = Select
+const { RangePicker } = DatePicker;
 
+/**
+ * Page - 优惠券批次
+ * @returns 
+ */
 const CouponPage=()=>{
-    const { RangePicker } = DatePicker;
+   
     const intl = useIntl()
-    const [data,setData] = useState<CouponBitchData[]>()
+    const [data,setData] = useState<CouponBatchData[]>()
     const [loading,setLoading] = useState(false)
     const [timers,setTimers] = useState<string[]>()
     const [tableParams,setTableParams] = useState<WardenData.ITableParams>({pagination:{current:1,pageSize:10}})
     const [formWindowOpen,setFormWindowOpen]=useState<boolean>(false)
-    const [formWindowData,setFormWindowData]=useState<CouponBitchData>()
+    const [formWindowData,setFormWindowData]=useState<CouponBatchData>()
     const [detailsWindowOpen,setDetailsWindowOpen]=useState<boolean>(false)
-    const [detailsWindowData,setDetailsWindowData]=useState<CouponBitchData>()
+    const [detailsWindowData,setDetailsWindowData]=useState<CouponBatchData>()
     const [issuanceWindowOpen,setIssuanceWindowOpen]=useState<boolean>(false)
-    const [issuanceWindowData,setIssuanceWindowData]=useState<CouponBitchData>()
+    const [issuanceWindowData,setIssuanceWindowData]=useState<CouponBatchData>()
+    const [listWindowOpen,setListWindowOpen]=useState<boolean>(false)
+    const [listWindowData,setListWindowData]=useState<CouponBatchData>()
  
     const bitchEnables =[
         {text:intl.formatMessage({id:'global.button.disable'}),value:'false'}, 
@@ -37,19 +44,19 @@ const CouponPage=()=>{
     ]
 
     const receiveMethods =[
-        {text:intl.formatMessage({id:'couponBitch.data.receiveMethod.auto'}),value:'Auto'}, 
-        {text:intl.formatMessage({id:'couponBitch.data.receiveMethod.active'}),value:'Active'}
+        {text:intl.formatMessage({id:'couponBatch.data.receiveMethod.auto'}),value:'Auto'}, 
+        {text:intl.formatMessage({id:'couponBatch.data.receiveMethod.active'}),value:'Active'}
     ]
 
     const couponTypes =[
-        {text:intl.formatMessage({id:'couponBitch.data.couponType.cash'}),value:'Cash'}, 
-        {text:intl.formatMessage({id:'couponBitch.data.couponType.discount'}),value:'Discount'},
-        {text:intl.formatMessage({id:'couponBitch.data.couponType.exchange'}),value:'Exchange'}
+        {text:intl.formatMessage({id:'couponBatch.data.couponType.cash'}),value:'Cash'}, 
+        {text:intl.formatMessage({id:'couponBatch.data.couponType.discount'}),value:'Discount'},
+        {text:intl.formatMessage({id:'couponBatch.data.couponType.exchange'}),value:'Exchange'}
     ]
 
-    const columns:ColumnsType<CouponBitchData> = [
+    const columns:ColumnsType<CouponBatchData> = [
         {
-            title:intl.formatMessage({id:'couponBitch.data.property.name'}),
+            title:intl.formatMessage({id:'couponBatch.data.property.name'}),
             dataIndex:'name',
             sorter:true,
             render:(value:any,record:any)=>{
@@ -57,21 +64,21 @@ const CouponPage=()=>{
             }
         },
         {
-            title:intl.formatMessage({id:'couponBitch.data.property.quantity'}),
+            title:intl.formatMessage({id:'couponBatch.data.property.quantity'}),
             dataIndex:'quantity',
             sorter:true,
         },
         {
-            title:intl.formatMessage({id:'couponBitch.data.property.denomination'}),
+            title:intl.formatMessage({id:'couponBatch.data.property.denomination'}),
             dataIndex:'denomination',
         },
         {
-            title:intl.formatMessage({id:'couponBitch.data.property.where'}),
+            title:intl.formatMessage({id:'couponBatch.data.property.where'}),
             dataIndex:'where',
             sorter:true,
         },
         {
-            title:intl.formatMessage({id:'couponBitch.data.property.enabled'}),
+            title:intl.formatMessage({id:'couponBatch.data.property.enabled'}),
             dataIndex:'enabled',
             filters:bitchEnables,
             render:(value)=>{
@@ -84,7 +91,7 @@ const CouponPage=()=>{
             },
         },
         {
-            title:intl.formatMessage({id:'couponBitch.data.property.receiveMethod'}),
+            title:intl.formatMessage({id:'couponBatch.data.property.receiveMethod'}),
             dataIndex:'receiveMethod',  
             filters:receiveMethods,
             render:(value)=>{               
@@ -94,7 +101,7 @@ const CouponPage=()=>{
             },
         },
         {
-            title:intl.formatMessage({id:'couponBitch.data.property.couponType'}),
+            title:intl.formatMessage({id:'couponBatch.data.property.couponType'}),
             dataIndex:'couponType',            
             render:(value:string)=>{                
                 return <Tag>{getNsText(couponTypes,value)}</Tag>
@@ -117,13 +124,14 @@ const CouponPage=()=>{
         },
         {
             title:intl.formatMessage({id:'global.data.property.action'}),
+            width:'100px',
             render:(value:any,record:any)=>{
                 return(
                     <Space>                        
-                        <AppButton tooltip={intl.formatMessage({id:'global.button.tooltip.details'})} onClick={()=>{onClickDetailsHandler(record)}} iconProps={{name:"details",color:"#333333"}} />                        
+                        <AppButton tooltip={intl.formatMessage({id:'global.button.tooltip.details'})} onClick={()=>{onClickDetailsHandler(record)}}><FileSearchOutlined /></AppButton>                       
                         <Divider type="vertical" />
-                        <AppButton tooltip={intl.formatMessage({id:'couponBitch.button.list'})} onClick={()=>{onClickDetailsHandler(record)}}><UnorderedListOutlined /></AppButton>   
-                        <AppButton tooltip={intl.formatMessage({id:'couponBitch.button.issuance'})} onClick={()=>{onClickIssuanceHandler(record)}}><BlockOutlined /></AppButton> 
+                        <AppButton tooltip={intl.formatMessage({id:'couponBatch.button.list'})} onClick={()=>{onClickListHandler(record)}}><UnorderedListOutlined /></AppButton>   
+                        <AppButton tooltip={intl.formatMessage({id:'couponBatch.button.issuance'})} onClick={()=>{onClickIssuanceHandler(record)}}><BlockOutlined /></AppButton> 
                     </Space>
                 )
             }
@@ -149,7 +157,7 @@ const CouponPage=()=>{
 
     const fetchData = () => {
         setLoading(true);
-        fetch('/api/couponBitchs',{
+        fetch('/api/couponBatchs',{
             method:'POST',
             cache: 'no-cache',
             credentials: 'same-origin',
@@ -173,7 +181,7 @@ const CouponPage=()=>{
     }
 
     // Table分页、排序、筛选事件
-    const onChangeHandler = (pagination: TablePaginationConfig, filters: Record<string, FilterValue | null>, sorter:  SorterResult<CouponBitchData> | SorterResult<CouponBitchData>[], extra: TableCurrentDataSource<CouponBitchData>) =>{               
+    const onChangeHandler = (pagination: TablePaginationConfig, filters: Record<string, FilterValue | null>, sorter:  SorterResult<CouponBatchData> | SorterResult<CouponBatchData>[], extra: TableCurrentDataSource<CouponBatchData>) =>{               
         setTableParams({
             pagination,
             ...filters,
@@ -183,7 +191,7 @@ const CouponPage=()=>{
 
      // 表格工具栏button
      const toolbarButtons = [    
-        <Button type="primary" onClick={()=>{onClickCreateHandler()}} icon={<PlusOutlined />} key="addBtn">{intl.formatMessage({id:'couponBitch.button.add'})}</Button>        
+        <Button type="primary" onClick={()=>{onClickCreateHandler()}} icon={<PlusOutlined />} key="addBtn">{intl.formatMessage({id:'couponBatch.button.add'})}</Button>        
     ]
     
     // 表格工具栏属性
@@ -214,17 +222,22 @@ const CouponPage=()=>{
         setFormWindowOpen(true)
     }
 
-    const onClickEditHandler=(e:CouponBitchData)=>{
+    const onClickEditHandler=(e:CouponBatchData)=>{
         setFormWindowData(e);
         setFormWindowOpen(true)
     }
 
-    const onClickIssuanceHandler=(e:CouponBitchData)=>{
+    const onClickIssuanceHandler=(e:CouponBatchData)=>{
         setIssuanceWindowData(e)
         setIssuanceWindowOpen(true)
     }
 
-    const onSubmitHandler=(e:CouponBitchData)=>{
+    const onClickListHandler=(e:CouponBatchData)=>{
+        setListWindowData(e)
+        setListWindowOpen(true)
+    }
+
+    const onSubmitHandler=(e:CouponBatchData)=>{
         const key = 'couponBitchSubmit'
         message.loading({ content: intl.formatMessage({id:'global.message.submitting'}), key })
         setTimeout(() => {
@@ -258,7 +271,7 @@ const CouponPage=()=>{
         closeWindowHandler:setDetailsWindowOpen
     }   
 
-    const windowFormProps:CouponBitchFormWindowProps = {
+    const windowFormProps:CouponBatchFormWindowProps = {
         open:formWindowOpen,
         data:formWindowData,
         onSubmit:onSubmitHandler,
@@ -268,18 +281,25 @@ const CouponPage=()=>{
     const windowIssuanceProps:CouponIssuanceWindowProps ={
         open:issuanceWindowOpen,
         data:issuanceWindowData,
-        onSubmit:onIssuanceHandler,
+        onSubmit:onIssuanceHandler,        
         closeWindowHandler:setIssuanceWindowOpen
     }
+
+    const windowListProps:CouponListWindowProps ={
+        open:listWindowOpen,
+        data:listWindowData,      
+        closeWindowHandler:setListWindowOpen
+    }
+
 
     // 查询面版属性
     const searchBarProps:DataGridSearchPanelProps = {
         searchButtonType:'icon',
         searchButtonTheme:'primary',
         searchPropertyItems:[
-            {label:intl.formatMessage({id:'couponBitch.data.property.name'}), value:'name'},
-            {label:intl.formatMessage({id:'couponBitch.data.property.description'}), value:'description'},
-            {label:intl.formatMessage({id:'couponBitch.data.property.denomination'}),value:'denomination'}
+            {label:intl.formatMessage({id:'couponBatch.data.property.name'}), value:'name'},
+            {label:intl.formatMessage({id:'couponBatch.data.property.description'}), value:'description'},
+            {label:intl.formatMessage({id:'couponBatch.data.property.denomination'}),value:'denomination'}
         ], 
           
     }
@@ -298,9 +318,10 @@ const CouponPage=()=>{
     return(
         <Container boxStyle="box" showTitle={true}>
             <DataGrid {...gridProps} />
-            <CouponBitchDetailsWindow {...windowDetailsProps} />
-            <CouponBitchFormWindow {...windowFormProps} />
+            <CouponBatchDetailsWindow {...windowDetailsProps} />
+            <CouponBatchFormWindow {...windowFormProps} />
             <CouponIssuanceWindow {...windowIssuanceProps} />
+            <CouponListWindow {...windowListProps} />
         </Container>
     )
 }

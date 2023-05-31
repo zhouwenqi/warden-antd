@@ -8,6 +8,12 @@ export interface ProjectDetailsWindowProps extends WindowProps {
     data?:ProjectData    
     onEdit?:(data:ProjectData)=>void;
 }
+
+/**
+ * Window - 项目详情
+ * @param props 
+ * @returns 
+ */
 const ProjectDetailsWindow=(props:ProjectDetailsWindowProps)=>{
     const intl = useIntl()
     const {closeWindowHandler,data,...WindowProps} = props

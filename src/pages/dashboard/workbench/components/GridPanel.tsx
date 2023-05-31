@@ -4,7 +4,7 @@ import { Tag } from 'antd';
 import styles from './GridPanel.less';
 import AppButton from '@/components/button';
 import AppChart from '@/components/AppChart';
-import { useIntl } from 'umi';
+import { history, useIntl } from 'umi';
 
 /**
  * 基本统计面版 - 工作台
@@ -129,7 +129,7 @@ function GridPanel(){
     return(
         <div className={styles.listBox}>
             <GridCard data={data[0]} memoElement={<div className={styles.gridChartBox}><AppChart style={{width:'100%',height:'100%'}} option={option1} /></div>} moreElement={<AppButton><AppIcon size={12} name='more2' color='#666' /></AppButton>} />
-            <GridCard data={data[1]} memoElement={<div className={styles.gridChartBox}><AppChart style={{width:'100%',height:'100%'}} option={option2} /></div>} moreElement={<AppButton><AppIcon size={12} name='more2' color='#666'  /></AppButton>} />
+            <GridCard data={data[1]} memoElement={<div className={styles.gridChartBox}><AppChart style={{width:'100%',height:'100%'}} option={option2} /></div>} moreElement={<AppButton onClick={()=>{history.push('/main/worker/order')}}><AppIcon size={12} name='more2' color='#666'  /></AppButton>} />
             <GridCard data={data[2]} memoElement={<div className={styles.gridChartBox}><AppChart style={{width:'100%',height:'100%'}} option={option3} /></div>} />
             <GridCard data={data[3]} memoElement={<img className={styles.gridWork} src="/images/visitiors.png" alt="visitiors" />} />
         </div>

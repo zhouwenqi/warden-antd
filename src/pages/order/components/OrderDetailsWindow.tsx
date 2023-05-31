@@ -10,6 +10,11 @@ export interface OrderDetailsWindowProps extends WindowProps {
     data?:OrderData;
 }
 
+/**
+ * 订单详情
+ * @param props 
+ * @returns 
+ */
 const OrderDetailsWindow=(props:OrderDetailsWindowProps)=>{
     const intl = useIntl()  
     const {closeWindowHandler,data,...WindowProps} = props

@@ -4,7 +4,7 @@ import { WardenData } from '@/pages/typings';
 import type { ColumnsType, } from 'antd/es/table';
 import type { FilterValue, SorterResult,FilterConfirmProps,TableCurrentDataSource } from 'antd/es/table/interface';
 import { useState,useEffect, useCallback } from 'react';
-import { WechatFilled,AlipayOutlined,AppleFilled } from '@ant-design/icons';
+import { WechatFilled,AlipayOutlined,AppleFilled,FileSearchOutlined } from '@ant-design/icons';
 import { Button, message,Space,DatePicker,TablePaginationConfig, Tooltip, Badge, Form, Select, InputNumber, Input, Popconfirm } from 'antd';
 import { DataGridProps, DataGridToolbarProps,DataGridSearchPanelProps } from '@/components/datagrid/typings';
 import { useIntl } from 'umi';
@@ -13,6 +13,10 @@ import { getNs, getNsText } from '@/utils/stringUtils';
 import OrderDetailsWindow, { OrderDetailsWindowProps } from './components/OrderDetailsWindow';
 import AppButton from '@/components/button';
 
+/**
+ * Page - 订单列表
+ * @returns 
+ */
 const OrderPage=()=>{
     const { RangePicker } = DatePicker;
     const intl = useIntl()
@@ -164,12 +168,13 @@ const OrderPage=()=>{
         },
         {
             title:intl.formatMessage({id:'global.data.property.action'}),
+            width:'80px',
             render:(value:any,record:any)=>{
                 return(
                     <Space>                        
-                        <AppButton tooltip={intl.formatMessage({id:'global.button.tooltip.details'})} onClick={()=>{onClickDetailsHandler(record)}} iconProps={{name:"details",color:"#333333"}} />                        
+                        <AppButton tooltip={intl.formatMessage({id:'global.button.tooltip.details'})} onClick={()=>{onClickDetailsHandler(record)}}><FileSearchOutlined /></AppButton>                       
                         <Popconfirm title={intl.formatMessage({id:'order.data.alert.audit.title'})}>
-                            <AppButton disabled={record.orderStatus!="Unaudited"} iconProps={{name:"verify",color:"#333333",size:18}} style={{marginLeft:"4px"}} />
+                            <AppButton disabled={record.orderStatus!="Unaudited"} iconProps={{name:"verify",color:"#333333"}} style={{marginLeft:"4px"}} />
                         </Popconfirm>
                     </Space>
                 )

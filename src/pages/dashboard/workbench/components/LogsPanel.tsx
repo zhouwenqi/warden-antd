@@ -4,7 +4,7 @@ import { WardenPanel } from "@/components/panel"
 import OperationDetailsWindow,{OperationDetailsWindowProps} from "@/pages/logs/operation/components/OperationDetailsWindow";
 import { Avatar, List,Typography } from "antd"
 import { useState } from "react";
-import { useIntl } from "umi";
+import { history, useIntl } from "umi";
 const {Text} = Typography;
 
 /**
@@ -50,7 +50,7 @@ const LogsPanel=()=>{
     
     return(
       <>
-      <WardenPanel title={intl.formatMessage({id:'workbench.card.logs.title'})} style={{paddingBottom:'0px'}} moreElement={<AppButton tooltip={intl.formatMessage({id:'tooltip.more'})}><AppIcon name="next" style={{marginTop:'5px'}} size={14} color="#666" /></AppButton>}>
+      <WardenPanel title={intl.formatMessage({id:'workbench.card.logs.title'})} style={{paddingBottom:'0px'}} moreElement={<AppButton onClick={()=>{history.push("/main/control/logs/operation")}} tooltip={intl.formatMessage({id:'tooltip.more'})}><AppIcon name="next" style={{marginTop:'5px'}} size={14} color="#666" /></AppButton>}>
           <List size="small" itemLayout="horizontal" dataSource={data} renderItem={(item)=>(
             <List.Item actions={[<a onClick={()=>{onViewHandler(item)}}>{intl.formatMessage({id:'global.button.view'})}</a>]}>
               <List.Item.Meta

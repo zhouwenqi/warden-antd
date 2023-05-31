@@ -3,6 +3,11 @@ import { PlusOutlined } from '@ant-design/icons'
 import styles from '../index.less'
 import { useIntl } from "umi"
 
+/**
+ * Panel - 项目列表视图
+ * @param props 
+ * @returns 
+ */
 const ProjectListPanel=(props:ProjectPanelProps)=>{
     const intl = useIntl()
     return(

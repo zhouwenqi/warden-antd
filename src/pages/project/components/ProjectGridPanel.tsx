@@ -6,7 +6,7 @@ import styles from '../index.less'
 import { TeamOutlined} from '@ant-design/icons';
 
 /**
- * 项目列表卡片布局
+ * 项目列表卡片视图
  * @param props 
  * @returns 
  */

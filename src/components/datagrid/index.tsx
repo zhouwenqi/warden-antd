@@ -19,7 +19,7 @@ import { SizeType } from 'antd/es/config-provider/SizeContext';
 const DataGrid=(props:DataGridProps)=>{
     const  {extElements,columns,disenableSelectCloumn,...tableProps} = props    
     const [gridColumns,setGridColumns] = useState<DataGridColumnType[]>([])    
-    const [rowHeight,setRowHeight] = useState<SizeType>('large')
+    const [rowHeight,setRowHeight] = useState<SizeType>(props.size)
     const [selectedRowKeys,setSelectedRowKeys]=useState<React.Key[]>([])
     
     useEffect(()=>{     

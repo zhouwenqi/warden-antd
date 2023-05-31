@@ -82,8 +82,8 @@ const VisitChartWindow=(props:VisitChartWindowProps)=>{
     },[charType])
 
     const segmentedOptions = [
-        {label:intl.formatMessage({id:'visit.data.property.terminal'}),value:'Terminal'},
-        {label:intl.formatMessage({id:'visit.data.property.application'}),value:'Application'}
+        {label:intl.formatMessage({id:'global.data.property.terminal'}),value:'Terminal'},
+        {label:intl.formatMessage({id:'global.data.property.application'}),value:'Application'}
     ]
 
     const onChangeChartTypeHandler=(e:SegmentedValue)=>{

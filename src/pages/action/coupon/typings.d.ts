@@ -1,4 +1,4 @@
-declare interface CouponBitchData {
+declare interface CouponBatchData {
     id:number;
     name:string;
     quantity:number;    
@@ -16,7 +16,7 @@ declare interface CouponBitchData {
     modifyDate?:string;
 }
 declare interface IssuanceData {
-    bitchId:number;
+    batchId:number;
     issuanceType:'Sandard'|'Directional';
     quantity:number;
     smsNotification:boolean;
@@ -26,7 +26,7 @@ declare interface IssuanceData {
 declare interface CouponData {
     id:number;
     code:string;
-    bitchId:number;    
+    batchId:number;    
     denomination:string;
     status:'Receive'|'Use'|'Expire';
     receiveMember?:string;
