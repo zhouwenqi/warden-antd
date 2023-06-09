@@ -127,7 +127,7 @@ const AdslotsPage=()=>{
                     <Space>
                         <AppButton tooltip={intl.formatMessage({id:'global.button.tooltip.details'})} onClick={()=>{onClickDetailsHandler(record)}}><FileSearchOutlined /></AppButton>
                         <Divider type="vertical" />
-                        <Popconfirm placement="topLeft" onConfirm={()=>{onClickDetailsHandler(record)}} title={intl.formatMessage({id:'global.button.tooltip.delete'})}><AppButton><DeleteOutlined /></AppButton></Popconfirm>
+                        <Popconfirm placement="topLeft" title={intl.formatMessage({id:'global.button.tooltip.delete'})}><AppButton><DeleteOutlined /></AppButton></Popconfirm>
                         <AppButton onClick={()=>{onClickEditHandler(record)}}><FormOutlined /></AppButton>
                     </Space>
                 )

@@ -31,21 +31,21 @@ const WelcomePanel=()=>{
           </Link>        
           <div className={styles.welcomeInfo}>
             <label>{weltag}，<Link to="/system/profile">{global.currentUser.nickName}</Link>，{intl.formatMessage({id:'workbench.welcome.title'})}</label><br />
-            <span className={styles.deptInfo}>{global.currentUser.deptName} - {global.currentUser.postName}</span><Tag color="orange">{global.currentUser.roleName}</Tag>
+            <span className={styles.deptInfo}>{global.currentUser.deptName} - {global.currentUser.postName} - </span><Tag>{global.currentUser.roleName}</Tag>
           </div>
         </div>
         <div className={styles.descInfo}>        
           <div className={styles.descItem}>
             <span>{intl.formatMessage({id:'workbench.welcome.account.id'})}</span><br />
-            <label>827397238</label>
+            <label>{global.currentUser.id}</label>
           </div>
           <div className={styles.descItem}>
             <span>{intl.formatMessage({id:'workbench.welcome.account.mobile'})}</span><br />
-            <label>139***322</label>
+            <label>{global.currentUser.mobile}</label>
           </div>
           <div className={styles.descItem}>
             <span>{intl.formatMessage({id:'workbench.welcome.account.signin.total'})}</span><br />
-            <label>3089</label>
+            <label>{global.currentUser.loginTotal}</label>
           </div>        
         </div>      
       </div>

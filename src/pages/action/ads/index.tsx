@@ -283,8 +283,6 @@ const AdsPage=()=>{
         onSubmit:onSubmitHandler,
         closeWindowHandler:setFormWindowOpen
     }
-   
-    
 
     return(
         <Container boxStyle="box" showTitle={true}>

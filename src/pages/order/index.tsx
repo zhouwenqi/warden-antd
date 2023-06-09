@@ -4,10 +4,10 @@ import { WardenData } from '@/pages/typings';
 import type { ColumnsType, } from 'antd/es/table';
 import type { FilterValue, SorterResult,FilterConfirmProps,TableCurrentDataSource } from 'antd/es/table/interface';
 import { useState,useEffect, useCallback } from 'react';
-import { WechatFilled,AlipayOutlined,AppleFilled,FileSearchOutlined } from '@ant-design/icons';
+import { WechatFilled,AlipayOutlined,AppleFilled,FileSearchOutlined,BarChartOutlined } from '@ant-design/icons';
 import { Button, message,Space,DatePicker,TablePaginationConfig, Tooltip, Badge, Form, Select, InputNumber, Input, Popconfirm } from 'antd';
 import { DataGridProps, DataGridToolbarProps,DataGridSearchPanelProps } from '@/components/datagrid/typings';
-import { useIntl } from 'umi';
+import { history, useIntl } from 'umi';
 import AppIcon from '@/components/AppIcon';
 import { getNs, getNsText } from '@/utils/stringUtils';
 import OrderDetailsWindow, { OrderDetailsWindowProps } from './components/OrderDetailsWindow';
@@ -238,6 +238,10 @@ const OrderPage=()=>{
         })
     }
 
+    // 表格工具栏button
+    const toolbarButtons = [    
+        <Button onClick={()=>{history.push('/main/control/report/payment')}} icon={<BarChartOutlined />} key="chartsBtn">{intl.formatMessage({id:'visit.data.button.chart.analysis'})}</Button>        
+    ]
     
     // 表格工具栏属性
     const toolBarProps:DataGridToolbarProps = {
@@ -253,7 +257,8 @@ const OrderPage=()=>{
         },
         onDelete:(keys:React.Key[])=>{
             console.log(keys)
-        }
+        },
+        leftButtons:toolbarButtons
     }
 
     const onClickDetailsHandler=(record:any)=>{        

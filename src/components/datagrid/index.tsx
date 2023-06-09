@@ -62,16 +62,24 @@ const DataGrid=(props:DataGridProps)=>{
         deleteButtonShow:!disenableSelectCloumn,
         ...props.toolBarProps
     }
-    return(
-        <div className={styles.box}>
-            <Form onFinish={onFinishHandler}>
-                <DataGridSearchPanel {...props.searchBarProps} />     
-            </Form>   
-            <div className={styles.table}>
-                <DataGridToolbar selectedRowKeys={selectedRowKeys} columns={props.columns} {...toolBarprops} onSetupColumns={(cols:DataGridColumnType[])=>{onSetupColumnHandler(cols)}} onSetRowheightType={(e)=>{onSetupRowheightHandler(e)}} />
-                <Table rowSelection={!disenableSelectCloumn ? rowSelectionProps : undefined} columns={dyColumns} {...tableProps} size={rowHeight} />    
-            </div>
+
+    const dataGridSearchPanel = props.searchBarProps ? (<Form onFinish={onFinishHandler}>
+        <DataGridSearchPanel {...props.searchBarProps} />     
+    </Form>) : <></>
+
+    const dataGridToolPanel = props.toolBarProps ? (<DataGridToolbar selectedRowKeys={selectedRowKeys} columns={props.columns} {...toolBarprops} onSetupColumns={(cols:DataGridColumnType[])=>{onSetupColumnHandler(cols)}} onSetRowheightType={(e)=>{onSetupRowheightHandler(e)}} />) : <></>
+
+    const dataGridPanel = props.searchBarProps || props.toolBarProps ?
+    (<div className={styles.box}>
+        {dataGridSearchPanel}  
+        <div className={styles.table}>
+            {dataGridToolPanel}
+            <Table rowSelection={!disenableSelectCloumn ? rowSelectionProps : undefined} columns={dyColumns} {...tableProps} size={rowHeight} />    
         </div>
+    </div>) : <Table rowSelection={!disenableSelectCloumn ? rowSelectionProps : undefined} columns={dyColumns} {...tableProps} size={rowHeight} />
+
+    return(
+        dataGridPanel
     )
 }
 

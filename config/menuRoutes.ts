@@ -37,23 +37,19 @@ export default [
         ]},
     ]},
     {path:'/main/system', name:'system', icon: 'SettingOutlined', routes:[
-        {path:'/main/system/message',name:'message', icon:'warden_ring', component:'@/pages/dashboard/workbench/index'},
+        {path:'/main/system/message',name:'message', icon:'warden_ring', component:'@/pages/message/index'},
         {path:'/main/system/', redirect:'/main/system/basic'},
         {path:'/main/system/basic',name: 'basic',icon:'ControlOutlined', routes:[
             {path:'/main/system/basic/',redirect:'/main/system/basic/profile'},
-            {path:'/main/system/basic/profile',name:'profile',component:'@/pages/dashboard/workbench/index'},
-            {path:'/main/system/basic/config',name:'config',component:'@/pages/dashboard/workbench/index'}
-        ]},
-        {path:'/main/system/data',name: 'data',icon:'GroupOutlined', routes:[
-            {path:'/main/system/data/',redirect:'/main/system/data/dictionary'},
-            {path:'/main/system/data/dictionary',name:'dictionary',component:'@/pages/dashboard/workbench/index'},
-            {path:'/main/system/data/dept',name:'dept',component:'@/pages/dashboard/workbench/index'},
-            {path:'/main/system/data/post',name:'post',component:'@/pages/dashboard/workbench/index'},
-        ]},
-        {path:'/main/system/important',name: 'important',icon:'BlockOutlined', routes:[
-            {path:'/main/system/important/',redirect:'/main/system/important/notice'},
-            {path:'/main/system/important/notice',name:'notice',component:'@/pages/dashboard/workbench/index'},
-            {path:'/main/system/important/smsTemplate',name:'smsTemplate',component:'@/pages/dashboard/workbench/index'}
+            {path:'/main/system/basic/profile',name:'profile',component:'@/pages/basic/profile/index'},
+            {path:'/main/system/basic/dictionary',name:'dictionary',component:'@/pages/basic/dictionary/index'},
+            
+        ]},       
+        {path:'/main/system/important',name: 'important',icon:'GroupOutlined', routes:[
+            {path:'/main/system/important/',redirect:'/main/system/important/dictionary'},
+            {path:'/main/system/important/config',name:'config',component:'@/pages/dashboard/workbench/index'},
+            {path:'/main/system/important/dept',name:'dept',component:'@/pages/dashboard/workbench/index'},
+            {path:'/main/system/important/post',name:'post',component:'@/pages/dashboard/workbench/index'}
         ]},
         {path:'/main/system/security',name: 'security',icon:'TeamOutlined', routes:[
             {path:'/main/system/security/',redirect:'/main/system/security/user'},

@@ -8,7 +8,7 @@ const getLocalUser=(local?:string)=>{
         local = window.localStorage.getItem('umi_locale') as string
     }
     var userInfo:Warden.SysUser = {
-        id:15,
+        id:158820382,
         uid:'jackma',
         nickName:'马邦德',
         deptName: '研发部',
@@ -18,16 +18,23 @@ const getLocalUser=(local?:string)=>{
         createDate: new Date(),
         loginDate: new Date(),
         face:'/images/face.png',
-        authoritys: ['xxx','ppp'],
+        authoritys: ['order:payment:statistics','monitoring','visits','add:adslots','add:adslots','modify:adslots','dept:manager','user:add','user:modify','user:delete'],
         roles: ['manager','dev'],
         roleName:'管理员',
+        gender:'男',
+        mobile:'180****2938',
+        loginTotal:13729,
+        loginIp:'202.98.173.95',        
+        birthday:'2010/10/13',
+        email:'superman@gmail.com',
         isRoot:false
     }
     if(local!='zh-CN'){
         userInfo.nickName = 'JackMa'
         userInfo.roleName = 'Manager'
         userInfo.deptName = 'R&D'
-        userInfo.postName = 'Development'  
+        userInfo.postName = 'Development'
+        userInfo.gender = 'Male'
     }
     return userInfo
 }
@@ -73,4 +80,5 @@ const getNsText=(list:any[],value:string):string=>{
     const item = getNs(list,value)
     return item!= undefined ? item.text : undefined
 }
+
 export {getLocalUser,getTagColor,getNsText,getNs}

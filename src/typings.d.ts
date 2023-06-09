@@ -70,6 +70,12 @@ declare namespace Warden{
         authoritys: Array<string>;
         roles: Array<string>;
         isRoot?: boolean;
+        loginTotal:number;
+        loginIp?:string;
+        email?:string;
+        mobile?:string;
+        birthday?:string;
+        gender:string;
     }
     type TerminalType = 'MAC' | 'PC' | 'MOBILE' | 'SERVER' | 'OTHER'
     type AppType = 'ANDROID' | 'IOS' | 'WEIXIN' | 'WEB' | 'OTHER'

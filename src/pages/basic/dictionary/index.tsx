@@ -1,114 +1,71 @@
 import Container from "@/layouts/components/Container"
 import type { ColumnsType, } from 'antd/es/table';
 import { WardenData } from '@/pages/typings';
-import { useState,useEffect} from "react"
+import { useState,useEffect } from "react"
 import { useIntl } from "umi"
-import { Space, Tag, Tooltip, DatePicker,Button,TablePaginationConfig,message} from "antd";
+import { Space, Tag, Badge, DatePicker,Button,TablePaginationConfig,message,Form, Select, Popconfirm, Tooltip, Divider } from "antd";
 import type { FilterValue, SorterResult,FilterConfirmProps,TableCurrentDataSource } from 'antd/es/table/interface';
-import { FileSearchOutlined,WechatFilled,AndroidFilled,AppleFilled,RobotFilled } from '@ant-design/icons';
 import { DataGridProps, DataGridToolbarProps,DataGridSearchPanelProps } from '@/components/datagrid/typings';
-import AppIcon from "@/components/AppIcon";
+import { PlusOutlined,FileSearchOutlined,DeleteOutlined,FormOutlined } from '@ant-design/icons';
 import DataGrid from "@/components/datagrid";
-import { getTagColor } from "@/utils/stringUtils";
+import { getNsText, getTagColor } from "@/utils/stringUtils";
 import AppButton from "@/components/button";
-import OperationDetailsWindow,{OperationDetailsWindowProps} from "./components/OperationDetailsWindow";
+import DictionaryFormWindow, { DictionaryFormWindowProps } from "./components/DictionaryFormWindow";
 
 const { RangePicker } = DatePicker;
 
-
-/**
- * Page - 操作日志
- * @returns 
- */
-const OperationPage=()=>{
-   
+const DictionaryPage=()=>{
     const intl = useIntl()
-    const locale = useIntl().locale
-    const [data,setData] = useState<OperationData[]>()
+    const local = useIntl().locale
+    const [data,setData] = useState<DictionaryData[]>()
     const [loading,setLoading] = useState(false)
     const [timers,setTimers] = useState<string[]>()
     const [tableParams,setTableParams] = useState<WardenData.ITableParams>({pagination:{current:1,pageSize:10}})
-    const [windowOpen,setWindowOpen]=useState<boolean>(false)
-    const [windowData,setWindowData]=useState<OperationData>()
-       
-    const columns:ColumnsType<OperationData> = [
+
+    const [formWindowOpen,setFormWindowOpen]=useState<boolean>(false)
+    const [formWindowData,setFormWindowData]=useState<DictionaryData>()
+
+    const dictionaryTyps = [
+        {text:'String',value:'String'},
+        {text:'Number',value:'Number'},
+        {text:'Boolean',value:'Boolean'},
+        {text:'Array',value:'Array'},
+        {text:'Object',value:'Object'}
+    ]
+
+    const columns:ColumnsType<DictionaryData> = [        
         {
             title:intl.formatMessage({id:'global.data.property.id'}),
             dataIndex:'id',
             sorter:true
         },
         {
-            title:intl.formatMessage({id:'operation.data.property.account'}),
+            title:intl.formatMessage({id:'global.data.property.name'}),
             dataIndex:'name',
-        },
-        {
-            title:intl.formatMessage({id:'global.data.property.ip'}),
-            dataIndex:'ip'
-        },
-        {
-            title:intl.formatMessage({id:'global.data.property.type'}),
-            dataIndex:'action',
-            render:(value)=>{
+            render:(value,record)=>{
                 return(
-                    <Tag key={value} color={getTagColor(value)}>{value}</Tag>
+                    <a onClick={()=>{onClickEditHandler(record)}}>{value}</a>
                 )
-            },
+            }
         },
         {
-            title:intl.formatMessage({id:'operation.data.property.content'}),
-            dataIndex:'content',
+            title:intl.formatMessage({id:'global.data.property.key'}),
+            dataIndex:'key'
+        },
+        {
+            title:intl.formatMessage({id:'global.data.property.value'}),
+            dataIndex:'value'
+        },
+        {
+            title:intl.formatMessage({id:'dictionary.data.property.type'}),
+            dataIndex:'type',
+            sorter:true,
+            filters:dictionaryTyps,
+            render:(value)=>{
+                return(<Tag>{value}</Tag>)
+            }
         },
         
-        {
-            title:intl.formatMessage({id:'global.data.property.terminal'}),
-            dataIndex:'terminal',
-            sorter:true,
-            render:(value)=>{
-                return(
-                    <Tag key={value}>{value}</Tag>
-                )
-            },
-            filters:[
-                {text:"PC",value:"PC"},
-                {text:"MAC",value:"MAC"},
-                {text:"SERVER",value:"SERVER"},
-                {text:"MOBILE",value:"MOBILE"},
-                {text:"OTHER",value:"OTHER"}
-            ]
-        },
-        {
-            title:intl.formatMessage({id:'global.data.property.application'}),
-            dataIndex:'appType',
-            sorter:true,
-            render:(value:Warden.AppType)=>{
-                let icon = <RobotFilled style={{color:"#666666"}} />
-                switch(value){
-                    case "WEIXIN":
-                        icon = <WechatFilled style={{color:"#666666"}} />
-                        break
-                    case "ANDROID":
-                        icon = <AndroidFilled style={{color:"#666666"}} />
-                        break
-                    case "IOS":
-                        icon = <AppleFilled style={{color:"#666666"}} />
-                        break
-                    case "WEB":
-                        icon = <AppIcon name="chrome" color="#666666" size={14} />                        
-                }
-                return(
-                    <Tooltip title={value}>
-                        {icon}
-                    </Tooltip>
-                )
-            },
-            filters:[
-                {text:"ANDROID",value:"ANDROID"},
-                {text:"IOS",value:"IOS"},
-                {text:"WEIXIN",value:"WEIXIN"},
-                {text:"WEB",value:"WEB"},
-                {text:"OTHER",value:"OTHER"}
-            ]
-        },
         {
             title:intl.formatMessage({id:'global.data.property.createDate'}),
             dataIndex:'createDate',
@@ -125,20 +82,17 @@ const OperationPage=()=>{
         },
         {
             title:intl.formatMessage({id:'global.data.property.action'}),
+            width:'100px',
             render:(value:any,record:any)=>{
                 return(
-                    <Space>
-                        <AppButton tooltip={intl.formatMessage({id:'global.button.tooltip.details'})} onClick={()=>{onClickDetailsHandler(record)}}><FileSearchOutlined /></AppButton>
+                    <Space>                       
+                        <Popconfirm placement="topLeft" title={intl.formatMessage({id:'global.button.tooltip.delete'})}><AppButton><DeleteOutlined /></AppButton></Popconfirm>
+                        <AppButton onClick={()=>{onClickEditHandler(record)}}><FormOutlined /></AppButton>
                     </Space>
                 )
             }
         }
     ]
-
-    const onClickDetailsHandler=(record:any)=>{        
-        setWindowData(record) 
-        setWindowOpen(true)       
-    }
 
     const onChangePickerHandler=(timeArr:string[])=>{
         let timerstring:(string[] | undefined) = timeArr
@@ -155,17 +109,17 @@ const OperationPage=()=>{
     
     useEffect(() => {
         fetchData();
-    }, [JSON.stringify(tableParams),locale]) 
+    }, [JSON.stringify(tableParams),local]) 
    
     const fetchData = () => {
         setLoading(true);
-        fetch('/api/logs/operation',{
+        fetch('/api/dictionarys',{
             method:'POST',
             cache: 'no-cache',
             credentials: 'same-origin',
             headers: {
                 "Content-Type": "application/json; charset=utf-8",
-                "local":locale
+                "local":local
             },
             body:JSON.stringify(tableParams)
         })
@@ -184,13 +138,18 @@ const OperationPage=()=>{
     }
 
     // Table分页、排序、筛选事件
-    const onChangeHandler = (pagination: TablePaginationConfig, filters: Record<string, FilterValue | null>, sorter:  SorterResult<OperationData> | SorterResult<OperationData>[], extra: TableCurrentDataSource<OperationData>) =>{               
+    const onChangeHandler = (pagination: TablePaginationConfig, filters: Record<string, FilterValue | null>, sorter:  SorterResult<DictionaryData> | SorterResult<DictionaryData>[], extra: TableCurrentDataSource<DictionaryData>) =>{               
         setTableParams({
             pagination,
             ...filters,
             ...sorter
         })
     }
+
+     // 表格工具栏button
+     const toolbarButtons = [    
+        <Button type="primary" onClick={()=>{onClickCreateHandler()}} icon={<PlusOutlined />} key="addBtn">{intl.formatMessage({id:'dictionary.button.add'})}</Button>        
+    ]
 
     // 表格工具栏属性
     const toolBarProps:DataGridToolbarProps = {
@@ -206,18 +165,44 @@ const OperationPage=()=>{
         },
         onDelete:(keys:React.Key[])=>{
             console.log(keys)
-        }
+        },
+        leftButtons:toolbarButtons
     }
    
     const searchBarProps:DataGridSearchPanelProps = {
         searchButtonType:'icon',
         searchButtonTheme:'primary',
         searchPropertyItems:[
-            {label:intl.formatMessage({id:'operation.data.property.account'}), value:'account'},
-            {label:intl.formatMessage({id:'global.data.property.content'}), value:'content'},
-            {label:intl.formatMessage({id:'global.data.property.ip'}),value:'ip'}
-        ]
+            {label:intl.formatMessage({id:'global.data.property.name'}), value:'name'},
+            {label:intl.formatMessage({id:'global.data.property.key'}), value:'key'},
+            {label:intl.formatMessage({id:'global.data.property.value'}), value:'value'}            
+        ],
+        filterFormItems:[
+            <Form.Item name="terminal" noStyle key="terminal">
+                
+            </Form.Item>                        
+        ], 
                
+    }
+
+    const onClickCreateHandler=()=>{
+        setFormWindowData(undefined)
+        setFormWindowOpen(true)
+    }
+
+    const onClickEditHandler=(e:DictionaryData)=>{
+        setFormWindowData(e);
+        setFormWindowOpen(true)
+    }
+
+    const onSubmitHandler=(e:DictionaryData)=>{
+        const key = 'adslotsSubmit'
+        message.loading({ content: intl.formatMessage({id:'global.message.submitting'}), key })
+        setTimeout(() => {
+            message.success({ content: intl.formatMessage({id:'global.message.commit'}), key, duration: 2 })
+            setFormWindowOpen(false)
+        }, 1000)
+
     }
 
     // datagrid属性
@@ -228,8 +213,7 @@ const OperationPage=()=>{
         dataSource:data,
         rowKey:(record)=>record.id,
         pagination:tableParams.pagination,
-        loading,
-        disenableSelectCloumn:true,        
+        loading,   
         onChange:onChangeHandler,
         footer:()=>{
             return(
@@ -237,19 +221,21 @@ const OperationPage=()=>{
             )
         }
     }
-    const windowProps:OperationDetailsWindowProps = {
-        open:windowOpen,
-        data:windowData,
-        closeWindowHandler:setWindowOpen
+
+    const windowFormProps:DictionaryFormWindowProps = {
+        open:formWindowOpen,
+        data:formWindowData,
+        onSubmit:onSubmitHandler,
+        closeWindowHandler:setFormWindowOpen
     }
    
+    
 
     return(
         <Container boxStyle="box" showTitle={true}>
             <DataGrid {...gridProps} />  
-            <OperationDetailsWindow {...windowProps} />
+            <DictionaryFormWindow {...windowFormProps}  />
         </Container>
     )
 }
-
-export default OperationPage
+export default DictionaryPage

@@ -202,5 +202,4 @@ const AdsFormWindow=(props:AdFormWindowProps)=>{
     )
 }
 
-
 export default AdsFormWindow

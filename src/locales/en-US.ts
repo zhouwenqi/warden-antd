@@ -88,6 +88,8 @@ export default {
   'global.data.property.name':'Name',
   'global.data.property.title':'Title',
   'global.data.property.description':'Description',
+  'global.data.property.key':'Key',
+  'global.data.property.value':'Value',
   'global.data.property.width':'Width',
   'global.data.property.height':'Height',
   'global.data.property.disable':'Disable',

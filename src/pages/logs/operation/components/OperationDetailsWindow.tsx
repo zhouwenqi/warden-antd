@@ -24,7 +24,7 @@ const OperationDetailsWindow = (props:OperationDetailsWindowProps)=>{
            <label>{intl.formatMessage({id:'global.data.property.name'})}：</label><span>{data.name}</span>
         </div>
         <div className="details-item">
-           <label>{intl.formatMessage({id:'global.data.property.type'})}：</label><Tag key={data.action} color={getTagColor(data.action)}>{data.action}</Tag>
+           <label>{intl.formatMessage({id:'global.data.property.type'})}：</label><span><Tag key={data.action} color={getTagColor(data.action)}>{data.action}</Tag></span>
         </div>
         <div className="details-item">
            <label>{intl.formatMessage({id:'global.data.property.terminal'})}：</label><span>{data.terminal}</span>

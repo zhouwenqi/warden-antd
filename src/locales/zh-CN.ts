@@ -87,6 +87,8 @@ export default {
   'global.data.property.name':'名称',
   'global.data.property.title':'标题',
   'global.data.property.description':'描述',
+  'global.data.property.key':'键',
+  'global.data.property.value':'值',
   'global.data.property.width':'宽度',
   'global.data.property.height':'高度',
   'global.data.property.disable':'禁用',
