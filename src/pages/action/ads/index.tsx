@@ -20,7 +20,7 @@ const { RangePicker } = DatePicker;
  */
 const AdsPage=()=>{
     const intl = useIntl()
-    const local = useIntl().locale
+    const locale = useIntl().locale
     const [data,setData] = useState<AdData[]>()
     const [loading,setLoading] = useState(false)
     const [timers,setTimers] = useState<string[]>()
@@ -34,11 +34,6 @@ const AdsPage=()=>{
         {text:intl.formatMessage({id:'adslots.data.option.type.image'}),value:'Image'},
         {text:intl.formatMessage({id:'adslots.data.option.type.video'}),value:'Video'},
         {text:intl.formatMessage({id:'adslots.data.option.type.text'}),value:'Text'},
-    ]
-
-    const slotsEnables =[
-        {text:intl.formatMessage({id:'global.button.disable'}),value:'false'}, 
-        {text:intl.formatMessage({id:'global.button.enable'}),value:'true'}
     ]
     
     const terminalOptions = [
@@ -155,7 +150,7 @@ const AdsPage=()=>{
     
     useEffect(() => {
         fetchData();
-    }, [JSON.stringify(tableParams),local]) 
+    }, [JSON.stringify(tableParams),locale]) 
    
     const fetchData = () => {
         setLoading(true);
@@ -165,7 +160,7 @@ const AdsPage=()=>{
             credentials: 'same-origin',
             headers: {
                 "Content-Type": "application/json; charset=utf-8",
-                "local":local
+                locale
             },
             body:JSON.stringify(tableParams)
         })

@@ -17,7 +17,7 @@ import ProjectFormWindow, { ProjectFormWindowProps } from './components/ProjectF
 const ProjectPage=()=>{
     
     const intl = useIntl()
-    const local = intl.locale 
+    const locale = intl.locale 
     const [data,setData] = useState<{list:ProjectData[]}>({list:[]})
     const [viewStyle,setViewStyle]=useState<string|number>("Card")
     const [formWindowOpen,setFormWindowOpen]=useState<boolean>(false)
@@ -26,7 +26,7 @@ const ProjectPage=()=>{
     const [detailsWindowData,setDetailsWindowData]=useState<ProjectData>()
     useEffect(()=>{
       getProjectData()
-    },[local])
+    },[locale])
 
     const getProjectData=()=>{
       fetch('/api/projects',{
@@ -35,7 +35,7 @@ const ProjectPage=()=>{
           credentials: 'same-origin',
           headers: {
               "Content-Type": "application/json; charset=utf-8",
-              "local":local
+              locale
           }
       })
       .then((response) => response.json())

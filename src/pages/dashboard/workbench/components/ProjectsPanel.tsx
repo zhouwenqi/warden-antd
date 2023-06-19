@@ -18,7 +18,7 @@ import ProjectFormWindow,{ProjectFormWindowProps} from "@/pages/project/componen
 const ProjectsPanel=()=>{  
     const appChart:MutableRefObject<any> = useRef() 
     const intl = useIntl()
-    const local = intl.locale 
+    const locale = intl.locale 
     const [data,setData] = useState<{list:Warkbench.Project[],chartTitle:string[]}>()
     const [detailsWindowOpen,setDetailsWindowOpen]=useState<boolean>(false)
     const [detailsWindowData,setDetailsWindowData]=useState<ProjectData>()
@@ -26,9 +26,7 @@ const ProjectsPanel=()=>{
     const [formWindowData,setFormWindowData]=useState<ProjectData>()
     useEffect(()=>{
       getProjectData()
-    },[local])
-
-
+    },[locale])
 
     const getProjectData=()=>{
       fetch('/api/project/top5',{
@@ -37,7 +35,7 @@ const ProjectsPanel=()=>{
           credentials: 'same-origin',
           headers: {
               "Content-Type": "application/json; charset=utf-8",
-              "local":local
+              locale
           }
       })
       .then((response) => response.json())
@@ -150,7 +148,7 @@ const ProjectsPanel=()=>{
     }  
     useEffect(()=>{
       updateOption()    
-    },[local,data])
+    },[locale,data])
 
     const onEditHandler=(e:ProjectData)=>{
       setFormWindowData(e)

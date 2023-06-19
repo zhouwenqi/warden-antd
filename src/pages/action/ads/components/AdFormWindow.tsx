@@ -30,7 +30,7 @@ export interface AdFormWindowProps extends WindowProps {
  */
 const AdsFormWindow=(props:AdFormWindowProps)=>{
     const intl = useIntl()  
-    const local = intl.locale
+    const locale = intl.locale
     const {closeWindowHandler,data,...WindowProps} = props
     const [loading,setLoading]=useState<boolean>(true)
     const [slotses, setSlotses] = useState<AdslotsData[]>([]);
@@ -73,7 +73,7 @@ const AdsFormWindow=(props:AdFormWindowProps)=>{
             credentials: 'same-origin',
             headers: {
                 "Content-Type": "application/json; charset=utf-8",
-                "local":local
+                "locale":locale
             },
             body:JSON.stringify({pagination:{current:1}})
         })
@@ -112,11 +112,8 @@ const AdsFormWindow=(props:AdFormWindowProps)=>{
         }
     }
 
-    const options = slotses.map((item:AdslotsData)=>({value:item.id,label:item.name + '['+item.code+']'}))
+    const options = slotses.map((item:AdslotsData)=>({value:item.id,label:item.name + '['+item.code+']'})) 
     
-    let contentPanel = <Input placeholder={intl.formatMessage({id:'ad.form.content.placeholder'})} />
-  
-
     return(
         <Window {...windowProps} footer={footerPanel}>
             <div>

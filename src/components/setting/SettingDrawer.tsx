@@ -40,18 +40,17 @@ const SettingDrawer = () => {
   const [isLayoutShadow,setIsLayoutShadow] = useState<boolean>(config?.isLayoutShadow!)
   const [isOutstand,setIsOutstand] = useState<boolean>(config?.logo.isOutstand!)
   const [isBigLogo,setIsBigLogo] = useState<boolean>(config?.logo.isBigLogo!)
+
   /**
    * 选择登录布局事件
    * @param e 登录布局类型
    */
   const onLoginLayoutChangeHandler = (e: Warden.LoginLayoutType) => {
     console.log(e);
-    setInitialState((preInitialState) => {
-      return {
+    setInitialState((preInitialState) => ({ 
         ...preInitialState,
-        config: { ...config!, loginLayout: e },
-      };
-    });
+        config: { ...config!, loginLayout: e },      
+    }));
   };
 
   /**
@@ -161,16 +160,20 @@ const SettingDrawer = () => {
   const onChangeLangageHandler = (e: string) => {
     setLanguage(e)
     setLocale(e, false)
-    // (伪代码)用户信息国际化                           
-    global.currentUser = getLocalUser(e)
-    // 清除菜单数据（菜单做了缓存，需要重新国际化）
-    global.menus = []
-    setInitialState((preInitialState) => {      
-      return {
-        ...preInitialState,
-        config: { ...config!, language: e }
-      }
-    })
+    global.menus = [];    
+    (async () =>{
+      global.currentUser = await getLocalUser(e)
+      setInitialState((preInitialState) => {      
+        return {
+          ...preInitialState,
+          config: { ...config!, language: e },
+          currentUser:global.currentUser
+        }
+      })
+      
+    })()    
+    console.log(global.currentUser)
+    
   }
 
 

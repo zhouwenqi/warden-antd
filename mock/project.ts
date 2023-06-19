@@ -1,7 +1,7 @@
 export default {
     'POST /api/project/top5':(req:any,res:any)=>{
-        const local = req.headers.local
-        const list = local == 'en-US' ? 
+        const locale = req.headers.locale
+        const list = locale == 'en-US' ? 
         [
             {id:'1',name:'Calf school',code:'P208823',color:'#ff6600',icon:'/svg/project/p1.svg',createDate:'2022/12/8 23:22',description:'Creating value for corporate customers is the pursuit of the calf academy all along...',memberCount:4,speedCount:86,testCount:19},
             {id:'2',name:'CodeMonkey horde',code:'P442323',color:'#2e78ff',icon:'/svg/project/p2.svg',createDate:'2022/12/8 23:22',description:'Code Monkey horde APP is a real dating software with easy registration...',memberCount:12,speedCount:59,testCount:51},
@@ -15,12 +15,12 @@ export default {
             {id:'4',name:'产品飞车',code:'A093823',color:'#57ad2d',icon:'/svg/project/p4.svg',createDate:'2022/12/8 23:22',description:'只为产品经理服务，其它人不接，产品飞车带您快速进入天堂...',memberCount:22,speedCount:93,testCount:31},
             {id:'5',name:'测试外卖',code:'C324222',color:'#16b7da',icon:'/svg/project/p5.svg',createDate:'2022/12/8 23:22',description:'测试妹子亲手炒的菜并配送...',memberCount:18,speedCount:49,testCount:76}
         ]
-        const chartTitle = local == 'en-US' ? ['Test progress','Development progress'] :  ['测试试进度','研发进度']
+        const chartTitle = locale == 'en-US' ? ['Test progress','Development progress'] :  ['测试进度','研发进度']
         res.send({chartTitle,list})
     },
     'POST /api/projects':(req:any,res:any)=>{
-        const local = req.headers.local
-        const list = local == 'en-US' ? 
+        const locale = req.headers.locale
+        const list = locale == 'en-US' ? 
         [
             {id:'1',name:'Calf school',code:'P208823',color:'#ff6600',icon:'/svg/project/p1.svg',createDate:'2022/12/8 23:22',modifyDate:'2022/12/8 23:22',description:'Creating value for corporate customers is the pursuit of the calf academy all along...',memberCount:4},
             {id:'2',name:'CodeMonkey horde',code:'P442323',color:'#2e78ff',icon:'/svg/project/p2.svg',createDate:'2022/12/8 23:22',modifyDate:'2022/12/8 23:22',description:'Code Monkey horde APP is a real dating software with easy registration...',memberCount:12},

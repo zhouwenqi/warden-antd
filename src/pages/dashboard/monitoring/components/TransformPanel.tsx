@@ -54,10 +54,18 @@ const TransformPanel = ()=>{
                     data: [chartData[3]]
                 }
             } 
-            appChart1.current.setOption(option1)     
-            appChart2.current.setOption(option2)     
-            appChart3.current.setOption(option3)     
-            appChart4.current.setOption(option4)     
+            if(appChart1.current.setOption){
+                appChart1.current.setOption(option1) 
+            }
+            if(appChart2.current.setOption){
+                appChart2.current.setOption(option2) 
+            }
+            if(appChart3.current.setOption){
+                appChart3.current.setOption(option3) 
+            }
+            if(appChart4.current.setOption){
+                appChart4.current.setOption(option4) 
+            }
           },300)
           intervalRef.current = interval
     }

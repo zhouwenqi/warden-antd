@@ -1,6 +1,5 @@
 export default {
     'POST /api/action/adslots':(req:any,res:any)=>{
-        const local = req.headers.local
         if(req.body.pagination.current > 1){
             res.send(
                 {

@@ -10,7 +10,7 @@ import styles from './OrderChartPanel.less';
 const OrderChartPanel=()=>{
     const appChart:MutableRefObject<any> = useRef()
     const intl = useIntl()
-    const local = intl.locale
+    const locale = intl.locale
     const projectsData = ['xxx','yyy','mmm','zzz','bbb'] 
 
     const getRandomRow=(tag:string,time:string)=>{
@@ -146,7 +146,7 @@ const OrderChartPanel=()=>{
 
     useEffect(()=>{
         appChart.current.setOption(initOption)
-    },[local])
+    },[locale])
 
     return(
         <div>

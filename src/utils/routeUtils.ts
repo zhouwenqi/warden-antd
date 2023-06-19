@@ -9,6 +9,7 @@ import { matchAuthority } from "./securityUtils"
  * @returns 
  */
 function getMenuData(routes:any[],intl:IntlShape):IMenuData[]{
+    
     const user = global.currentUser
     let menuItemDatas:IMenuData[]=[]
     if(!routes || routes.length <=0){

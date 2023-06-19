@@ -1,0 +1,19 @@
+declare interface UserData{
+    id:number;
+    uid:string;
+    face:string;
+    nickName:string;
+    mobile:string;
+    email?:string;
+    gender:string;
+    birthday:string;
+    deptId?:number;
+    deptName?:string;
+    postId?:number;
+    postName?:string;
+    roleId?:number[];
+    roleName?:string[];
+    enabled:boolean;
+    createDate:string;
+    modifyDate:string;
+}

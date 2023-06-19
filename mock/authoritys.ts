@@ -1,9 +1,9 @@
 export default {
     'POST /api/data/authoritys':(req:any,res:any)=>{
-        const local = req.headers.local       
+        const locale = req.headers.locale       
         res.send(
             {
-                list:local=='en-US' ?
+                list:locale=='en-US' ?
                 [
                     {label:'Query report',value:'query:report',authoriths:[{label:'Monitoring',value:'monitoring'},{label:'Visits',value:'visits'},{label:'Order payment statistics',value:'order:payment:statistics'},{label:'Operation logs',value:'operation:logs'},{label:'Sms logs',value:'sms:logs'}]},
                     {label:'Projects',value:'project:manager',authoriths:[{label:'View project',value:'view:project'},{label:'Create project',value:'create:project'},{label:'Modify project',value:'modify:project'},{label:'Delete project',value:'delete:project'}]},

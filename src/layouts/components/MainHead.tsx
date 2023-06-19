@@ -1,24 +1,36 @@
-import { Layout, Menu, Space, Dropdown, Avatar,Tooltip,MenuProps, Badge } from "antd";
-import React from 'react';
+import { Layout, Menu, Space, Dropdown, Avatar,Tooltip,MenuProps, Badge, Modal } from "antd";
+import React, { useState } from 'react';
 import AppIcon from "@/components/AppIcon";
 import { history, useIntl } from "umi";
 import './MainHead.less';
 import LogoPanel from "./LogoPanel";
 const {Header} = Layout;
 const MainHead =(props:LayoutProps.HeadProps)=> {
-
-    let baseStyle = 'warden-layout-header'   
-  
-    const menuProps:MenuProps={
+    let baseStyle = 'warden-layout-header'
+    const intl = useIntl()
+    const [openExitDialog,setOpenExitDialog]=useState<boolean>(false)  
+    const menuProps:MenuProps={      
       items:[
-        {key:"Edit", label:"Edit"},
-        {key:"Path", label:"Path"},
-        {key:"Profile", label:"Profile"}
-      ]
+        {key:"Profile", label:intl.formatMessage({id:'current.userinfo.menu.profile'})},
+        {key:"Exit", label:intl.formatMessage({id:'current.userinfo.menu.exit'})}
+      ],
+      onClick:(e)=>{
+        console.log(e)
+         switch(e.key)  {
+        case "Profile":
+          history.push('/main/system/basic/profile') 
+          break
+        case "Exit":
+          Modal.confirm({title:intl.formatMessage({id:'current.dialog.exit.title'}),content:intl.formatMessage({id:'current.dialog.exit.content'}),onOk:()=>{
+            history.push('/login') 
+          }})
+          break
+      }
+      }
     }
     
     // 菜单点击事件
-    const onMenuClick: MenuProps['onClick'] = (e) => {     
+    const onMenuClick: MenuProps['onClick'] = (e) => {   
       history.push(e.key) 
     }   
 
@@ -59,16 +71,16 @@ const MainHead =(props:LayoutProps.HeadProps)=> {
                 <Space direction="horizontal">
                     <Dropdown menu={menuProps} placement="bottomRight">
                       <Space>
-                          <Avatar className="warden-avatar-box" src={global.currentUser.face}>{global.currentUser.uid}</Avatar>
+                          <Avatar size={24} className="warden-avatar-box" src={global.currentUser.face}>{global.currentUser.uid}</Avatar>
                           <label className="warden-avatar-name">{global.currentUser.uid}</label>
                       </Space>
                     </Dropdown>
-                    <a className="icon">
+                    <a className="icon" onClick={()=>{history.push('/main/system/message')}}>
                     <Badge count={19} size="small">
                         <AppIcon name="ring" size={18} />
                     </Badge>
                     </a>
-                    <FullscreenButton />         
+                    <FullscreenButton />       
                 </Space>
               </div>
           </Header>

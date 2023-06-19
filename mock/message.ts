@@ -1,9 +1,9 @@
 export default {
     'POST /api/messages':(req:any,res:any)=>{
-        const local = req.headers.local        
+        const locale = req.headers.locale        
         if(req.body.pagination.current > 1){
             res.send({
-                list:local=='en-US' ? [
+                list:locale=='en-US' ? [
                     {id:11,msgType:'Event',title:'XXXXXX service is about to expire reminder',content:'Your subscription to XXXXXX service is about to expire in 2 days, please deal with it immediately',isRead:true, createDate:'2023/4/12 23:08:28'},
                     {id:12,msgType:'Notice',title:'Digital Certificate Management Service product notifications',content:'Dear xxxxxx: Your certificate cert- xxxxxx, bound domain name is xxxx.com on 2023-06-06 13:36:54 Download from the console, to ensure the security of your certificate, please confirm whether it is operated by you. If it is not your own operation, please contact us in time.',isRead:false, createDate:'2023/4/12 23:08:28'},
                     {id:13,msgType:'Notice',title:'Cloud Resolution Resolution records delete notifications',content:'Dear xxxxxx: You deleted the DNS record of the domain name xxxx.com.',isRead:true, createDate:'2023/4/12 23:08:28'}
@@ -19,7 +19,7 @@ export default {
             })
         }else{
             res.send({
-                list:local=='en-US' ? [
+                list:locale=='en-US' ? [
                     {id:1,msgType:'Notice',title:'Digital Certificate Management Service product notifications',content:'Dear xxxxxx: Your certificate cert- xxxxxx, bound domain name is xxxx.com on 2023-06-06 13:36:54 Download from the console, to ensure the security of your certificate, please confirm whether it is operated by you. If it is not your own operation, please contact us in time.',isRead:false, createDate:'2023/4/12 23:08:28'},
                     {id:2,msgType:'Notice',title:'Cloud Resolution Resolution records delete notifications',content:'Dear xxxxxx: You deleted the DNS record of the domain name xxxx.com.',isRead:false, createDate:'2023/4/12 23:08:28'},
                     {id:3,msgType:'Notice',title:'Feedback on template review results',content:'Hello, your xxxxxx review failed, click the SMS console to view the review details. The SMS exclusive service group has been launched, and you can directly submit "xxxxxx" applications in the Dings group to receive real-time notification of review results and modification suggestions. Let you easily grasp SMS usage anytime, anywhere.',isRead:false, createDate:'2023/4/12 23:08:28'},

@@ -165,7 +165,7 @@ const OperationPage=()=>{
             credentials: 'same-origin',
             headers: {
                 "Content-Type": "application/json; charset=utf-8",
-                "local":locale
+                locale
             },
             body:JSON.stringify(tableParams)
         })

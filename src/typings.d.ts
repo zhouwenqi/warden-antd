@@ -63,8 +63,8 @@ declare namespace Warden{
         deptId: number;
         postName: string;
         postId: number;
-        createDate: Date;
-        loginDate: Date;
+        createDate: string;
+        loginDate: string;
         face?:string;
         roleName:string;
         authoritys: Array<string>;

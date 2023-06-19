@@ -19,7 +19,7 @@ const { RangePicker } = DatePicker;
  */
 const SmsPage=()=>{
     const intl = useIntl()
-    const local = useIntl().locale
+    const locale = useIntl().locale
     const [data,setData] = useState<SmsData[]>()
     const [loading,setLoading] = useState(false)
     const [timers,setTimers] = useState<string[]>()
@@ -133,7 +133,7 @@ const SmsPage=()=>{
     
     useEffect(() => {
         fetchData();
-    }, [JSON.stringify(tableParams),local]) 
+    }, [JSON.stringify(tableParams),locale]) 
    
     const fetchData = () => {
         setLoading(true);
@@ -143,7 +143,7 @@ const SmsPage=()=>{
             credentials: 'same-origin',
             headers: {
                 "Content-Type": "application/json; charset=utf-8",
-                "local":local
+                locale
             },
             body:JSON.stringify(tableParams)
         })

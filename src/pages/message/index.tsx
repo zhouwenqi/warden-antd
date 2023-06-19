@@ -140,7 +140,7 @@ const MessagePage=()=>{
             credentials: 'same-origin',
             headers: {
                 "Content-Type": "application/json; charset=utf-8",
-                "local":locale
+                locale
             },
             body:JSON.stringify(tableParams)
         })
@@ -169,7 +169,7 @@ const MessagePage=()=>{
 
     // 表格工具栏button
     const toolbarButtons = [
-        <Dropdown.Button onClick={()=>{message.success(intl.formatMessage({id:'message.message.read.success'}))}} menu={markMenus}>{intl.formatMessage({id:'message.button.read.mark'})}</Dropdown.Button>
+        <Dropdown.Button key="readmessageButton" onClick={()=>{message.success(intl.formatMessage({id:'message.message.read.success'}))}} menu={markMenus}>{intl.formatMessage({id:'message.button.read.mark'})}</Dropdown.Button>
     ]
     
     // 表格工具栏属性
@@ -207,7 +207,7 @@ const MessagePage=()=>{
         searchButtonTheme:'primary',
         searchPropertyItems:[
             {label:intl.formatMessage({id:'global.data.property.title'}), value:'title'},
-            {label:intl.formatMessage({id:'global.data.property.content'}), value:'content'},
+            {label:intl.formatMessage({id:'message.data.property.content'}), value:'content'},
         ],
         filterFormItems:[
             <Form.Item name="terminal" noStyle key="terminal">

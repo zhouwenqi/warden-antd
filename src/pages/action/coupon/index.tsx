@@ -157,7 +157,7 @@ const CouponPage=()=>{
 
     const fetchData = () => {
         setLoading(true);
-        fetch('/api/couponBatchs',{
+        fetch('/api/coupon/batchs',{
             method:'POST',
             cache: 'no-cache',
             credentials: 'same-origin',

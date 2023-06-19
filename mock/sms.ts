@@ -1,10 +1,10 @@
 export default {
     'POST /api/logs/sms':(req:any,res:any)=>{
-        const local = req.headers.local
+        const locale = req.headers.locale
         if(req.body.pagination.current > 1){
             res.send(
                 {
-                    list:local=='en-US' ? 
+                    list:locale=='en-US' ? 
                     [
                         {id:11,templateSn:'ALISMS020382',mobile:'13622302809',smsType:'verification',smsContent:'You are registering as a member, verification code:203820',appType:'WEB',terminal:'PC',sendTime:'2023/3/26 13:12:37'},
                         {id:12,templateSn:'ALISMS342452',mobile:'13755437539',smsType:'verification',smsContent:'You are registering as a member, verification code:442323',appType:'IOS',terminal:'MOBILE',sendTime:'2023/3/25 14:16:33'},
@@ -23,7 +23,7 @@ export default {
         }else{
             res.send(
                 {
-                    list:local=='en-US' ?
+                    list:locale=='en-US' ?
                     [
                         {id:1,templateSn:'ALISMS020382',mobile:'13622302809',smsType:'verification',smsContent:'You are registering as a member, verification code:203820',appType:'WEB',terminal:'PC',sendTime:'2023/3/26 13:12:37'},
                         {id:2,templateSn:'ALISMS342452',mobile:'13755437539',smsType:'verification',smsContent:'You are registering as a member, verification code:442323',appType:'IOS',terminal:'MOBILE',sendTime:'2023/3/25 14:16:33'},

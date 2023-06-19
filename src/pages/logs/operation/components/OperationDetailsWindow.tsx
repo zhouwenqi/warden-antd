@@ -6,6 +6,12 @@ import { useIntl } from "umi";
 export interface OperationDetailsWindowProps extends WindowProps {
     data?:OperationData;
 }
+
+/**
+ * Window - 日志
+ * @param props 
+ * @returns 
+ */
 const OperationDetailsWindow = (props:OperationDetailsWindowProps)=>{
     const intl = useIntl()  
     const {closeWindowHandler,data,...WindowProps} = props

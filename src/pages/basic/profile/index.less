@@ -11,26 +11,31 @@
 }
 .profileHead{
     margin-top:10px;
-    text-align: center;  
-    dl{
-        display: block;
-        padding:0px 20px 10px 20px;
-        text-align: left;
-        margin:0px;
-        label{
-            display: inline-block;
-            width:90px;
-            color:var(--warden-text-color-2);
-        }
-        span{
-            display: inline-block;
-        }
-    } 
+    text-align: center; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
 }
 .profileFoot{
     display: flex;
     justify-content: space-between;
 }
+.profileList{
+    display: block;
+    padding:0px 20px 10px 20px;
+    text-align: left;
+    margin:0px;
+    label{
+        display: inline-block;
+        width:90px;
+        color:var(--warden-text-color-2);
+    }
+    span{
+        display: inline-block;
+    }
+} 
 
 label.uid{
     font-size: 24px;
@@ -43,10 +48,32 @@ label.id{
     padding:20px;
     background-color: white;
 }
-.face{
-    width:90px;
-    border-radius: 45px;    
+.faceBox{
+    width:90px;    
+    text-align: center;
+    label{
+        display: flex;
+        position:absolute;
+        width:90px;
+        height:90px;
+        border-radius: 45px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+        opacity: 0;    
+        cursor: pointer;    
+    }
+    label:hover{
+        background-color: rgba(0,0,0,0.5);
+        opacity: 1;
+    }
+    img{
+        width:90px;
+        border-radius: 45px;
+    }
 }
+
 .authBox{
     padding:10px;
 }

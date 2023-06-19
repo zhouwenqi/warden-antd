@@ -46,16 +46,15 @@ export default [
             
         ]},       
         {path:'/main/system/important',name: 'important',icon:'GroupOutlined', routes:[
-            {path:'/main/system/important/',redirect:'/main/system/important/dictionary'},
-            {path:'/main/system/important/config',name:'config',component:'@/pages/dashboard/workbench/index'},
-            {path:'/main/system/important/dept',name:'dept',component:'@/pages/dashboard/workbench/index'},
-            {path:'/main/system/important/post',name:'post',component:'@/pages/dashboard/workbench/index'}
+            {path:'/main/system/important/',redirect:'/main/system/important/config'},
+            {path:'/main/system/important/config',name:'config',component:'@/pages/important/config/index'},
+            {path:'/main/system/important/dept',name:'dept',component:'@/pages/important/dept/index'},
+            {path:'/main/system/important/post',name:'post',component:'@/pages/important/post/index'}
         ]},
         {path:'/main/system/security',name: 'security',icon:'TeamOutlined', routes:[
             {path:'/main/system/security/',redirect:'/main/system/security/user'},
-            {path:'/main/system/security/user',name:'user',component:'@/pages/dashboard/workbench/index'},
-            {path:'/main/system/security/role',name:'role',component:'@/pages/dashboard/workbench/index'},
-            {path:'/main/system/security/permission',name:'permission',component:'@/pages/dashboard/workbench/index'}
+            {path:'/main/system/security/user',name:'user',component:'@/pages/security/user/index'},
+            {path:'/main/system/security/role',name:'role',component:'@/pages/security/role/index'}
         ]},
     ]}
 ]

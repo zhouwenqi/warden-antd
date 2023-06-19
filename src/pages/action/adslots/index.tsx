@@ -20,7 +20,7 @@ const { RangePicker } = DatePicker;
  */
 const AdslotsPage=()=>{
     const intl = useIntl()
-    const local = useIntl().locale
+    const locale = useIntl().locale
     const [data,setData] = useState<AdslotsData[]>()
     const [loading,setLoading] = useState(false)
     const [timers,setTimers] = useState<string[]>()
@@ -155,7 +155,7 @@ const AdslotsPage=()=>{
     
     useEffect(() => {
         fetchData();
-    }, [JSON.stringify(tableParams),local]) 
+    }, [JSON.stringify(tableParams),locale]) 
    
     const fetchData = () => {
         setLoading(true);
@@ -165,7 +165,7 @@ const AdslotsPage=()=>{
             credentials: 'same-origin',
             headers: {
                 "Content-Type": "application/json; charset=utf-8",
-                "local":local
+                locale
             },
             body:JSON.stringify(tableParams)
         })

@@ -29,12 +29,7 @@ const AdslotsDetailsWindow = (props:AdDetailsWindowProps)=>{
     const slotsTypeOptions = [
         {text:intl.formatMessage({id:'adslots.data.option.type.image'}),value:'Image'},
         {text:intl.formatMessage({id:'adslots.data.option.type.video'}),value:'Video'},
-        {text:intl.formatMessage({id:'adslots.data.option.type.text'}),value:'Text'},
-    ]
-
-    const slotsEnables =[
-        {text:intl.formatMessage({id:'global.button.disable'}),value:'false'}, 
-        {text:intl.formatMessage({id:'global.button.enable'}),value:'true'}
+        {text:intl.formatMessage({id:'adslots.data.option.type.text'}),value:'Text'}
     ]
 
     let footerPanel = (

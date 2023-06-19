@@ -109,9 +109,6 @@ const VisitPage = () => {
             )
         },
     ]
-
-    
-
     const onChangePickerHandler=(timeArr:string[])=>{
         let timerstring:(string[] | undefined) = timeArr
         if(timeArr[0] =='' || timeArr[1] == ''){

@@ -1,13 +1,12 @@
 export default {
-    'POST /api/action/ads':(req:any,res:any)=>{
-        const local = req.headers.local
+    'POST /api/action/ads':(req:any,res:any)=>{      
         if(req.body.pagination.current > 1){
             res.send(
                 {
                     list: [
-                        {id:8,slotsId:4,slotsCode:'T-009208326',title:'Configure and manage',content:'/images/screen2.png',link:'https://github.com/zhouwenqi/warden-antd',slotsType:'Image',clickSum:34,order:24,expire:'2023/6/25 13:12:37',createDate:'2023/3/25 13:12:37',modifyDate:'2023/3/25 23:12:37'},
-                        {id:9,slotsId:4,slotsCode:'T-009208326',title:'Explore quick start templates',content:'/images/screen3.png',link:'https://github.com/zhouwenqi/warden-antd',slotsType:'Image',clickSum:34,order:26,expire:'2023/6/25 13:12:37',createDate:'2023/3/25 13:12:37',modifyDate:'2023/3/25 23:12:37'},
-                        {id:10,slotsId:4,slotsCode:'T-009208326',title:'Learn core concepts',content:'/images/screen1.png',link:'https://github.com/zhouwenqi/warden-antd',slotsType:'Image',clickSum:18,order:30,expire:'2023/6/25 13:12:37',createDate:'2023/3/25 13:12:37',modifyDate:'2023/3/25 23:12:37'}
+                        {id:11,slotsId:4,slotsCode:'T-009208326',title:'Configure and manage',content:'/images/screen2.png',link:'https://github.com/zhouwenqi/warden-antd',slotsType:'Image',clickSum:34,order:24,expire:'2023/6/25 13:12:37',createDate:'2023/3/25 13:12:37',modifyDate:'2023/3/25 23:12:37'},
+                        {id:12,slotsId:4,slotsCode:'T-009208326',title:'Explore quick start templates',content:'/images/screen3.png',link:'https://github.com/zhouwenqi/warden-antd',slotsType:'Image',clickSum:34,order:26,expire:'2023/6/25 13:12:37',createDate:'2023/3/25 13:12:37',modifyDate:'2023/3/25 23:12:37'},
+                        {id:13,slotsId:4,slotsCode:'T-009208326',title:'Learn core concepts',content:'/images/screen1.png',link:'https://github.com/zhouwenqi/warden-antd',slotsType:'Image',clickSum:18,order:30,expire:'2023/6/25 13:12:37',createDate:'2023/3/25 13:12:37',modifyDate:'2023/3/25 23:12:37'}
                     ],
                     pagination:{
                         ...req.body.pagination,

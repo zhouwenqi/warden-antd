@@ -1,5 +1,5 @@
 import { Avatar, Tag } from "antd"
-import { Link, useIntl } from "umi"
+import { Link, useIntl, useModel } from "umi"
 import dayjs from 'dayjs';
 import styles from './WelcomePanel.less'
 
@@ -9,8 +9,10 @@ import styles from './WelcomePanel.less'
  */
 const WelcomePanel=()=>{    
     const intl = useIntl()
-    const hour = dayjs().hour()
-    console.log(hour)
+    const { initialState, loading, error, refresh, setInitialState } =
+    useModel('@@initialState');
+    
+    const hour = dayjs().hour()    
     var weltag = ''
     if(hour > 6 && hour < 11){
       weltag = intl.formatMessage({id:'workbench.welcome.time.morning'})
@@ -31,7 +33,7 @@ const WelcomePanel=()=>{
           </Link>        
           <div className={styles.welcomeInfo}>
             <label>{weltag}，<Link to="/system/profile">{global.currentUser.nickName}</Link>，{intl.formatMessage({id:'workbench.welcome.title'})}</label><br />
-            <span className={styles.deptInfo}>{global.currentUser.deptName} - {global.currentUser.postName} - </span><Tag>{global.currentUser.roleName}</Tag>
+            <span className={styles.deptInfo}>{initialState?.currentUser?.deptName} - {initialState?.currentUser?.postName} - </span><Tag>{initialState?.currentUser?.roleName}</Tag>
           </div>
         </div>
         <div className={styles.descInfo}>        

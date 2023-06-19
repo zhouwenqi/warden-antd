@@ -1,12 +1,11 @@
 import Container from "@/layouts/components/Container"
-import { EditOutlined,DeleteOutlined } from '@ant-design/icons'
-import { Divider, Tabs,  Space, Tag, Tooltip, DatePicker,Button,TablePaginationConfig,message, Checkbox } from "antd"
+import { Divider, Tabs,  Space, Tag, Tooltip, DatePicker,Button,TablePaginationConfig,message, Checkbox, Upload, UploadFile, UploadProps } from "antd"
 import type { ColumnsType, } from 'antd/es/table';
 import { WardenData } from '@/pages/typings';
 import { useState,useEffect} from "react"
-import { useIntl } from "umi"
+import { useIntl,useModel } from "umi"
 import type { FilterValue, SorterResult,FilterConfirmProps,TableCurrentDataSource } from 'antd/es/table/interface';
-import { FileSearchOutlined,WechatFilled,AndroidFilled,AppleFilled,RobotFilled } from '@ant-design/icons';
+import { UploadOutlined,WechatFilled,AndroidFilled,AppleFilled,RobotFilled } from '@ant-design/icons';
 import { DataGridProps, DataGridToolbarProps,DataGridSearchPanelProps } from '@/components/datagrid/typings';
 import AppIcon from "@/components/AppIcon";
 import DataGrid from "@/components/datagrid";
@@ -23,14 +22,16 @@ import ProfileFormWindow, { ProfileFormWindowProps } from "./components/ProfileF
 const ProfilePage=()=>{
 
     const intl = useIntl()
-    const local = useIntl().locale
+    const locale = useIntl().locale
     const [data,setData] = useState<OperationData[]>()
     const [authoritys,setAuthoritys]=useState<any[]>()
     const [loading,setLoading] = useState(false)
     const [tableParams,setTableParams] = useState<WardenData.ITableParams>({pagination:{current:1,pageSize:10}})
-    const [openPasswordModal,setOpenPasswordModal]=useState<boolean>(false)
-    const [windowOpen,setWindowOpen]=useState<boolean>(false)    
-       
+    const [openPasswordModal,setOpenPasswordModal]=useState<boolean>(false)   
+    const [windowOpen,setWindowOpen]=useState<boolean>(false)
+    
+    const { initialState } = useModel('@@initialState');
+    const userInfo = initialState?.currentUser
     const columns:ColumnsType<OperationData> = [
         {
             title:intl.formatMessage({id:'global.data.property.id'}),
@@ -97,11 +98,11 @@ const ProfilePage=()=>{
 
     useEffect(()=>{
         fetchAuthoritysData()
-    },[local])
+    },[locale])
     
     useEffect(() => {
         fetchLogsData();
-    }, [JSON.stringify(tableParams),local]) 
+    }, [JSON.stringify(tableParams),locale]) 
    
     const fetchLogsData = () => {
         setLoading(true);
@@ -111,7 +112,7 @@ const ProfilePage=()=>{
             credentials: 'same-origin',
             headers: {
                 "Content-Type": "application/json; charset=utf-8",
-                "local":local
+                locale
             },
             body:JSON.stringify(tableParams)
         })
@@ -138,7 +139,7 @@ const ProfilePage=()=>{
             credentials: 'same-origin',
             headers: {
                 "Content-Type": "application/json; charset=utf-8",
-                "local":local
+                locale
             }
         })
         .then((response) => response.json())
@@ -175,7 +176,7 @@ const ProfilePage=()=>{
         authPanel.push(
             <div key={'checkboxgroup-'+index}>
             <label>{item.label}</label><br />
-            <Checkbox.Group disabled key={'checkbox-group-'+index} defaultValue={global.currentUser.authoritys} options={item.authoriths} />
+            <Checkbox.Group disabled key={'checkbox-group-'+index} defaultValue={userInfo!.authoritys} options={item.authoriths} />
             </div>
         )
     })
@@ -189,29 +190,47 @@ const ProfilePage=()=>{
             message.success(intl.formatMessage({id:'profile.message.profile.success'}))
         }
     }
+ 
+    const onChangeUploadHandler:UploadProps['onChange']=({fileList:newFileList,file:newFile,event:e})=>{
+        // 伪代码，实际根据业务作相应的判断
+        if(newFile.status=='done'){
+            message.success(intl.formatMessage({id:'message.message.upload.success'}))
+        }
+        
+    }
+
+    const tabsPanel=[
+        {label:intl.formatMessage({id:'profile.tab.title.authoritys'}),key:"authoritys",children:(<div className={styles.authBox}>{authPanel}</div>)},
+        {label:intl.formatMessage({id:'profile.tab.title.logs'}),key:"logs",children:(<DataGrid {...gridProps} />),style:{padding:"0px"}}
+    ]
 
     return(
         <Container boxStyle="box" showTitle={true}>
             <div className={styles.box}>
                 <div className={styles.boxLeft}>
                     <div className={styles.profileHead}>
-                        <img src={global.currentUser.face} className={styles.face} /><br />
-                        <label className={styles.uid}>{global.currentUser.uid}</label><br />
-                        <label className={styles.id}>{global.currentUser.id}</label><br /><br />
-                        <label>{global.currentUser.deptName} - {global.currentUser.postName} - <Tag>{global.currentUser.roleName}</Tag></label>
-                        <Divider />
-                        <dl>
-                            <dd><label>{intl.formatMessage({id:'profile.data.property.nickname'})}：</label><span>{global.currentUser.nickName}</span></dd>
-                            <dd><label>{intl.formatMessage({id:'profile.data.property.mobile'})}：</label><span>{global.currentUser.mobile}</span></dd>
-                            <dd><label>{intl.formatMessage({id:'profile.data.property.email'})}：</label><span>{global.currentUser.email}</span></dd>
-                            <dd><label>{intl.formatMessage({id:'profile.data.property.gender'})}</label><span>{global.currentUser.gender}</span></dd>  
-                            <dd><label>{intl.formatMessage({id:'profile.data.property.birthday'})}</label><span>{global.currentUser.birthday}</span></dd>
-                            <dd><label>{intl.formatMessage({id:'profile.data.property.login.total'})}</label><span>{global.currentUser.loginTotal}</span></dd>
-                            <dd><label>{intl.formatMessage({id:'profile.data.property.login.ip'})}：</label><span>{global.currentUser.loginIp}</span></dd>
-                            <dd><label>{intl.formatMessage({id:'profile.data.property.login.time'})}：</label><span>{global.currentUser.loginDate.toDateString()}</span></dd>
-                            <dd><label>{intl.formatMessage({id:'profile.data.property.createDate'})}：</label><span>{global.currentUser.createDate.toDateString()}</span></dd>
-                        </dl>                        
+                        <div className={styles.faceBox}>                            
+                            <Tooltip title={intl.formatMessage({id:'message.button.upload.face'})}><label><Upload accept="image/png, image/jpeg" showUploadList={false} maxCount={1} onChange={onChangeUploadHandler}><UploadOutlined style={{fontSize:"24px", color:"white"}} /></Upload></label></Tooltip>
+                            <img src={userInfo!.face} />                            
+                        </div>  
+                        <div>
+                            <label className={styles.uid}>{userInfo!.uid}</label><br />
+                            <label className={styles.id}>{userInfo!.id}</label><br /><br />
+                            <label>{userInfo!.deptName} - {userInfo!.postName} - <Tag>{userInfo!.roleName}</Tag></label>
+                        </div>                                        
                     </div>
+                    <Divider /> 
+                    <dl className={styles.profileList}>
+                        <dd><label>{intl.formatMessage({id:'profile.data.property.nickname'})}：</label><span>{userInfo!.nickName}</span></dd>
+                        <dd><label>{intl.formatMessage({id:'profile.data.property.mobile'})}：</label><span>{userInfo!.mobile}</span></dd>
+                        <dd><label>{intl.formatMessage({id:'profile.data.property.email'})}：</label><span>{userInfo!.email}</span></dd>
+                        <dd><label>{intl.formatMessage({id:'profile.data.property.gender'})}</label><span>{userInfo!.gender}</span></dd>  
+                        <dd><label>{intl.formatMessage({id:'profile.data.property.birthday'})}</label><span>{userInfo!.birthday}</span></dd>
+                        <dd><label>{intl.formatMessage({id:'profile.data.property.login.total'})}</label><span>{userInfo!.loginTotal}</span></dd>
+                        <dd><label>{intl.formatMessage({id:'profile.data.property.login.ip'})}：</label><span>{userInfo!.loginIp}</span></dd>
+                        <dd><label>{intl.formatMessage({id:'profile.data.property.login.time'})}：</label><span>{userInfo!.loginDate}</span></dd>
+                        <dd><label>{intl.formatMessage({id:'profile.data.property.createDate'})}：</label><span>{userInfo!.createDate}</span></dd>
+                    </dl> 
                     <div>                                                  
                         <Button onClick={()=>{setOpenPasswordModal(true)}} style={{marginBottom:'10px'}} block>{intl.formatMessage({id:'profile.button.change.password'})}</Button>
                         <Button onClick={()=>{setWindowOpen(true)}} type="primary" block>{intl.formatMessage({id:'profile.button.modify.profile'})}</Button>
@@ -219,17 +238,10 @@ const ProfilePage=()=>{
                         <ProfileFormWindow {...windowProps} />
                     </div>
                 </div>
+
+                
                 <div className={styles.boxRight}>
-                    <Tabs type="card">                        
-                        <Tabs.TabPane tab={intl.formatMessage({id:'profile.tab.title.authoritys'})} key="authoritys">
-                            <div className={styles.authBox}>
-                                {authPanel}
-                            </div>
-                        </Tabs.TabPane>
-                        <Tabs.TabPane tab={intl.formatMessage({id:'profile.tab.title.logs'})} key="logs" style={{padding:"0px"}}>
-                            <DataGrid {...gridProps} />
-                        </Tabs.TabPane>
-                    </Tabs>
+                    <Tabs type="card" items={tabsPanel}></Tabs>
                 </div>
             </div>
         </Container>

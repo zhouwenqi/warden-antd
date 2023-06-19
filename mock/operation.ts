@@ -1,10 +1,10 @@
 export default {
     'POST /api/logs/operation':(req:any,res:any)=>{
-        const local = req.headers.local
+        const locale = req.headers.locale
         if(req.body.pagination.current > 1){
             res.send(
                 {
-                    list:local=='en-US' ? 
+                    list:locale=='en-US' ? 
                     [
                         {id:11,name:'Oracle',face:'/images/face/f5.png',ip:'89.22.43.154',action:'LOGIN',content:'Oracle use cell phone login warden system',appType:'IOS',terminal:'MOBILE',createDate:'2023/3/25 18:39:56',modifyDate:'2023/3/25 18:39:56'},
                         {id:12,name:'Oracle',face:'/images/face/f5.png',ip:'189.23.176.179',action:'LOGIN',content:'Oracle use cell phone login warden system',appType:'IOS',terminal:'MOBILE',createDate:'2023/3/25 19:24:32',modifyDate:'2023/3/25 19:24:32'},
@@ -21,7 +21,7 @@ export default {
         }else{
             res.send(
                 {
-                    list:local=='en-US' ?
+                    list:locale=='en-US' ?
                     [
                         {id:1,name:'Microsoft',face:'/images/face/f1.png',ip:'142.12.48.109',action:'DELETE',content:'Microsoft delete an order：PSN49837246',appType:'WEB',terminal:'PC',createDate:'2023/3/25 13:12:37',modifyDate:'2023/3/25 23:12:37'},               
                         {id:2,name:'Google',face:'/images/face/f2.png',ip:'162.59.218.35',action:'MODIFY',content:'Google modify user(173****234) the password',appType:'OTHER',terminal:'PC',createDate:'2023/3/25 13:22:27',modifyDate:'2023/3/25 13:22:27'},

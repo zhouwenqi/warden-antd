@@ -16,7 +16,7 @@ const { RangePicker } = DatePicker;
 
 const DictionaryPage=()=>{
     const intl = useIntl()
-    const local = useIntl().locale
+    const locale = useIntl().locale
     const [data,setData] = useState<DictionaryData[]>()
     const [loading,setLoading] = useState(false)
     const [timers,setTimers] = useState<string[]>()
@@ -109,7 +109,7 @@ const DictionaryPage=()=>{
     
     useEffect(() => {
         fetchData();
-    }, [JSON.stringify(tableParams),local]) 
+    }, [JSON.stringify(tableParams),locale]) 
    
     const fetchData = () => {
         setLoading(true);
@@ -119,7 +119,7 @@ const DictionaryPage=()=>{
             credentials: 'same-origin',
             headers: {
                 "Content-Type": "application/json; charset=utf-8",
-                "local":local
+                locale
             },
             body:JSON.stringify(tableParams)
         })

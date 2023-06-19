@@ -40,11 +40,11 @@ export default {
         {time:'30:23:48',pv:29,uv:11,ip:9},
         {time:'30:23:49',pv:30,uv:13,ip:8},
         {time:'30:23:50',pv:34,uv:12,ip:10},
-        {time:'30:23:51',pv:33,uv:10,ip:11},
+        {time:'30:23:51',pv:33,uv:10,ip:11}
     ],
     'POST /api/monitoring/sales':(req:any,res:any)=>{
-        const local = req.headers.local      
-        const list = local=='en-US' ? [
+        const locale = req.headers.locale      
+        const list = locale=='en-US' ? [
             {name:'BeiJing',value:0,time:'2022/12/19 8:05',area:'BeiJing'},
             {name:'ShangHai',value:0,time:'2022/12/19 8:06',area:'ShangHai'},
             {name:'HongKong',value:0,time:'2022/12/19 8:07',area:'HongKong'},

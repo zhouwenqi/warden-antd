@@ -118,7 +118,7 @@ const SalesChartPanel=()=>{
 
 const SalesCount=(props:Monitoring.TotalProps)=>{
   const intl = useIntl()
-  const local = intl.locale
+  const locale = intl.locale
   const [total,setTotal] = useState(0)
   const intervalRef:MutableRefObject<any> = useRef()  
   let chartData:Monitoring.Sales[]=[]
@@ -128,7 +128,7 @@ const SalesCount=(props:Monitoring.TotalProps)=>{
     return ()=>{
       onClearInterval()
     }
-  },[local])
+  },[locale])
   const onClearInterval=()=>{
     clearInterval(intervalRef.current)
   } 
@@ -138,8 +138,8 @@ const SalesCount=(props:Monitoring.TotalProps)=>{
         cache: 'no-cache',
         credentials: 'same-origin',
         headers: {
-            "Content-Type": "application/json; charset=utf-8",
-            "local":local
+          "Content-Type": "application/json; charset=utf-8",
+          locale
         }
       })
       .then((response) => response.json())

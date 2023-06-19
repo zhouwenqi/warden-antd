@@ -1,24 +1,25 @@
-import { Button,Input, Space } from 'antd';
-import { Link } from 'react-router-dom';
-import yayJpg from '../assets/yay.jpg';
+import AppIcon from '@/components/AppIcon';
+import { useEffect } from 'react';
+import { history } from 'umi';
+import styles from './index.less'
 
+/**
+ * Page - 首页
+ * @returns 
+ */
 export default function HomePage() {
+  useEffect(()=>{    
+    const timer = setTimeout(()=>{
+      history.push('/login')
+    },3000)
+    return ()=>clearTimeout(timer)
+  },[])
+
+  
+
   return (
-    <div>
-      <h2>Yay! Welcome to umi!</h2>
-      <div>
-        <img src={yayJpg} width="388" />        
-      </div>    
-      <div>
-        <Space>
-        <Link to={'/login'}>Login</Link>
-        <Link to={'/Main'}>Main</Link>
-        <Link to={'/Docs'}>Docs</Link>
-        </Space>
-      </div> 
-      <div>
-        To get started, edit <code>pages/index.tsx</code> and save to reload...
-      </div>
+    <div className={styles.startBox}>
+      <AppIcon name="logo" size={90} />
     </div>
   );
 }

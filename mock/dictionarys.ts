@@ -1,9 +1,9 @@
 export default {
     'POST /api/dictionarys':(req:any,res:any)=>{
-        const local = req.headers.local        
+        const locale = req.headers.locale        
         if(req.body.pagination.current > 1){
             res.send({
-                list:local=='en-US' ? [
+                list:locale=='en-US' ? [
                     {id:11,type:'String',name:'Cast scrolling text ads',key:'scroll-ad-text',value:'uuuuuuuuuuuuuuuu',description:'Cast scrolling text ads', createDate:'2023/4/12 23:08:28',modifyDate:'2023/4/12 23:08:28'},
                     {id:12,type:'Array',name:'Invoice type',key:'invoice-types',value:'xxxxxxxx',description:'Invoice type', createDate:'2023/4/12 23:08:28',modifyDate:'2023/4/12 23:08:28'},
                     {id:13,type:'Object',name:'Automatically send red packet data',key:'auto-packet',value:'yyyyyyyyyyyyyyyy',description:'Automatically send red packet data', createDate:'2023/4/12 23:08:28',modifyDate:'2023/4/12 23:08:28'}
@@ -20,7 +20,7 @@ export default {
             })
         }else{
             res.send({
-                list:local=='en-US' ? [
+                list:locale=='en-US' ? [
                     {id:1,type:'String',name:'Website name',key:'website-name',value:'World group',description:'Website name', createDate:'2023/4/12 23:08:28',modifyDate:'2023/4/12 23:08:28'},
                     {id:2,type:'String',name:'Image server url',key:'image-server-url',value:'https://image.xxxxx.com',description:'Image server url', createDate:'2023/4/12 23:08:28',modifyDate:'2023/4/12 23:08:28'},
                     {id:3,type:'Boolean',name:'Whether the server can be shut down remotely',key:'isClosedServer',value:'true',description:'Whether the server can be shut down remotely', createDate:'2023/4/12 23:08:28',modifyDate:'2023/4/12 23:08:28'},

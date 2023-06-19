@@ -1,5 +1,5 @@
 export default {
-    'POST /api/couponBatchs':(req:any,res:any)=>{
+    'POST /api/coupon/batchs':(req:any,res:any)=>{
         let list =  [
             {id:1,name:'618活动满1000送500减券',quantity:50000,denomination:'500',where:1000,receiveMethod:'Active',receiveQuantity:40000,useQuantity:12000,couponType:'Cash',expireDate:['2023/6/18 23:59:59','2023/7/1 00:00:00'],enabled:true, receiveDate:['2023/6/18 23:59:59','2023/7/1 00:00:00'],createDate:'2023/4/12 23:08:28',modifyDate:'2023/4/12 23:08:28'},
             {id:2,name:'618活动满1800送800减券',quantity:20000,denomination:'800',where:1800,receiveMethod:'Active',receiveQuantity:15000,useQuantity:12000,couponType:'Cash',expireDate:['2023/6/18 23:59:59','2023/7/1 00:00:00'],enabled:true, receiveDate:['2023/6/18 23:59:59','2023/7/1 00:00:00'],createDate:'2023/4/12 23:08:28',modifyDate:'2023/4/12 23:08:28'},
