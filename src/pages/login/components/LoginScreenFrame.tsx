@@ -82,9 +82,9 @@ export default function LoginScreenFrame(props:FrameProps) {
                   {intl.formatMessage({ id: 'login.rememberme' })}
                 </Checkbox>
               </Form.Item>
-              <Link to="/main">
+              <a onClick={()=>{props.onForegot!()}}>
                 {intl.formatMessage({ id: 'login.forgot.pwd' })}
-              </Link>
+              </a>
             </div>
             <Form.Item name="loginbtn" style={{ marginBottom: '0px' }}>
               <Button loading={props.logingStatus} type="primary" htmlType="submit" block>

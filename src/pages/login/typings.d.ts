@@ -1,4 +1,5 @@
 declare type FrameProps = {
-    onLogin:Function,
-    logingStatus:boolean
+    onLogin:(values:any)=>void;
+    onForegot?:()=>void;
+    logingStatus:boolean;
 }

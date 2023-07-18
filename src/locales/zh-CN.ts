@@ -5,7 +5,7 @@ import pages from './zh-CN/pages';
 export default {
   'app.name': '沃登',
   'app.title': '沃登后台管理系统',
-  'app.copyright.info': 'Powered by 2022 © warden.vip',
+  'app.copyright.info': 'Powered by 2023 © warden.vip',
   'config.setting.drawer.title': '界面配置',
   'config.setting.login.layout.title': '登录页布局',
   'config.setting.main.layout.title': '主体布局',

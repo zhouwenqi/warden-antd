@@ -5,7 +5,7 @@ import pages from './en-US/pages';
 export default {
   'app.name': 'Warden',
   'app.title': 'Warden Management System',
-  'app.copyright.info': 'Powered by 2022 © warden.vip',
+  'app.copyright.info': 'Powered by 2023 © warden.vip',
   'config.setting.drawer.title': 'Interface configuration',
   'config.setting.login.layout.title': 'Login layout',
   'config.setting.main.layout.title': 'Main layout',

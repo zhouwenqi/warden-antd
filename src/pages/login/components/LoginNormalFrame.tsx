@@ -22,9 +22,7 @@ export default function LoginNormalFrame(props:FrameProps) {
     props.onLogin(data)
   };
   const intl = useIntl();
-
-  const userInfoHandler = async ()=>{
-  }
+  
   return (
     <div className={styles.frameBody}>
       <div className={styles.loginBox}>
@@ -75,7 +73,7 @@ export default function LoginNormalFrame(props:FrameProps) {
                   {intl.formatMessage({ id: 'login.rememberme' })}
                 </Checkbox>
               </Form.Item>
-              <a onClick={userInfoHandler}>{intl.formatMessage({ id: 'login.forgot.pwd' })}</a>
+              <a onClick={()=>{props.onForegot!()}}>{intl.formatMessage({ id: 'login.forgot.pwd' })}</a>
             </div>
 
             <Form.Item name="loginbtn" style={{ marginBottom: '0px' }}>

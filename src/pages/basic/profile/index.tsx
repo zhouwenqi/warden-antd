@@ -1,12 +1,12 @@
 import Container from "@/layouts/components/Container"
-import { Divider, Tabs,  Space, Tag, Tooltip, DatePicker,Button,TablePaginationConfig,message, Checkbox, Upload, UploadFile, UploadProps } from "antd"
+import { Divider, Tabs,   Tag, Tooltip, Button,TablePaginationConfig,message, Checkbox, Upload,  UploadProps } from "antd"
 import type { ColumnsType, } from 'antd/es/table';
 import { WardenData } from '@/pages/typings';
 import { useState,useEffect} from "react"
 import { useIntl,useModel } from "umi"
-import type { FilterValue, SorterResult,FilterConfirmProps,TableCurrentDataSource } from 'antd/es/table/interface';
+import type { FilterValue, SorterResult,TableCurrentDataSource } from 'antd/es/table/interface';
 import { UploadOutlined,WechatFilled,AndroidFilled,AppleFilled,RobotFilled } from '@ant-design/icons';
-import { DataGridProps, DataGridToolbarProps,DataGridSearchPanelProps } from '@/components/datagrid/typings';
+import { DataGridProps } from '@/components/datagrid/typings';
 import AppIcon from "@/components/AppIcon";
 import DataGrid from "@/components/datagrid";
 import { getTagColor } from "@/utils/stringUtils";
@@ -200,8 +200,9 @@ const ProfilePage=()=>{
     }
 
     const tabsPanel=[
-        {label:intl.formatMessage({id:'profile.tab.title.authoritys'}),key:"authoritys",children:(<div className={styles.authBox}>{authPanel}</div>)},
-        {label:intl.formatMessage({id:'profile.tab.title.logs'}),key:"logs",children:(<DataGrid {...gridProps} />),style:{padding:"0px"}}
+        {label:intl.formatMessage({id:'profile.tab.title.logs'}),key:"logs",children:(<DataGrid {...gridProps} />),style:{padding:"0px"}},
+        {label:intl.formatMessage({id:'profile.tab.title.authoritys'}),key:"authoritys",children:(<div className={styles.authBox}>{authPanel}</div>)}
+        
     ]
 
     return(

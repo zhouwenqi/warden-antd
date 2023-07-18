@@ -1,5 +1,5 @@
-import { useIntl,useModel } from 'umi';
-import { Tooltip,Layout,Menu,MenuProps } from 'antd';
+import { history, useIntl,useModel } from 'umi';
+import { Tooltip } from 'antd';
 import AppIcon from '@/components/AppIcon';
 /**
  * Logo面版
@@ -56,7 +56,7 @@ import AppIcon from '@/components/AppIcon';
             placement={placement}
             title={intl.formatMessage({ id: 'app.title' })}
           >
-            <a className="icon">
+            <a className="icon" onClick={()=>{history.push('/main')}}>
               {logoElement}
             </a>            
           </Tooltip>          

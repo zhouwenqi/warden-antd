@@ -107,7 +107,7 @@ export default function LoginCardFrame(props:FrameProps) {
                     {intl.formatMessage({ id: 'login.rememberme' })}
                   </Checkbox>
                 </Form.Item>
-                <a href="#">{intl.formatMessage({ id: 'login.forgot.pwd' })}</a>
+                <a onClick={()=>{props.onForegot!()}}>{intl.formatMessage({ id: 'login.forgot.pwd' })}</a>
               </div>
               <Form.Item name="loginbtn" style={{ marginBottom: '0px' }}>
                 <Button

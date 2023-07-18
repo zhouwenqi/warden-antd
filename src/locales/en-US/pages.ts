@@ -13,6 +13,7 @@ export default {
     'login.layout.screen.card.describe2' :'Deep integration of cloud and enterprise to create a digital future',
     'login.layout.screen.card.title3' :'On cloud edge tool',
     'login.layout.screen.card.describe3' :'Focus on cloud technology, overview cloud dynamics',
+    'login.forgot.password.alt':'Please contact the administrator',
     'workbench.card.todos.title':'To-do list',
     'workbench.card.todos.tag':'Emergency events',
     'workbench.card.registrations.title':'New users',

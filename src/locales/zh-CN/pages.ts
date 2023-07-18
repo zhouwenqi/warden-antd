@@ -13,6 +13,7 @@ export default {
     'login.layout.screen.card.describe2' :'云与企业深度融合，创造数字化未来',
     'login.layout.screen.card.title3' :'云上创业利器',
     'login.layout.screen.card.describe3' :'聚焦云科技，纵览云动态',
+    'login.forgot.password.alt':'请联系管理员',
     'workbench.card.todos.title':'待办事项',
     'workbench.card.todos.tag':'紧急事件',
     'workbench.card.registrations.title':'本周新增用户',
