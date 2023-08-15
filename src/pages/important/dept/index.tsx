@@ -73,6 +73,7 @@ const DeptPage=()=>{
         {
             title:intl.formatMessage({id:'global.data.property.action'}),
             width:'100px',
+            dataIndex:'actions',
             render:(value:any,record:any)=>{
                 return(
                     <Space>

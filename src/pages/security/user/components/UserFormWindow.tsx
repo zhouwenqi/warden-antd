@@ -49,9 +49,12 @@ const UserFormWindow=(props:UserFormWindowProps)=>{
     const onFinishHandler=(values:any)=>{      
         props.onSubmit!(values!)
     }    
-
-    form.resetFields()
-    useEffect(()=>{        
+    
+    useEffect(()=>{     
+        if(!props.open){
+            return
+        }
+        form.resetFields()
         if(data){     
             form.setFieldsValue(data)       
             form.setFieldValue('birthday',moment(data.birthday))
@@ -160,8 +163,11 @@ const UserFormWindow=(props:UserFormWindowProps)=>{
                         name="face"
                         label={intl.formatMessage({id:'user.data.property.face'})}
                         >                                
-                        <Upload listType="picture-card"  accept="image/png, image/jpeg" maxCount={1} showUploadList={false}>
-                            <UploadOutlined />
+                        <Upload listType="picture-card" action={'/image/upload'}  accept="image/png, image/jpeg" maxCount={1} showUploadList={false}>
+                            {data?<div>
+                                <img src={data?.face} style={{width:"60px"}} />
+                            </div>:
+                            <UploadOutlined />}
                         </Upload>
                     </Form.Item>                                                             
                 </Form>

@@ -46,7 +46,7 @@ const OperationPage=()=>{
             dataIndex:'ip'
         },
         {
-            title:intl.formatMessage({id:'global.data.property.type'}),
+            title:intl.formatMessage({id:'operation.data.property.type'}),
             dataIndex:'action',
             render:(value)=>{
                 return(
@@ -125,6 +125,7 @@ const OperationPage=()=>{
         },
         {
             title:intl.formatMessage({id:'global.data.property.action'}),
+            dataIndex:'actions',
             render:(value:any,record:any)=>{
                 return(
                     <Space>
@@ -214,7 +215,7 @@ const OperationPage=()=>{
         searchButtonTheme:'primary',
         searchPropertyItems:[
             {label:intl.formatMessage({id:'operation.data.property.account'}), value:'account'},
-            {label:intl.formatMessage({id:'global.data.property.content'}), value:'content'},
+            {label:intl.formatMessage({id:'operation.data.property.content'}), value:'content'},
             {label:intl.formatMessage({id:'global.data.property.ip'}),value:'ip'}
         ]
                

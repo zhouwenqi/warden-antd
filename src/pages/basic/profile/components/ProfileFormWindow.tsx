@@ -49,7 +49,10 @@ const ProfileFormWindow=(props:ProfileFormWindowProps)=>{
         props.onSubmit!(values!)
     }
 
-    useEffect(()=>{        
+    useEffect(()=>{     
+        if(!props.open) {
+            return
+        }
         if(data){     
             form.setFieldsValue(data)       
             form.setFieldValue('birthday',moment(data.birthday))

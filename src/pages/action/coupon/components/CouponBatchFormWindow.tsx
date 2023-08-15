@@ -52,6 +52,9 @@ const CouponBatchFormWindow=(props:CouponBatchFormWindowProps)=>{
     }
 
     useEffect(()=>{
+        if(!props.open){
+            return
+        }
         form.resetFields()
         if(data){            
             const {receiveDate,expireDate,...pdata} = data

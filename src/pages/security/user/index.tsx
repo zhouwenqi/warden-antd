@@ -96,6 +96,7 @@ const UserPage=()=>{
         {
             title:intl.formatMessage({id:'global.data.property.action'}),
             width:'100px',
+            dataIndex:'actions',
             render:(value:any,record:any)=>{
                 return(
                     <Space>
@@ -198,9 +199,9 @@ const UserPage=()=>{
             {label:intl.formatMessage({id:'profile.data.property.mobile'}), value:'mobile'},
         ], 
         filterFormItems:[
-            <Select style={{width:"120px"}} placeholder={intl.formatMessage({id:'user.data.property.dept'})} />,
-            <Select style={{width:"120px"}} placeholder={intl.formatMessage({id:'user.data.property.post'})} />,
-            <Select style={{width:"120px"}} placeholder={intl.formatMessage({id:'user.data.property.role'})} />
+            <Select key="user.dept" style={{width:"120px"}} placeholder={intl.formatMessage({id:'user.data.property.dept'})} />,
+            <Select key="user.post" style={{width:"120px"}} placeholder={intl.formatMessage({id:'user.data.property.post'})} />,
+            <Select key="user.role" style={{width:"120px"}} placeholder={intl.formatMessage({id:'user.data.property.role'})} />
         ]
                
     }

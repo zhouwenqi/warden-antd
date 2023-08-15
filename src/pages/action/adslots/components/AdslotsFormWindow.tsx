@@ -1,7 +1,6 @@
 import Window from "@/components/window"
 import { WindowProps } from "@/components/window/typings"
-import { getNsText } from "@/utils/stringUtils";
-import { Alert, Badge,Form, Button, Input, Popconfirm, Space, Tag, DatePicker, InputNumber, Select, Checkbox, Segmented } from "antd";
+import {  Form, Button, Input,  Space, InputNumber,  Checkbox, Segmented } from "antd";
 import { useIntl } from "umi";
 import { useEffect } from "react";
 
@@ -43,11 +42,13 @@ const AdslotsFormWindow=(props:AdslotsFormWindowProps)=>{
     }
 
     const onFinishHandler=(values:any)=>{
-        console.log(values)
         props.onSubmit!(values!)
     }
 
     useEffect(()=>{
+        if(!props.open){
+            return
+        }
         form.resetFields()
         if(data){            
             form.setFieldsValue({...data})

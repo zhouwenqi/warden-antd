@@ -50,8 +50,17 @@ const RoleFormWindow=(props:RoleFormWindowProps)=>{
         props.onSubmit!(values!)
     }    
 
-    form.resetFields()
-    form.setFieldsValue(data)
+    
+    useEffect(()=>{     
+        if(!props.open){
+            return
+        }
+        form.resetFields()
+        if(data){     
+            form.setFieldsValue(data)
+        }
+    },[data])
+    
     let footerPanel = (        
         <Space>
             <Button onClick={()=>{closeWindowHandler!(false)}}>{intl.formatMessage({id:'global.button.cancel'})}</Button>

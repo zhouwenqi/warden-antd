@@ -169,6 +169,7 @@ const OrderPage=()=>{
         {
             title:intl.formatMessage({id:'global.data.property.action'}),
             width:'80px',
+            dataIndex:'actions',
             render:(value:any,record:any)=>{
                 return(
                     <Space>                        

@@ -83,6 +83,7 @@ const DictionaryPage=()=>{
         {
             title:intl.formatMessage({id:'global.data.property.action'}),
             width:'100px',
+            dataIndex:'actions',
             render:(value:any,record:any)=>{
                 return(
                     <Space>                       
@@ -177,11 +178,6 @@ const DictionaryPage=()=>{
             {label:intl.formatMessage({id:'global.data.property.key'}), value:'key'},
             {label:intl.formatMessage({id:'global.data.property.value'}), value:'value'}            
         ],
-        filterFormItems:[
-            <Form.Item name="terminal" noStyle key="terminal">
-                
-            </Form.Item>                        
-        ], 
                
     }
 

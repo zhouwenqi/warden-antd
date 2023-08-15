@@ -45,9 +45,8 @@ const ConfigPage=()=>{
         })
         .then((response) => response.json())
         .then((results ) => {  
-            setLoading(false) 
-            form.setFieldsValue(results)         
-            
+            setLoading(false)    
+            form.setFieldsValue(results)            
         })
     }
 
@@ -127,7 +126,7 @@ const ConfigPage=()=>{
                         </Form.Item>
                         <Form.Item
                             name="appIcon"
-                            label={intl.formatMessage({id:'config.data.property.appIcon'})}
+                            label={intl.formatMessage({id:'config.data.property.appIcon'})}                         
                             >                                
                             <Upload listType="picture-card"  accept="image/png, image/jpeg" maxCount={1} showUploadList={false}>
                                 <UploadOutlined />

@@ -46,12 +46,14 @@ const AdsFormWindow=(props:AdFormWindowProps)=>{
         form.submit()
     }
 
-    const onFinishHandler=(values:any)=>{
-        console.log(values)
+    const onFinishHandler=(values:any)=>{        
         props.onSubmit!(values!)
     }
 
     useEffect(()=>{
+        if(!props.open){
+            return
+        }
         form.resetFields()
         if(data){       
             const {expire, ...pdata}=data            

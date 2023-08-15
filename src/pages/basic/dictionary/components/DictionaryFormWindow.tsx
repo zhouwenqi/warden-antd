@@ -42,12 +42,14 @@ const DictionaryFormWindow=(props:DictionaryFormWindowProps)=>{
         form.submit()
     }
 
-    const onFinishHandler=(values:any)=>{
-        console.log(values)
+    const onFinishHandler=(values:any)=>{      
         props.onSubmit!(values!)
     }
 
     useEffect(()=>{
+        if(!props.open){
+            return
+        }
         form.resetFields()
         if(data){            
             form.setFieldsValue({...data})

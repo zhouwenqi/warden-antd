@@ -42,6 +42,9 @@ const CouponIssuanceWindow=(props:CouponIssuanceWindowProps)=>{
     }
     
     useEffect(()=>{
+        if(!props.open){
+            return
+        }
         form.resetFields()        
     },[data]) 
 

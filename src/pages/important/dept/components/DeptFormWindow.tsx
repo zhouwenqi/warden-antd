@@ -41,8 +41,14 @@ const DeptFormWindow=(props:DeptFormWindowProps)=>{
         onClose:()=>{closeWindowHandler!(false)},
         ...WindowProps
     }
-    form.resetFields()
-    form.setFieldsValue(data) 
+    useEffect(()=>{
+        if(!props.open){
+            return
+        }
+        form.resetFields()
+        form.setFieldsValue(data)
+    },[data])
+    
     useEffect(()=>{
         fetchData()               
     },[])   

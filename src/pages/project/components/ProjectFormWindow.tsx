@@ -33,6 +33,9 @@ const ProjectFormWindow=(props:ProjectFormWindowProps)=>{
     const [form] = Form.useForm();
     const {closeWindowHandler,data,...WindowProps} = props
     useEffect(()=>{
+        if(!props.open){
+            return
+        }
         form.resetFields()
         form.setFieldsValue({...data})      
     },[data])

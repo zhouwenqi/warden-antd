@@ -40,8 +40,13 @@ const PostFormWindow=(props:PostFormWindowProps)=>{
         destroyOnClose:true,
         ...WindowProps
     }
-    form.resetFields()
-    form.setFieldsValue(data)
+    useEffect(()=>{
+        if(!props.open){
+            return
+        }
+        form.resetFields()
+        form.setFieldsValue(data)
+    },[data])
 
     const onSubmitHandler=()=>{
         form.submit()
